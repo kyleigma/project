@@ -14,6 +14,10 @@
 		$filename = $_FILES['e_photo']['name'];
 		$annex = $_POST['annex'];
 		$total_amount_2 = $gtc + $dr  + $uc  + $evax  + $other_ca  + $annex;
+
+		// Format month_2 and month_1 to only save month and year
+		$month_2 = (new DateTime($month_2))->format('Y-m-d');
+		$month_1 = (new DateTime($month_1))->format('Y-m-d');
 		
 		if(!empty($filename)){
 			move_uploaded_file($_FILES['e_photo']['tmp_name'], 'assets/images/'.$filename);	

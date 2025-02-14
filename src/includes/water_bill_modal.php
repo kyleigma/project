@@ -12,7 +12,7 @@
                     <label for="month_wb" class="col-sm-3 control-label">Month</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="month_wb" name="month_wb" required>
+                      <input type="date" class="form-control" id="month_wb" name="month_wb" required>
                     </div>
                 </div>
                 <div class="form-group">
@@ -61,7 +61,7 @@
                     <label for="edit_month_wb" class="col-sm-3 control-label">Month</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_month_wb" name="month_wb">
+                      <input type="date" class="form-control" id="edit_month_wb" name="month_wb">
                     </div>
                 </div>
                 <div class="form-group">
@@ -142,4 +142,3 @@
     </div>
 </div>
 
-     

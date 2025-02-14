@@ -139,10 +139,14 @@ body.modal-open {
                     while ($row = $query->fetch_assoc()) {
                         $image = !empty($row['w_photo']) ? 'assets/images/' . $row['w_photo'] : 'assets/images/blank.svg';
 
+                        // Format the month_wb to "Month Year"
+                        $month_wb = new DateTime($row['month_wb']);
+                        $formatted_month_wb = $month_wb->format('F Y');
+
                         echo "
                         <tr data-id='" . $row['id'] . "'> 
                             <td class='text-center'>" . $rowNumber . "</td> 
-                            <td>" . $row['month_wb'] . "</td>
+                            <td>" . $formatted_month_wb . "</td>
                             <td>" . $row['date_receive'] . "</td>
                             <td class='text-center'>
                                 <div class='d-flex align-items-center justify-content-center'>

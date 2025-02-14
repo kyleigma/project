@@ -328,103 +328,73 @@
     </div>
     <!-- container-scroller -->
     <?php include 'includes/scripts.php';?>
-<?php
-// Function to format month
-function formatMonth($dateString) {
-    $timestamp = strtotime($dateString);
-    return $timestamp ? date("Y-m", $timestamp) : null;
+    <?php
+include("includes/conn.php");
+
+// Electricity Bill Data
+$labels101 = [];
+$values101 = [];
+$sqlElectricity = "SELECT month_2, total_amount_2 FROM electric_bill ORDER BY month_2 ASC";
+$resultElectricity = $conn->query($sqlElectricity);
+while ($row = $resultElectricity->fetch_assoc()) {
+    $labels101[] = date("F Y", strtotime($row['month_2']));
+    $values101[] = floatval($row['total_amount_2']);
 }
 
-// Fetch & process electricity bill data
-$electricityData = [];
-$labels = [];
-$sql101 = "SELECT month_2, total_amount_2 FROM electric_bill";
-$result101 = $conn->query($sql101);
-if ($result101->num_rows > 0) {
-    while ($row = $result101->fetch_assoc()) {
-        $month = formatMonth($row['month_2']);
-        if ($month) {
-            $electricityData[$month] = floatval($row['total_amount_2']);
-            $labels[] = $month;
-        }
-    }
+// Water Bill Data
+$waterlabel = [];
+$watervalues = [];
+$sqlWater = "SELECT month_wb, total_amount_wb FROM water_bill ORDER BY month_wb ASC";
+$resultWater = $conn->query($sqlWater);
+while ($row = $resultWater->fetch_assoc()) {
+    $waterlabel[] = date("F Y", strtotime($row['month_wb']));
+    $watervalues[] = floatval($row['total_amount_wb']);
 }
 
-// Fetch & process water bill data
-$waterData = [];
-$sqlwater = "SELECT month_wb, total_amount_wb FROM water_bill";
-$resultwater = $conn->query($sqlwater);
-if ($resultwater->num_rows > 0) {
-    while ($row = $resultwater->fetch_assoc()) {
-        $month = formatMonth($row['month_wb']);
-        if ($month) {
-            $waterData[$month] = floatval($row['total_amount_wb']);
-            $labels[] = $month;
-        }
-    }
-}
-
-// Fetch & process WiFi bill data
-$wifiData = [];
-$sqlwifi = "SELECT month_1, total_amount_1 FROM wifi_bill";
-$resultwifi = $conn->query($sqlwifi);
-if ($resultwifi->num_rows > 0) {
-    while ($row = $resultwifi->fetch_assoc()) {
-        $month = formatMonth($row['month_1']);
-        if ($month) {
-            $wifiData[$month] = floatval($row['total_amount_1']);
-            $labels[] = $month;
-        }
-    }
-}
-
-// Remove duplicates & sort months
-$labels = array_unique($labels);
-sort($labels);
-
-// Organize data for the chart
-$chartLabels = [];
-$electricityValues = [];
-$waterValues = [];
-$wifiValues = [];
-
-foreach ($labels as $month) {
-    $chartLabels[] = date("F Y", strtotime($month));
-    $electricityValues[] = isset($electricityData[$month]) ? $electricityData[$month] : 0;
-    $waterValues[] = isset($waterData[$month]) ? $waterData[$month] : 0;
-    $wifiValues[] = isset($wifiData[$month]) ? $wifiData[$month] : 0;
-
+// WiFi Bill Data
+$wifilabels = [];
+$wifivalues = [];
+$sqlWifi = "SELECT month_1, total_amount_1 FROM wifi_bill ORDER BY month_1 ASC";
+$resultWifi = $conn->query($sqlWifi);
+while ($row = $resultWifi->fetch_assoc()) {
+    $wifilabels[] = date("F Y", strtotime($row['month_1']));
+    $wifivalues[] = floatval($row['total_amount_1']);
 }
 ?>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    var chartLabels = <?php echo json_encode($chartLabels); ?>;
-    var electricityValues = <?php echo json_encode($electricityValues); ?>;
-    var waterValues = <?php echo json_encode($waterValues); ?>;
-    var wifiValues = <?php echo json_encode($wifiValues); ?>;
+    var electricityValues = <?php echo json_encode($values101); ?>;
+    var electricityLabels = <?php echo json_encode($labels101); ?>;
+    
+    var waterValues = <?php echo json_encode($watervalues); ?>;
+    var waterLabels = <?php echo json_encode($waterlabel); ?>;
+    
+    var wifiValues = <?php echo json_encode($wifivalues); ?>;
+    var wifiLabels = <?php echo json_encode($wifilabels); ?>;
 
+    // Function to determine the max Y-axis value
     function getMaxValue(data) {
-    return Math.max(...data) > 0 ? Math.ceil(Math.max(...data) / 1000) * 1000 : 1000;
-}
+        let max = Math.max(...data);
+        return Math.ceil(max / 1000) * 1000 || 1000; // Round up to the nearest 1000
+    }
 
-    function createChart(ctx, label, data, borderColor, backgroundColor) {
+    // Function to create a chart
+    function createChart(ctx, labels, label, data, borderColor, backgroundColor, maxY) {
         new Chart(ctx, {
             type: "line",
             data: {
-                labels: chartLabels,
-                datasets: [
-                    {
-                        label: label,
-                        data: data,
-                        borderColor: borderColor,
-                        backgroundColor: backgroundColor,
-                        borderWidth: 2,
-                        fill: true,
-                        pointRadius: 5,
-                        pointHoverRadius: 7
-                    }
-                ]
+                labels: labels,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    borderColor: borderColor,
+                    backgroundColor: backgroundColor,
+                    borderWidth: 2,
+                    fill: true,
+                    pointRadius: 5,
+                    pointHoverRadius: 7
+                }]
             },
             options: {
                 responsive: true,
@@ -434,63 +404,68 @@ document.addEventListener("DOMContentLoaded", function () {
                     tooltip: {
                         callbacks: {
                             label: function (tooltipItem) {
-                                let value = tooltipItem.raw.toLocaleString("en-PH", { style: "currency", currency: "PHP" });
-                                return `${tooltipItem.dataset.label}: ${value}`;
+                                return `${tooltipItem.dataset.label}: ₱${tooltipItem.raw.toLocaleString("en-PH")}`;
                             }
                         }
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: "Months" } },
+                    x: { 
+                        title: { display: true, text: "Months" },
+                        ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 }
+                    },
                     y: { 
                         title: { display: true, text: "Total Amount (₱)" },
-                        ticks: { 
-                            callback: function(value) {
-                                return `₱${value.toLocaleString()}`;
-                            }
-                        },
-                        suggestedMax: getMaxValue([electricityValues, waterValues, wifiValues])
+                        ticks: { callback: value => `₱${value.toLocaleString()}` },
+                        suggestedMax: maxY
                     }
                 }
             }
         });
     }
 
-    createChart(document.getElementById("electricityChart"), "Electricity Bill", electricityValues, "#ff5733", "#ff573333");
-    createChart(document.getElementById("waterChart"), "Water Bill", waterValues, "#3498db", "#3498db33");
-    createChart(document.getElementById("wifiChart"), "WiFi Bill", wifiValues, "#2ecc71", "#2ecc7133");
+    // Individual Charts with Unique X-Axis Labels
+    createChart(
+        document.getElementById("electricityChart"),
+        electricityLabels,
+        "Electricity Bill",
+        electricityValues,
+        "#ff5733",
+        "#ff573333",
+        getMaxValue(electricityValues)
+    );
 
+    createChart(
+        document.getElementById("waterChart"),
+        waterLabels,
+        "Water Bill",
+        waterValues,
+        "#3498db",
+        "#3498db33",
+        getMaxValue(waterValues)
+    );
+
+    createChart(
+        document.getElementById("wifiChart"),
+        wifiLabels,
+        "WiFi Bill",
+        wifiValues,
+        "#2ecc71",
+        "#2ecc7133",
+        getMaxValue(wifiValues)
+    );
+
+    // Overview Chart (Shared Timeline)
     var overviewCanvas = document.getElementById("overviewChart");
     if (overviewCanvas) {
         new Chart(overviewCanvas, {
             type: "line",
             data: {
-                labels: chartLabels,
+                labels: [...new Set([...electricityLabels, ...waterLabels, ...wifiLabels])], // Merged unique labels
                 datasets: [
-                    {
-                        label: "Electricity Bill",
-                        data: electricityValues,
-                        borderColor: "#ff5733",
-                        backgroundColor: "#ff573333",
-                        borderWidth: 2,
-                        fill: true
-                    },
-                    {
-                        label: "Water Bill",
-                        data: waterValues,
-                        borderColor: "#3498db",
-                        backgroundColor: "#3498db33",
-                        borderWidth: 2,
-                        fill: true
-                    },
-                    {
-                        label: "WiFi Bill",
-                        data: wifiValues,
-                        borderColor: "#2ecc71",
-                        backgroundColor: "#2ecc7133",
-                        borderWidth: 2,
-                        fill: true
-                    }
+                    { label: "Electricity Bill", data: electricityValues, borderColor: "#ff5733", backgroundColor: "#ff573333", borderWidth: 2, fill: true },
+                    { label: "Water Bill", data: waterValues, borderColor: "#3498db", backgroundColor: "#3498db33", borderWidth: 2, fill: true },
+                    { label: "WiFi Bill", data: wifiValues, borderColor: "#2ecc71", backgroundColor: "#2ecc7133", borderWidth: 2, fill: true }
                 ]
             },
             options: {
@@ -501,22 +476,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     tooltip: {
                         callbacks: {
                             label: function (tooltipItem) {
-                                let value = tooltipItem.raw.toLocaleString("en-PH", { style: "currency", currency: "PHP" });
-                                return `${tooltipItem.dataset.label}: ${value}`;
+                                return `${tooltipItem.dataset.label}: ₱${tooltipItem.raw.toLocaleString("en-PH")}`;
                             }
                         }
                     }
                 },
                 scales: {
-                    x: { title: { display: true, text: "Months" } },
+                    x: { 
+                        title: { display: true, text: "Months" },
+                        ticks: { autoSkip: false, maxRotation: 45, minRotation: 45 }
+                    },
                     y: { 
                         title: { display: true, text: "Total Amount (₱)" },
-                        ticks: { 
-                            callback: function(value) {
-                                return `₱${value.toLocaleString()}`;
-                            }
-                        },
-                        suggestedMax: getMaxValue([electricityValues, waterValues, wifiValues])
+                        ticks: { callback: value => `₱${value.toLocaleString()}` },
+                        suggestedMax: getMaxValue([...electricityValues, ...waterValues, ...wifiValues]) // Uses highest across all bills
                     }
                 }
             }
@@ -525,8 +498,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("overviewChart canvas element not found!");
     }
 });
-
 </script>
+
 
 <style>
     /* Set a fixed height for charts */

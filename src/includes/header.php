@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="assets/vendors/typicons/typicons.css">
     <link rel="stylesheet" href="assets/vendors/simple-line-icons/css/simple-line-icons.css">
     <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
-    <link rel="stylesheet" href="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="assets/scss/_sidebar.scss?v=1.0.1">
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
