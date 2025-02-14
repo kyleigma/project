@@ -1,6 +1,3 @@
-<!-- jQuery (Full Version) - Required for Popups, DataTables, and AJAX -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <!-- Bootstrap 5 Bundle (Includes Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -30,20 +27,9 @@
 <!-- Dashboard & Custom Scripts -->
 <script src="assets/js/dashboard.js"></script>
 
-
-<!-- Fix Bootstrap Modals, Tooltips & Popups -->
+<!-- DataTables Initialization -->
 <script>
 $(document).ready(function() {
-    // Initialize Bootstrap tooltips and popovers
-    $('[data-bs-toggle="tooltip"]').tooltip();
-    $('[data-bs-toggle="popover"]').popover();
-
-    // Fix Bootstrap 5 modal issue
-    $(".modal").on("hidden.bs.modal", function () {
-        $(this).removeData("bs.modal");
-    });
-
-    // DataTables Initialization
     $(".datatable").DataTable({
         "paging": false, 
         "searching": true,
@@ -62,4 +48,3 @@ $(document).ready(function() {
     });
 });
 </script>
-
