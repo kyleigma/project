@@ -175,6 +175,7 @@
           $('#edit_municipality_name').val(response.municipality_id); // Set municipality
           $('#edit_address').val(response.address); // Set address
           $('#edit_access_point').val(response.access_point); // Set access point
+          $('#edit_status').val(response.status); // Set status
         }
       });
     }

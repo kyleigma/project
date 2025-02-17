@@ -146,6 +146,39 @@
                       <input type="number" class="form-control" id="edit_access_point" name="access_point">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="edit_status" class="col-sm-3 control-label">Status</label>
+                    <div class="col-sm-12">
+                    <select class="form-control" id="edit_status" name="status" required>
+    <option value="">Select Status</option>
+    <?php
+        // Fetch the current status for the specific row you're editing
+        $sql = "SELECT status FROM free_wifi WHERE id = ?";  // Use the row's unique ID to fetch status
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);  // Bind the ID to the query
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $currentStatus = '';  // Default value
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $currentStatus = $row['status'];  // Retrieve the status of the row you're editing
+        }
+
+        $statuses = ['active', 'inactive']; // Explicit list of possible statuses
+
+        // Loop through each status option and check if it matches the current status
+        foreach ($statuses as $statusOption) {
+            $selected = ($currentStatus == $statusOption) ? 'selected' : '';  // Set selected option if it matches
+            echo "<option value='" . $statusOption . "' $selected>" . ucfirst($statusOption) . "</option>";
+        }
+    ?>
+</select>
+
+
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>

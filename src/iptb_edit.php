@@ -7,6 +7,7 @@ if (isset($_POST['edit'])) {
     $municipality = $_POST['municipality_name']; 
     $address = $_POST['address'];
     $access_point = $_POST['access_point'];  // Access point number
+    $status = $_POST['status'];  // Status field from the form
 
     // Ensure access_point is valid
     if (empty($access_point) || !is_numeric($access_point) || (int)$access_point === 0) {
@@ -24,9 +25,10 @@ if (isset($_POST['edit'])) {
     $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
-        // Update project details
-        $stmt = $conn->prepare("UPDATE free_wifi SET project_id = ?, address = ?, municipality_id = ?, access_point = ? WHERE id = ?");
-        $stmt->bind_param("isiii", $project_name, $address, $municipality, $access_point, $id);
+        // Update project details including the status field
+        // The status field will now store 'active' or 'inactive'
+        $stmt = $conn->prepare("UPDATE free_wifi SET project_id = ?, address = ?, municipality_id = ?, access_point = ?, status = ? WHERE id = ?");
+        $stmt->bind_param("isiiis", $project_name, $address, $municipality, $access_point, $status, $id);
         
         if ($stmt->execute()) {
             $_SESSION['success'] = 'Project updated successfully';

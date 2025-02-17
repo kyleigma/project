@@ -23,10 +23,13 @@ if (isset($_POST['add'])) {
         $stmt->bind_result($project_id);
         $stmt->fetch();
 
+        // Set default status as 'active'
+        $status = 'active';
+
         // Insert into free_wifi table
         $stmt = $conn->prepare("INSERT INTO free_wifi (project_id, address, municipality_id, access_point, status) 
                                 VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("isiii", $project_id, $address, $municipality, $access_point, $status = '');
+        $stmt->bind_param("isiss", $project_id, $address, $municipality, $access_point, $status);
         if ($stmt->execute()) {
             $_SESSION['success'] = 'Project added successfully';
         } else {
