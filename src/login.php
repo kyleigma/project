@@ -50,7 +50,7 @@ if (isset($_POST['login'])) {
             header('Location: index.php'); // Redirect to user dashboard
             exit;
         } else {
-            $_SESSION['error'] = 'Incorrect password';
+            $_SESSION['error'] = 'Incorrect username or password';
             header('Location: loginpage.php');
             exit;
         }

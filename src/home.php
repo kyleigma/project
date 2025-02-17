@@ -392,8 +392,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     backgroundColor: backgroundColor,
                     borderWidth: 2,
                     fill: true,
-                    pointRadius: 5,
-                    pointHoverRadius: 7
+                    pointRadius: 3,
+                    pointHoverRadius: 3
                 }]
             },
             options: {

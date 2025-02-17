@@ -65,16 +65,23 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM altavas ORDER BY priority ASC";
+                    $sql = "SELECT 
+                    fw.id, fw.address, fw.access_point, 
+                    fp.name AS project_name, m.name AS municipality_name
+                            FROM free_wifi fw
+                            INNER JOIN free_wifi_projects fp ON fw.project_id = fp.id
+                            INNER JOIN municipalities m ON fw.municipality_id = m.id
+                            WHERE fw.project_id IN (1, 'iptb')
+                            ORDER BY fw.address ASC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
                         <tr>
                           <td class='hidden'></td>
-                          <td>".$row['projectname_altavas']."</td>
-                          <td>".$row['locality_altavas']."</td>
-                          <td>".$row['address_project']."</td>
-                          <td>".$row['aps_altavas']."</td>
+                          <td>".$row['project_name']."</td> 
+                          <td>".$row['municipality_name']."</td> 
+                          <td>".$row['address']."</td> 
+                          <td>".$row['access_point']."</td> 
                           <td width='50'>
                             <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='mdi mdi-square-edit-outline'></i> </button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='mdi mdi-trash-can'></i> </button>                          
@@ -110,85 +117,69 @@
 
     <!-- Initialize DataTable -->
     <script>
-      $(document).ready(function () {
-        // Handle "Add New" Button Click
-        $(document).on('click', '.addnew', function (e) {
+    $(document).ready(function () {
+      // Handle "Add New" Button Click
+      $(document).on('click', '.addnew', function (e) {
         e.preventDefault();
         if ($('#addnew').length) {
-            $('#addnew').modal('show');
+          $('#addnew').modal('show');
         }
-        });
+      });
 
-        // Handle Edit Button Click
-        $(document).on('click', '.edit', function (e) {
+      // Handle Edit Button Click
+      $(document).on('click', '.edit', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
 
         if (id) {
-            if ($('#edit').length) {
+          if ($('#edit').length) {
             $('#edit').modal('show');
-            }
-            getRow(id);
+          }
+          getRow(id); // Fetch the data for the selected project
         }
-        });
+      });
 
-        // Handle Delete Button Click
-        $(document).on('click', '.delete', function (e) {
+      // Handle Delete Button Click
+      $(document).on('click', '.delete', function (e) {
         e.preventDefault();
         var id = $(this).data('id');
 
         if (id) {
-            if ($('#delete').length) {
+          if ($('#delete').length) {
             $('#delete').modal('show');
-            }
-            getRow(id);
+          }
+          getRow(id); // Fetch the data for deletion
         }
-        });
+      });
 
-        // Handle Edit Photo Button Click
-        $(document).on('click', '.photo', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-
-        if (id) {
-            if ($('#edit_photo').length) {
-            $('#edit_photo').modal('show');
-            }
-            getRow(id);
-        }
-        });
-
-        // Close Modal on Button Click
-        $(document).on('click', '.close-modal', function () {
+      // Close Modal on Button Click
+      $(document).on('click', '.close-modal', function () {
         var modal = $(this).closest('.modal');
         if (modal.length) {
-            modal.modal('hide');
+          modal.modal('hide');
         }
-        });
+      });
     });
 
-    // Function to fetch row data
+    // Function to fetch row data for the Edit modal
     function getRow(id) {
-        console.log("Fetching data for ID:", id);
-        // Ensure the function is defined in your script
+      $.ajax({
+        type: 'POST',
+        url: 'iptb_row.php', // Ensure this file exists and fetches the data
+        data: {id:id},
+        dataType: 'json',
+        success: function(response) {
+          // Set the values in the Edit modal
+          $('.id').val(response.id); // Set hidden ID input
+          $('#edit_project_name').val(response.project_id); // Set project name
+          $('#edit_municipality_name').val(response.municipality_id); // Set municipality
+          $('#edit_address').val(response.address); // Set address
+          $('#edit_access_point').val(response.access_point); // Set access point
+        }
+      });
     }
+  </script>
 
-      function getRow(id){
-        $.ajax({
-          type: 'POST',
-          url: 'iptb_row.php',
-          data: {id:id},
-          dataType: 'json',
-          success: function(response){
-            $('.id').val(response.id);
-            $('#edit_projectname_altavas').val(response.projectname_altavas);
-            $('#edit_locality_altavas').val(response.locality_altavas);
-            $('#edit_address_project').val(response.address_project);
-            $('#edit_aps_altavas').val(response.aps_altavas);
-            $('.projectname_altavas').html(response.projectname_altavas);
-          }
-        });
-      }
-    </script>
+
   </body>
 </html>

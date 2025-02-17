@@ -16,23 +16,23 @@ $projects = [
 ];
 
 $municipalities = [
-    ["title" => "Altavas", "description" => "This is a description for card 1.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_1.php"],
-    ["title" => "Balete", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Banga", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Batan", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Buruanga", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Ibajay", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Kalibo", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Lezo", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Libacao", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Madalag", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Makato", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Malay", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Malinao", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Nabas", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "New Washington", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Numancia", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
-    ["title" => "Tangalan", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "municipal_2.php"],
+    ["title" => "Altavas", "description" => "This is a description for card 1.", "image" => "assets/images/altavas.jpg", "link" => "municipal_1.php"],
+    ["title" => "Balete", "description" => "This is a description for card 2.", "image" => "assets/images/balete.jpg", "link" => "municipal_2.php"],
+    ["title" => "Banga", "description" => "This is a description for card 2.", "image" => "assets/images/banga.jpg", "link" => "municipal_2.php"],
+    ["title" => "Batan", "description" => "This is a description for card 2.", "image" => "assets/images/batan.jpg", "link" => "municipal_2.php"],
+    ["title" => "Buruanga", "description" => "This is a description for card 2.", "image" => "assets/images/buruanga.jpg", "link" => "municipal_2.php"],
+    ["title" => "Ibajay", "description" => "This is a description for card 2.", "image" => "assets/images/ibajay.jpg", "link" => "municipal_2.php"],
+    ["title" => "Kalibo", "description" => "This is a description for card 2.", "image" => "assets/images/kalibo.jpg", "link" => "municipal_2.php"],
+    ["title" => "Lezo", "description" => "This is a description for card 2.", "image" => "assets/images/lezo.jpg", "link" => "municipal_2.php"],
+    ["title" => "Libacao", "description" => "This is a description for card 2.", "image" => "assets/images/libacao.jpg", "link" => "municipal_2.php"],
+    ["title" => "Madalag", "description" => "This is a description for card 2.", "image" => "assets/images/madalag.jpg", "link" => "municipal_2.php"],
+    ["title" => "Makato", "description" => "This is a description for card 2.", "image" => "assets/images/makato.jpg", "link" => "municipal_2.php"],
+    ["title" => "Malay", "description" => "This is a description for card 2.", "image" => "assets/images/malay.jpg", "link" => "municipal_2.php"],
+    ["title" => "Malinao", "description" => "This is a description for card 2.", "image" => "assets/images/malinao.jpg", "link" => "municipal_2.php"],
+    ["title" => "Nabas", "description" => "This is a description for card 2.", "image" => "assets/images/nabas.jpg", "link" => "municipal_2.php"],
+    ["title" => "New Washington", "description" => "This is a description for card 2.", "image" => "assets/images/new_wash.jpg", "link" => "municipal_2.php"],
+    ["title" => "Numancia", "description" => "This is a description for card 2.", "image" => "assets/images/numancia.jpg", "link" => "municipal_2.php"],
+    ["title" => "Tangalan", "description" => "This is a description for card 2.", "image" => "assets/images/tangalan.jpg", "link" => "municipal_2.php"],
 ];
 ?>
 
@@ -48,17 +48,17 @@ $municipalities = [
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="container">
-                        <img src="https://placehold.co/1920x400" class="img-fluid mb-3" alt="Header Image">
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Free Wifi</h1>
-                            <nav style="font-size:85%;" aria-label="breadcrumb">
-                                <ol class="breadcrumb mb-0">
-                                    <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
-                                    <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                                    <li class="active" aria-current="page">Free Wifi</li>
-                                </ol>
-                            </nav>
-                        </div>
+                    <img src="https://placehold.co/1920x400" class="img-fluid mb-3 rounded" alt="Header Image">
+                    <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-4">
+                        <h1 class="h3 mb-2 mb-sm-0 text-gray-800">Free Wifi</h1>
+                        <nav class="breadcrumb-container" aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 d-flex flex-wrap align-items-center">
+                                <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><i class="mdi mdi-menu-right"></i></li>
+                                <li class="breadcrumb-item active" aria-current="page">Free Wifi</li>
+                            </ol>
+                        </nav>
+                    </div>
                         <!-- Tab navigation -->
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -94,10 +94,19 @@ $municipalities = [
                                     <div class="col-md-4 mb-4">
                                         <a href="<?php echo $municipality['link']; ?>" class="text-decoration-none">
                                             <div class="card h-100">
-                                                <img src="<?php echo $municipality['image']; ?>" class="card-img-top" alt="Image">
+                                                <div class="card-img-container position-relative">
+                                                    <img src="<?php echo $municipality['image']; ?>" class="card-img-top" alt="Image">
+                                                </div>
                                                 <div class="card-body">
-                                                    <h6 class="card-title"><?php echo $municipality['title']; ?></h6>
-                                                    <p class="card-text"><?php echo $municipality['description']; ?></p>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h4 class="card-title"><?php echo $municipality['title']; ?></h4>
+                                                        </div>
+                                                        <div class="col-6 text-end">
+                                                            <p class="text-muted mb-0">Total Number:</span></p>
+                                                            <h2 class="card-title text-primary fw-bold" style="font-size: 1.5rem;">9999</h2>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </a>
@@ -119,5 +128,44 @@ $municipalities = [
     </div>
     <!-- container-scroller -->
     <?php include 'includes/scripts.php';?>
+
+    <script>
+(function ($) {
+  'use strict';
+  $(function () {
+    var body = $('body');
+
+    // Store and retrieve active tab from localStorage
+    function setActiveTab() {
+      var activeTab = localStorage.getItem("activeTab");
+
+      if (activeTab) {
+        $('.nav-link').removeClass('active');
+        $('.tab-pane').removeClass('show active');
+
+        var selectedTab = $('#' + activeTab);
+        var selectedPane = $(selectedTab.attr('data-bs-target'));
+
+        if (selectedTab.length && selectedPane.length) {
+          selectedTab.addClass('active');
+          selectedPane.addClass('show active');
+        }
+      }
+    }
+
+    // Save the clicked tab ID in localStorage
+    $('.nav-link').on("click", function () {
+      localStorage.setItem("activeTab", this.id);
+    });
+
+    // Apply the active tab after the page loads
+    setActiveTab();
+  });
+
+})(jQuery);
+
+    </script>
+
+
 </body>
 </html>
