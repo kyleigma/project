@@ -13,7 +13,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Implemented Aklan Free WiFi Sites - IPTB</h1>
+                <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites - IPTB</h1>
                 <nav style="font-size:85%;" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
@@ -56,18 +56,19 @@
                 <thead>
                     <tr>
                         <th class="hidden"></th>
-                        <th>Project Name</th>
-                        <th>Location</th>
+                        <th width="30">Project Name</th>
+                        <th>Municipality</th>
                         <th>Address</th>
                         <th>APs</th>
+                        <th>Status</th>
                         <th width="50">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                  <?php
+                <?php
                     $sql = "SELECT 
                     fw.id, fw.address, fw.access_point, 
-                    fp.name AS project_name, m.name AS municipality_name
+                    fp.name AS project_name, fw.status, m.name AS municipality_name
                             FROM free_wifi fw
                             INNER JOIN free_wifi_projects fp ON fw.project_id = fp.id
                             INNER JOIN municipalities m ON fw.municipality_id = m.id
@@ -75,14 +76,18 @@
                             ORDER BY fw.address ASC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+                      $statusBadge = $row['status'] == 'active' ? 'badge-success' : 'badge-danger';
                       echo "
                         <tr>
                           <td class='hidden'></td>
                           <td>".$row['project_name']."</td> 
                           <td>".$row['municipality_name']."</td> 
                           <td>".$row['address']."</td> 
-                          <td>".$row['access_point']."</td> 
-                          <td width='50'>
+                          <td class='text-center'>".$row['access_point']."</td> 
+                          <td class='text-center'>
+                              <span class='badge rounded-pill $statusBadge' style='font-size: 0.75rem;'>".ucfirst($row['status'])."</span>
+                          </td>
+                          <td width='50' class='text-center'>
                             <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='mdi mdi-square-edit-outline'></i> </button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='mdi mdi-trash-can'></i> </button>                          
                           </td>

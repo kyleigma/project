@@ -28,15 +28,3 @@
     <!-- jQuery (Required for Modals & AJAX) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Fix Bootstrap Modals & Tooltips -->
-    <script>
-    $(document).ready(function() {
-        $('[data-bs-toggle="tooltip"]').tooltip();
-        $('[data-bs-toggle="popover"]').popover();
-
-        $(".modal").on("hidden.bs.modal", function () {
-            $(this).removeData("bs.modal");
-        });
-    });
-    </script>
-</head>

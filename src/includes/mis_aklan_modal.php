@@ -9,31 +9,58 @@
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="mis_aklan_add.php">
                 <div class="form-group">
-                    <label for="projectname_balete" class="col-sm-3 control-label">Project Name</label>
+                    <label for="project_name" class="col-sm-3 control-label">Project Name</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="projectname_balete" name="projectname_balete" required>
+                      <!-- Hidden input for the project ID -->
+                      <input type="hidden" id="project_id" name="project_id" value="<?php 
+                        // Query to fetch the MIS Aklan project ID
+                        $sql = "SELECT id FROM free_wifi_projects WHERE name = 'MIS Aklan' LIMIT 1";
+                        $result = $conn->query($sql);
+                        
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            echo $row['id'];  // Set MIS Aklan project ID
+                        }
+                      ?>">
+                      <!-- Text input for displaying the project name -->
+                      <input type="text" class="form-control" id="project_name" name="project_name" value="MIS Aklan" readonly>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="locality_balete" class="col-sm-3 control-label">Location</label>
+                    <label for="municipality_name" class="col-sm-3 control-label">Municipality</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="locality_balete" name="locality_balete" required>
+                      <select class="form-control" id="municipality_name" name="municipality_name" required>
+                        <option value="">Select Municipality</option>
+                        <?php
+                          // Assuming you have a connection to the database
+                          $sql = "SELECT id, name FROM municipalities";
+                          $result = $conn->query($sql);
+                          
+                          if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                              echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                            }
+                          } else {
+                            echo "<option value=''>No municipalities available</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="address_project" class="col-sm-3 control-label">Address</label>
+                    <label for="address" class="col-sm-3 control-label">Address</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="address_project" name="address_project" required>
+                      <input type="text" class="form-control" id="address" name="address" required>
                     </div>
                 </div>
             <div class="form-group">
-                    <label for="aps_balete" class="col-sm-3 control-label">APs</label>
+                    <label for="access_point" class="col-sm-3 control-label">APs</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="aps_balete" name="aps_balete" required>
+                      <input type="number" class="form-control" id="access_point" name="access_point" required>
                     </div>
                 </div>
             </div>
@@ -46,7 +73,7 @@
     </div>
 </div>
 
-<!-- Edit -->
+<!-- Edit Modal -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -58,31 +85,90 @@
               <form class="form-horizontal" method="POST" action="mis_aklan_edit.php">
                 <input type="hidden" class="id" name="id">
                 <div class="form-group">
-                    <label for="edit_projectname_balete" class="col-sm-3 control-label">Project Name</label>
+                  <label for="edit_project_name" class="col-sm-3 control-label">Project Name</label>
+                  <div class="col-sm-12">
+                      <select class="form-control" id="edit_project_name" name="project_name" required>
+                          <option value="">Select Project</option>
+                          <?php
+                              // Assuming you have a connection to the database
+                              $sql = "SELECT id, name FROM free_wifi_projects";
+                              $result = $conn->query($sql);
 
+                              if ($result->num_rows > 0) {
+                                  while ($row = $result->fetch_assoc()) {
+                                      // Check if the current project_id matches the one from the database
+                                      $selected = ($row['id'] == $project_id) ? 'selected' : '';
+                                      echo "<option value='" . $row['id'] . "' $selected>" . $row['name'] . "</option>";
+                                  }
+                              } else {
+                                  echo "<option value=''>No projects available</option>";
+                              }
+                          ?>
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_municipality_name" class="col-sm-3 control-label">Municipality</label>
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_projectname_balete" name="projectname_balete">
+                        <select class="form-control" id="edit_municipality_name" name="municipality_name" required>
+                            <option value="">Select Municipality</option>
+                            <?php
+                                // Assuming you have a connection to the database
+                                $sql = "SELECT id, name FROM municipalities";
+                                $result = $conn->query($sql);
+                                
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        // Check if the current municipality matches the one from the database
+                                        if ($row['id'] == $municipality_id) {
+                                            echo "<option value='" . $row['id'] . "' selected>" . $row['name'] . "</option>";
+                                        } else {
+                                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<option value=''>No municipalities available</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit_address" class="col-sm-3 control-label">Address</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id="edit_address" name="address">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_locality_balete" class="col-sm-3 control-label">Location</label>
-
+                    <label for="edit_access_point" class="col-sm-3 control-label">APs</label>
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_locality_balete" name="locality_balete">
+                      <input type="number" class="form-control" id="edit_access_point" name="access_point">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_address_project" class="col-sm-3 control-label">Address</label>
-
+                    <label for="edit_status" class="col-sm-3 control-label">Status</label>
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_address_project" name="address_project">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_aps_balete" class="col-sm-3 control-label">APs</label>
+                        <select class="form-control" id="edit_status" name="status" required>
+                            <option value="">Select Status</option>
+                            <?php
+                                // Fetch the current status for the specific row you're editing
+                                $sql = "SELECT status FROM free_wifi WHERE id = ?";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->bind_param("i", $id);  // Bind the ID to the query
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                $currentStatus = $result->fetch_assoc()['status'] ?? '';  // Retrieve the status of the row you're editing
 
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_aps_balete" name="aps_balete">
+                                $statuses = ['active', 'inactive']; // Explicit list of possible statuses
+
+                                // Loop through each status option and check if it matches the current status
+                                foreach ($statuses as $statusOption) {
+                                    $selected = ($currentStatus == $statusOption) ? 'selected' : '';  // Set selected option if it matches
+                                    echo "<option value='$statusOption' $selected>" . ucfirst($statusOption) . "</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -94,6 +180,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Delete -->
 <div class="modal fade" id="delete">
@@ -121,4 +208,4 @@
 </div>
 
 
-     
+

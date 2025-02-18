@@ -20,31 +20,84 @@
 <script src="assets/js/jquery.cookie.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- DataTables Plugins -->
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
-
 <!-- Dashboard & Custom Scripts -->
 <script src="assets/js/dashboard.js"></script>
 
 <!-- DataTables Initialization -->
 <script>
 $(document).ready(function() {
-    $(".datatable").DataTable({
-        "paging": false, 
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": false,
-        "responsive": true,
-        "scrollX": true,
-        "scrollY": "500px",
-        "scrollCollapse": true,
-        "retrieve": true,
-        "fixedHeader": true,
-        "columnDefs": [
-            { "orderable": false, "targets": [-1] }
-        ]
+    if (!$.fn.DataTable.isDataTable('.datatable')) {
+        var table = $(".datatable").DataTable({
+            "paging": false, 
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "responsive": true,
+            "scrollX": true,
+            "scrollY": "500px",
+            "scrollCollapse": true,
+            "retrieve": true,
+            "fixedHeader": {
+                header: true,  // Keep the header fixed at the top
+                footer: false  // Disable footer fixed if not needed
+            },
+            "columnDefs": [
+                { "orderable": false, "targets": [-1] }
+            ],
+            "createdRow": function(row, data, dataIndex) {
+                // Add row number to the first column
+                $('td', row).eq(0).html(dataIndex + 1);
+            }
+        });
+
+        // Adjust the table layout after window resize or sidebar toggle
+        $(window).on('resize', function() {
+            table.columns.adjust().draw();
+        });
+
+        // Ensure layout adjustment when the sidebar is toggled
+        $(".sidebar-toggle").on('click', function() {
+            table.columns.adjust().draw();
+        });
+    }
+
+    // Optional: You can also adjust the table width explicitly if needed
+    $(".datatable").css({
+        'width': '100%',
+        'table-layout': 'auto'
     });
 });
 </script>
+
+
+<style>
+    /* Make sure the table and header expand correctly */
+.dataTables_scrollHeadInner {
+    width: 100% !important;  /* Force scroll header to match the table width */
+}
+
+/* Ensure table and scroll body width align */
+table.dataTable {
+    width: 100% !important;  /* Ensure full width */
+}
+
+.dataTables_scrollBody {
+    width: 100% !important;  /* Ensure scrollable body is 100% width */
+}
+
+/* Ensure fixed header remains sticky and does not move */
+table.dataTable thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+}
+
+/* Adjust scrolling container when the sidebar is toggled */
+.dataTables_wrapper .dataTables_scrollBody {
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    width: 100%;
+}
+  </style>
