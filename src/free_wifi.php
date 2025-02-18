@@ -48,7 +48,7 @@ $municipalities = [
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="container">
-                    <img src="https://placehold.co/1920x400" class="img-fluid mb-3 rounded" alt="Header Image">
+                    <img src="assets/images/dict_proj/freewifi4all.png" class="img-fluid mb-3 rounded" alt="Header Image">
                     <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-4">
                         <h1 class="h3 mb-2 mb-sm-0 text-gray-800">Free Wifi</h1>
                         <nav class="breadcrumb-container" aria-label="breadcrumb">
