@@ -64,12 +64,10 @@ body.modal-open {
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">WiFi Bill</h1>
+                        <h1 class="h3 mb-0 text-gray-800 mb-3">WiFi Bill</h1>
                         <nav style="font-size:85%;" aria-label="breadcrumb">
                             <ol class="breadcrumb mb-0">
                                 <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
-                                <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                                <li class=""><a href="free_wifi.php">Utilities</a></li>
                                 <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
                                 <li class="active" aria-current="page">WiFi Bill</li>
                             </ol>
@@ -102,7 +100,7 @@ body.modal-open {
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
                         <div class="ml-auto">
-                            <a href="wifi_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
+                            <a href="wifi_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
                                 <i class="mdi mdi-printer-outline"></i> Print
                             </a>
                             <a href="wifi_bill_excel.php" target="_blank" class="btn btn-md btn-primary btn-flat">
@@ -114,7 +112,7 @@ body.modal-open {
                     <table class="table responsive table-striped datatable" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th width="25px">#</th>
+                                <th class="hidden"></th>
                                 <th>Month</th>
                                 <th>Date OR<br>Receive</th>
                                 <th>Picture</th>
@@ -130,14 +128,16 @@ body.modal-open {
 
                             while ($row = $query->fetch_assoc()) {
                                 $image = !empty($row['wifi_photo']) ? 'assets/images/' . $row['wifi_photo'] : 'assets/images/blank.svg';
+
+                                // Format the month_1 to "Month Year"
                                 $month_1 = new DateTime($row['month_1']);
-                                $formatted_month = $month_1->format('F Y');
+                                $formatted_month_1 = $month_1->format('F Y');
 
                                 echo "
                                 <tr data-id='" . $row['id'] . "'> 
-                                    <td class='text-center'>" . $rowNumber . "</td> 
-                                    <td>" . $formatted_month . "</td>
-                                    <td>" . $row['date_1'] . "</td>
+                                    <td class='hidden text-center'></td>
+                                    <td class='text-start'>" . $formatted_month_1 . "</td>
+                                    <td class='text-start'>" . $row['date_1'] . "</td>
                                     <td class='text-center'>
                                         <div class='d-flex align-items-center justify-content-center'>
                                             <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
@@ -146,7 +146,7 @@ body.modal-open {
                                             </a>
                                         </div>
                                     </td>
-                                    <td>" . number_format($row['total_amount_1'], 2) . "</td>
+                                    <td class='text-start'>" . number_format($row['total_amount_1'], 2) . "</td>
                                     <td class='text-center'>
                                         <button class='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
                                             <i class='mdi mdi-square-edit-outline'></i>
@@ -156,11 +156,14 @@ body.modal-open {
                                         </button>
                                     </td>
                                 </tr>";
-                                $rowNumber++;
                             }
                             ?>
                         </tbody>
                     </table>
+                    <div id="modal-container">
+                        <span class="close" style="opacity: 1;">&times;</span>
+                        <img id="modal-content">
+                    </div>
                 </div>
                 <?php include 'includes/footer.php';?>
             </div>
@@ -170,8 +173,49 @@ body.modal-open {
     <?php include 'includes/wifi_bill_modal.php';?>
     <?php include 'includes/scripts.php';?>
 
+    <!-- DataTables CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/select.dataTables.min.css">
+    <!-- jQuery (must be included before DataTables JS) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
+    <div id="modal-container">
+        <span class="close" style="opacity: 1;">&times;</span>
+        <img id="modal-content">
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalContainer = document.getElementById('modal-container');
+        var modalContent = document.getElementById('modal-content');
+        var closeBtn = document.querySelector('#modal-container .close');
+        var galleryImgs = document.querySelectorAll('.bill-images');
+
+        galleryImgs.forEach(function(img) {
+            img.addEventListener('click', function() {
+                modalContent.src = this.src;
+                modalContainer.classList.add('active'); // Fix: Show modal properly
+            });
+        });
+
+        closeBtn.addEventListener('click', function() {
+            modalContainer.classList.remove('active'); // Fix: Hide modal properly
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modalContainer) {
+                modalContainer.classList.remove('active'); // Fix: Hide when clicking outside
+            }
+        });
+    });
+    </script>
+
+    <!-- Initialize DataTable -->
     <script>
     $(document).ready(function() {
+        // Handle "Add New" Button Click
         $(document).on('click', '.addnew', function(e) {
             e.preventDefault();
             if ($('#addnew').length) {
@@ -179,9 +223,11 @@ body.modal-open {
             }
         });
 
+        // Handle Edit Button Click
         $(document).on('click', '.edit', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
+
             if (id) {
                 if ($('#edit').length) {
                     $('#edit').modal('show');
@@ -190,9 +236,11 @@ body.modal-open {
             }
         });
 
+        // Handle Delete Button Click
         $(document).on('click', '.delete', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
+
             if (id) {
                 if ($('#delete').length) {
                     $('#delete').modal('show');
@@ -201,9 +249,11 @@ body.modal-open {
             }
         });
 
+        // Handle Edit Photo Button Click
         $(document).on('click', '.photo', function(e) {
             e.preventDefault();
             var id = $(this).data('id');
+
             if (id) {
                 if ($('#edit_photo').length) {
                     $('#edit_photo').modal('show');
@@ -211,8 +261,24 @@ body.modal-open {
                 getRow(id);
             }
         });
+
+        // Close Modal on Button Click
+        $(document).on('click', '.close-modal', function() {
+            var modal = $(this).closest('.modal');
+            if (modal.length) {
+                modal.modal('hide');
+            }
+        });
     });
 
+    // Function to fetch row data
+    function getRow(id) {
+        console.log("Fetching data for ID:", id);
+        // Ensure the function is defined in your script
+    }
+    </script>
+
+    <script>
     function getRow(id) {
         $.ajax({
             type: 'POST',

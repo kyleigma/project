@@ -24,7 +24,7 @@ if (isset($_POST['upload'])) {
             $stmt->bind_param("si", $filename, $id);
 
             if ($stmt->execute()) {
-                $_SESSION['success'] = 'Photo updated successfully';
+                $_SESSION['success'] = 'Photo updated successfully!';
             } else {
                 $_SESSION['error'] = 'Database error: ' . $stmt->error;
             }
@@ -34,10 +34,10 @@ if (isset($_POST['upload'])) {
             $_SESSION['error'] = 'Failed to upload photo. Check folder permissions.';
         }
     } else {
-        $_SESSION['error'] = 'Select a valid photo to update';
+        $_SESSION['error'] = 'Select a valid photo to update.';
     }
 } else {
-    $_SESSION['error'] = 'Select photo to update first';
+    $_SESSION['error'] = 'Select photo to update first.';
 }
 
 header('location: water_bill.php');

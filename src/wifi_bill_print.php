@@ -57,9 +57,8 @@
     
     $pdf->SetFont('Arial','B',$rowFont);
     $pdf->Cell(10 ,5,'No',1,0, 'C');
-    $pdf->Cell(35 ,5,'Month',1,0,'C');
-    $pdf->Cell(35 ,5,'Date OR Receive',1,0,'C');
-    $pdf->Cell(55 ,5,'Picture Attachment',1,0,'C');
+    $pdf->Cell(65 ,5,'Month',1,0,'C');
+    $pdf->Cell(65 ,5,'Date OR Receive',1,0,'C');
     $pdf->Cell(50 ,5,'Total Amount',1,1,'C');//end of line HEADER
     
     // Content
@@ -72,15 +71,30 @@
         $pdf->Cell(10 ,8,$i,1,0, 'C');
         $month = $wifi['month_1'];
         $date = $wifi['date_1'];
-        $photo = $wifi['wifi_photo'];
         $amount = $wifi['total_amount_1'];
      
-        $pdf->Cell(35 ,8,$month,1,0,'L');
-        $pdf->Cell(35 ,8,$date,1,0,'L');
-        $pdf->Cell(55 ,8,$photo,1,0,'L');
-        $pdf->Cell(50 ,8,number_format($amount,2),1,1,'L');
+        $pdf->Cell(65 ,8,$month,1,0,'C');
+        $pdf->Cell(65 ,8,$date,1,0,'C');
+        $pdf->Cell(50 ,8,number_format($amount,2),1,1,'C');
         $i++;
     }
 
+    //make a dummy empty cell as a vertical spacer   ---------------------- SIGNATORIES ------------------
+    $pdf->Cell(189 ,10,'',0,1);//end of line
+    
+    $pdf->SetFont('Arial','',$rowFont);
+    $pdf->Cell(20 ,5,'Prepared by:',0,1, 'L');
+    
+    //make a dummy empty cell as a vertical spacer
+    $pdf->Cell(189 ,10,'',0,1);//end of line
+    
+    $pdf->SetFont('Arial','B',$rowFont);
+    $pdf->Cell(90 ,5,'DICT Student-Interns',0,0);
+    $pdf->Cell(90 ,5,'',0,1);
+    // $pdf->SetFont('Arial','',$rowFont);
+    // $pdf->Cell(90 ,5,'Chairperson, Computer Science Program',0,0);
+    // $pdf->Cell(90 ,5,'',0,0);
+
     $pdf->Output();
+
 ?>

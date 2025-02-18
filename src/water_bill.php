@@ -74,17 +74,15 @@ body.modal-open {
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Water Bill</h1>
-                        <nav style="font-size:85%;" aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0">
-                                <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
-                                <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                                <li class=""><a href="free_wifi.php">Utilities</a></li>
-                                <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                                <li class="active" aria-current="page">Water Bill</li>
-                            </ol>
-                        </nav>
-                    </div>
+                    <h1 class="h3 mb-0 text-gray-800 mb-3">Water Bill</h1>
+                    <nav style="font-size:85%;" aria-label="breadcrumb">
+                        <ol class="breadcrumb mb-0">
+                            <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
+                            <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
+                            <li class="active" aria-current="page">Water Bill</li>
+                        </ol>
+                    </nav>
+                </div>
 
                     <?php
                 if (isset($_SESSION['error'])) {
@@ -111,7 +109,7 @@ body.modal-open {
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
                         <div class="ml-auto">
-                            <a href="water_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
+                            <a href="water_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
                                 <i class="mdi mdi-printer-outline"></i> Print
                             </a>
                             <a href="water_bill_excel.php" target="_blank" class="btn btn-md btn-primary btn-flat">
@@ -122,7 +120,7 @@ body.modal-open {
                     <table class="table responsive table-striped datatable" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th width="25px">#</th>
+                                <th class="hidden"></th>
                                 <th>Month</th>
                                 <th>Date OR<br>Receive</th>
                                 <th>Picture</th>
@@ -132,43 +130,42 @@ body.modal-open {
                         </thead>
                         <tbody>
                             <?php
-                    $sql = "SELECT * FROM water_bill";
-                    $query = $conn->query($sql);
-                    $rowNumber = 1;
+                            $sql = "SELECT * FROM water_bill";
+                            $query = $conn->query($sql);
+                            $rowNumber = 1;
 
-                    while ($row = $query->fetch_assoc()) {
-                        $image = !empty($row['w_photo']) ? 'assets/images/' . $row['w_photo'] : 'assets/images/blank.svg';
+                            while ($row = $query->fetch_assoc()) {
+                                $image = !empty($row['w_photo']) ? 'assets/images/' . $row['w_photo'] : 'assets/images/blank.svg';
 
-                        // Format the month_wb to "Month Year"
-                        $month_wb = new DateTime($row['month_wb']);
-                        $formatted_month_wb = $month_wb->format('F Y');
+                                // Format the month_wb to "Month Year"
+                                $month_wb = new DateTime($row['month_wb']);
+                                $formatted_month_wb = $month_wb->format('F Y');
 
-                        echo "
-                        <tr data-id='" . $row['id'] . "'> 
-                            <td class='text-center'>" . $rowNumber . "</td> 
-                            <td>" . $formatted_month_wb . "</td>
-                            <td>" . $row['date_receive'] . "</td>
-                            <td class='text-center'>
-                                <div class='d-flex align-items-center justify-content-center'>
-                                    <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
-                                    <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "'>
-                                        <span class='mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>" . number_format($row['total_amount_wb'], 2) . "</td>
-                            <td class='text-center'>
-                                <button class='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
-                                    <i class='mdi mdi-square-edit-outline'></i>
-                                </button>
-                                <button class='btn btn-danger btn-sm delete' data-id='" . $row['id'] . "'>
-                                    <i class='mdi mdi-trash-can'></i>
-                                </button>
-                            </td>
-                        </tr>";
-                        $rowNumber++;
-                    }
-                    ?>
+                                echo "
+                                <tr data-id='" . $row['id'] . "'> 
+                                    <td class='hidden text-center'></td>
+                                    <td class='text-start'>" . $formatted_month_wb . "</td>
+                                    <td class='text-start'>" . $row['date_receive'] . "</td>
+                                    <td class='text-center'>
+                                        <div class='d-flex align-items-center justify-content-center'>
+                                            <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
+                                            <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "'>
+                                                <span class='mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td class='text-start'>" . number_format($row['total_amount_wb'], 2) . "</td>
+                                    <td class='text-center'>
+                                        <button class='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
+                                            <i class='mdi mdi-square-edit-outline'></i>
+                                        </button>
+                                        <button class='btn btn-danger btn-sm delete' data-id='" . $row['id'] . "'>
+                                            <i class='mdi mdi-trash-can'></i>
+                                        </button>
+                                    </td>
+                                </tr>";
+                            }
+                            ?>
                         </tbody>
                     </table>
                     <div id="modal-container">

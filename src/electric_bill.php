@@ -74,14 +74,12 @@ body.modal-open {
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Electric Bill</h1>
+                <h1 class="h3 mb-0 text-gray-800 mb-3">Electricity Bill</h1>
                 <nav style="font-size:85%;" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
                         <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                        <li class=""><a href="free_wifi.php">Utilities</a></li>
-                        <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                        <li class="active" aria-current="page">Electric Bill</li>
+                        <li class="active" aria-current="page">Electricity Bill</li>
                     </ol>
                 </nav>
             </div>
@@ -111,7 +109,7 @@ body.modal-open {
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
                 <div class="ml-auto">
-                    <a href="electric_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
+                    <a href="electric_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
                         <i class="mdi mdi-printer-outline"></i> Print
                     </a>
                     <a href="electric_bill_excel.php" target="_blank" class="btn btn-md btn-primary btn-flat">
@@ -119,10 +117,11 @@ body.modal-open {
                     </a>
                 </div>
             </div>
+
             <table class="table table-striped datatable" style="width: 100%;">
-                <thead class="thead-dark">
+                <thead>
                     <tr>
-                        <th width="25px">#</th>
+                        <th class="hidden"></th>
                         <th>Inclusive<br>Months</th>
                         <th>Date OR<br>Receive</th>
                         <th>Picture</th>
@@ -149,7 +148,7 @@ body.modal-open {
 
                         echo "
                         <tr data-id='" . $row['id'] . "'> 
-                            <td class='text-center'>" . $rowNumber . "</td> 
+                            <td class='hidden text-center'></td>
                             <td>" . $row['month_2'] . " -<br><br>" . $row['month_1'] . "</td>
                             <td>" . $row['date_2'] . "</td>
                             <td class='text-center'>
@@ -177,7 +176,6 @@ body.modal-open {
                                 </button>
                             </td>
                         </tr>";
-                        $rowNumber++;
                     }
                     ?>
                 </tbody>
