@@ -48,6 +48,7 @@ $query = mysqli_query($conn, "SELECT fwp.name AS project_name, fw.address, m.nam
                               FROM free_wifi fw 
                               JOIN free_wifi_projects fwp ON fw.project_id = fwp.id 
                               JOIN municipalities m ON fw.municipality_id = m.id 
+                              WHERE fw.project_id = 1
                               ORDER BY fw.id ASC");
 
 $pdf->SetFont('Arial', 'B', $rowFont);
@@ -61,14 +62,18 @@ $pdf->Cell(20, 5, 'Status', 1, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $i = 1;
 
-while ($row = mysqli_fetch_assoc($query)) {
-    $pdf->Cell(10, 8, $i, 1, 0, 'C');
-    $pdf->Cell(30, 8, $row['project_name'], 1, 0, 'C'); // Centered
-    $pdf->Cell(30, 8, $row['municipality'], 1, 0, 'C'); // Centered
-    $pdf->Cell(90, 8, $row['address'], 1, 0, 'L'); // Left aligned
-    $pdf->Cell(10, 8, $row['access_point'], 1, 0, 'C');
-    $pdf->Cell(20, 8, ucfirst($row['status']), 1, 1, 'C');
-    ++$i;
+if (mysqli_num_rows($query) > 0) {
+    while ($row = mysqli_fetch_assoc($query)) {
+        $pdf->Cell(10, 8, $i, 1, 0, 'C');
+        $pdf->Cell(30, 8, $row['project_name'], 1, 0, 'C'); // Centered
+        $pdf->Cell(30, 8, $row['municipality'], 1, 0, 'C'); // Centered
+        $pdf->Cell(90, 8, $row['address'], 1, 0, 'L'); // Left aligned
+        $pdf->Cell(10, 8, $row['access_point'], 1, 0, 'C');
+        $pdf->Cell(20, 8, ucfirst($row['status']), 1, 1, 'C');
+        ++$i;
+    }
+} else {
+    $pdf->Cell(189, 8, 'No records found', 1, 1, 'C');
 }
 
 // Space before signatories

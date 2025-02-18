@@ -1,30 +1,46 @@
 <?php
-	include 'includes/session.php';
+include 'includes/session.php';
 
-	if(isset($_POST['add'])){
-		$projectname_batan = $_POST['projectname_batan'];
-		$barangay_batan = $_POST['barangay_batan'];
-		$projetc_2 = $_POST['project_2'];
-		$aps_batan = $_POST['aps_batan'];
+if (isset($_POST['add'])) {
+    $project_name = $_POST['project_name'];
+    $municipality = $_POST['municipality_name'];
+    $address = $_POST['address'];
+    $access_point = (int)$_POST['access_point'];
 
-		$sql = "SELECT * FROM batan ORDER BY priority DESC LIMIT 1";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+    if ($access_point === 0) {
+        $_SESSION['error'] = 'Access Point cannot be 0';
+        header('location: municipal.php');
+        exit();
+    }
 
-		$priority = $row['priority'] + 1;
-		
-		$sql = "INSERT INTO batan (projectname_batan, barangay_batan, project_2, aps_batan, priority) VALUES ('$projectname_batan', '$barangay_batan', '$project_2', '$aps_batan','$priority')";
-		if($conn->query($sql)){
-			$_SESSION['success'] = 'Project Name added successfully';
-		}
-		else{
-			$_SESSION['error'] = $conn->error;
-		}
+    // Check if the project name exists and get its ID
+    $stmt = $conn->prepare("SELECT id FROM free_wifi_projects WHERE name = ? LIMIT 1");
+    $stmt->bind_param("s", $project_name);
+    $stmt->execute();
+    $stmt->store_result();
 
-	}
-	else{
-		$_SESSION['error'] = 'Fill up add form first';
-	}
+    if ($stmt->num_rows > 0) {
+        $stmt->bind_result($project_id);
+        $stmt->fetch();
 
-	header('location: municipal.php');
+        // Set default status as 'active'
+        $status = 'active';
+
+        // Insert into free_wifi table
+        $stmt = $conn->prepare("INSERT INTO free_wifi (project_id, address, municipality_id, access_point, status) 
+                                VALUES (?, ?, ?, ?, ?)");
+        $stmt->bind_param("isiss", $project_id, $address, $municipality, $access_point, $status);
+        if ($stmt->execute()) {
+            $_SESSION['success'] = 'Project added successfully';
+        } else {
+            $_SESSION['error'] = $stmt->error;
+        }
+    } else {
+        $_SESSION['error'] = 'Project Name does not exist';
+    }
+} else {
+    $_SESSION['error'] = 'Fill up the form first';
+}
+
+header('location: municipal.php');
 ?>
