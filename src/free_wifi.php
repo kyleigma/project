@@ -4,15 +4,15 @@
 <?php
 // Sample data for projects and municipalities
 $projects = [
-    ["title" => "IPTB", "description" => "This is a description for card 1.", "image" => "https://placehold.co/350x150/png", "link" => "iptb.php"],
-    ["title" => "MIS Aklan", "description" => "This is a description for card 2.", "image" => "https://placehold.co/350x150/png", "link" => "mis_aklan.php"],
-    ["title" => "Municipal", "description" => "This is a description for card 3.", "image" => "https://placehold.co/350x150/png", "link" => "municipal.php"],
-    ["title" => "PIALEOS", "description" => "This is a description for card 4.", "image" => "https://placehold.co/350x150/png", "link" => "pialeos.php"],
-    ["title" => "PICS-PP", "description" => "This is a description for card 5.", "image" => "https://placehold.co/350x150/png", "link" => "pics_pp.php"],
-    ["title" => "Region Initiated", "description" => "This is a description for card 6.", "image" => "https://placehold.co/350x150/png", "link" => "region_initiated.php"],
-    ["title" => "UISGIDA", "description" => "This is a description for card 7.", "image" => "https://placehold.co/350x150/png", "link" => "uisgida.php"],
-    ["title" => "VSAT UNDP-CoRe", "description" => "This is a description for card 8.", "image" => "https://placehold.co/350x150/png", "link" => "vsat_undp_core.php"],
-    ["title" => "WITS", "description" => "This is a description for card 9.", "image" => "https://placehold.co/350x150/png", "link" => "wits.php"],
+    ["title" => "IPTB", "description" => "This is a description for card 1.", "image" => "assets/images/dict_proj/iptb.png", "link" => "iptb.php"],
+    ["title" => "MIS Aklan", "description" => "This is a description for card 2.", "image" => "assets/images/dict_proj/misaklan.png", "link" => "mis_aklan.php"],
+    ["title" => "Municipal", "description" => "This is a description for card 3.", "image" => "assets/images/dict_proj/municipal.png", "link" => "municipal.php"],
+    ["title" => "PIALEOS", "description" => "This is a description for card 4.", "image" => "assets/images/dict_proj/pialeos.png", "link" => "pialeos.php"],
+    ["title" => "PICS-PP", "description" => "This is a description for card 5.", "image" => "assets/images/dict_proj/picspp.png", "link" => "pics_pp.php"],
+    ["title" => "Region Initiated", "description" => "This is a description for card 6.", "image" => "assets/images/dict_proj/region.png", "link" => "region_initiated.php"],
+    ["title" => "UISGIDA", "description" => "This is a description for card 7.", "image" => "assets/images/dict_proj/uisgida.png", "link" => "uisgida.php"],
+    ["title" => "VSAT UNDP-CoRe", "description" => "This is a description for card 8.", "image" => "assets/images/dict_proj/vsat.png", "link" => "vsat_undp_core.php"],
+    ["title" => "WITS", "description" => "This is a description for card 9.", "image" => "assets/images/dict_proj/wits.png", "link" => "wits.php"],
 ];
 
 $municipalities = [
@@ -150,6 +150,10 @@ $municipalities = [
           selectedTab.addClass('active');
           selectedPane.addClass('show active');
         }
+      } else {
+        // Set default tab to "Projects" if no active tab is found in localStorage
+        $('#projects-tab').addClass('active');
+        $('#projects').addClass('show active');
       }
     }
 
@@ -163,7 +167,6 @@ $municipalities = [
   });
 
 })(jQuery);
-
     </script>
 
 
