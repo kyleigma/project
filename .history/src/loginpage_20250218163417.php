@@ -9,15 +9,32 @@
 
   <style>
     body {
+      position: relative;
       background-image: url('/project/images/logbg.svg');
       background-size: cover;
       background-position: center;
+      filter: blur(100px);
       background-repeat: no-repeat;
       height: 100%;
       width: 100%;
     }
+    
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('/project/images/logbg.svg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+    }
+    
     .auth-form-light {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.78);
       border-radius: 10px; /* Add rounded corners */
       background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
     }

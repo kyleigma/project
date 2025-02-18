@@ -8,32 +8,50 @@
     <?php include 'includes/header.php'; ?>
 
   <style>
-    body {
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background-image: url('/project/images/logbg.svg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      filter: blur(5px); /* Add blur effect */
+      z-index: -1;
+    }
+    
+    body {
       height: 100%;
       width: 100%;
+      position: relative;
     }
+    
     .auth-form-light {
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 10px; /* Add rounded corners */
       background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
     }
+    
     .container-scroller {
       height: 100%;
     }
+    
     .container-fluid {
       height: 100%;
     }
+    
     .content-wrapper {
       height: 100%;
       background: transparent !important;
     }
+    
     .page-body-wrapper {
       padding-top: 0;
     }
+    
     html, body {
       height: 100%;
     }

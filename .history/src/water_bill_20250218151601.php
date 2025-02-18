@@ -2,9 +2,14 @@
 <?php include 'includes/session.php'; ?>
 
 <style>
-    .datatable th, .datatable td {
-        text-align: center; /* Center-align headers and contents */
-        vertical-align: middle; /* Vertically center contents */
+    .datatable th {
+        white-space: normal; /* Allow text wrapping */
+        word-break: break-word; /* Ensure wrapping */
+        text-align: center; /* Keep headers centered */
+        max-width: 80px; /* Adjust width as needed */
+        min-width: 80px; /* Prevents excessive shrinking */
+        overflow-wrap: break-word; /* Ensures text breaks */
+        padding: 5px; /* Reduces padding to save space */
     }
     .bill-images {
       width: 30px;
@@ -53,6 +58,11 @@
 body.modal-open {
     overflow: hidden;
 
+}
+
+.centered-table th, .centered-table td {
+    text-align: center;
+    vertical-align: middle;
 }
 
 </style>
@@ -114,10 +124,10 @@ body.modal-open {
                     </a>
                 </div>
             </div>
-            <table class="table responsive table-striped datatable" style="width: 100%;">
+            <table class="table responsive table-striped datatable centered-table" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th width="25px">#</th>
+                        <th width="25px" class="sorting sorting_desc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" style="width: 118.391px;" aria-label="#: activate to sort column ascending" aria-sort="descending">#</th>
                         <th>Month</th>
                         <th>Date OR<br>Receive</th>
                         <th>Picture</th>
@@ -136,169 +146,164 @@ body.modal-open {
 
                         // Format the month_wb to "Month Year"
                         $month_wb = new DateTime($row['month_wb']);
-                        $formatted_month_wb = $month_wb->format('F Y');
-
+                        $formatted_month_wb = $month_wb->format('F Y');ed_month_wb . "</td>
+e_receive'] . "</td>
                         echo "
-                        <tr data-id='" . $row['id'] . "'> 
-                            <td class='text-center'>" . $rowNumber . "</td> 
-                            <td>" . $formatted_month_wb . "</td>
-                            <td>" . $row['date_receive'] . "</td>
-                            <td class='text-center'>
                                 <div class='d-flex align-items-center justify-content-center'>
                                     <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
                                     <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "'>
                                         <span class='mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>" . number_format($row['total_amount_wb'], 2) . "</td>
-                            <td class='text-center'>
+                                    </a>ext-center'>
+                                </div>lass='d-flex align-items-center justify-content-center'>
+                            </td>   <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
+                            <td class='text-center'>" . number_format($row['total_amount_wb'], 2) . "</td>hoto text-primary d-flex align-items-center' data-id='" . $row['id'] . "'>
+                            <td class='text-center'>'mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
                                 <button class='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
                                     <i class='mdi mdi-square-edit-outline'></i>
                                 </button>
                                 <button class='btn btn-danger btn-sm delete' data-id='" . $row['id'] . "'>
                                     <i class='mdi mdi-trash-can'></i>
-                                </button>
-                            </td>
-                        </tr>";
-                        $rowNumber++;
-                    }
-                    ?>
-                </tbody>
-            </table>
+                                </button>lass='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
+                            </td>   <i class='mdi mdi-square-edit-outline'></i>
+                        </tr>"; </button>
+                        $rowNumber++;on class='btn btn-danger btn-sm delete' data-id='" . $row['id'] . "'>
+                    }               <i class='mdi mdi-trash-can'></i>
+                    ?>          </button>
+                </tbody>    </td>
+            </table>    </tr>";
             <div id="modal-container">
                 <span class="close" style="opacity: 1;">&times;</span>
                 <img id="modal-content">
-            </div>
-          </div>
+            </div>tbody>
+          </div>ble>
           <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
+          <!-- partial:../../partials/_footer.html -->">&times;</span>
           <?php include 'includes/footer.php';?>
           <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
-    </div>
+        </div>v>
+        <!-- main-panel ends -->nds -->
+      </div>-- partial:../../partials/_footer.html -->
+      <!-- page-body-wrapper ends -->ter.php';?>
+    </div><!-- partial -->
     <!-- container-scroller -->
     <?php include 'includes/water_bill_modal.php';?>
     <?php include 'includes/scripts.php';?>
-
+      <!-- page-body-wrapper ends -->
     <!-- DataTables CSS and JS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" type="text/css" href="assets/js/select.dataTables.min.css">
-    
+    <?php include 'includes/scripts.php';?>
     <!-- jQuery (must be included before DataTables JS) -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>ap4.min.css">
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+    
+       <div id="modal-container"> before DataTables JS) -->
+      <span class="close" style="opacity: 1;">&times;</span>"></script>
+      <img id="modal-content">atatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    </div>t src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 
-       <div id="modal-container">
-      <span class="close" style="opacity: 1;">&times;</span>
-      <img id="modal-content">
-    </div>
-
-    <script>
+    <script>id="modal-container">
       document.addEventListener('DOMContentLoaded', function() {
     var modalContainer = document.getElementById('modal-container');
     var modalContent = document.getElementById('modal-content');
     var closeBtn = document.querySelector('#modal-container .close');
     var galleryImgs = document.querySelectorAll('.bill-images');
-
-    galleryImgs.forEach(function(img) {
-        img.addEventListener('click', function() {
-            modalContent.src = this.src;
+      document.addEventListener('DOMContentLoaded', function() {
+    galleryImgs.forEach(function(img) {ementById('modal-container');
+        img.addEventListener('click', function() {dal-content');
+            modalContent.src = this.src;r('#modal-container .close');
             modalContainer.classList.add('active'); // Fix: Show modal properly
         });
-    });
-
+    });leryImgs.forEach(function(img) {
+        img.addEventListener('click', function() {
     closeBtn.addEventListener('click', function() {
-        modalContainer.classList.remove('active'); // Fix: Hide modal properly
+        modalContainer.classList.remove('active'); // Fix: Hide modal properlyy
+    }); });
     });
-
     window.addEventListener('click', function(e) {
-        if (e.target === modalContainer) {
+        if (e.target === modalContainer) {ction() {
             modalContainer.classList.remove('active'); // Fix: Hide when clicking outside
         }
     });
-});
-
-    </script>
-
+}); window.addEventListener('click', function(e) {
+        if (e.target === modalContainer) {
+    </script>odalContainer.classList.remove('active'); // Fix: Hide when clicking outside
+        }
     <!-- Initialize DataTable -->
     <script>
         $(document).ready(function () {
             // Handle "Add New" Button Click
             $(document).on('click', '.addnew', function (e) {
-            e.preventDefault();
+            e.preventDefault();->
             if ($('#addnew').length) {
                 $('#addnew').modal('show');
-            }
-            });
-
+            }/ Handle "Add New" Button Click
+            });ocument).on('click', '.addnew', function (e) {
+            e.preventDefault();
             // Handle Edit Button Click
             $(document).on('click', '.edit', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
 
-            if (id) {
-                if ($('#edit').length) {
+            if (id) { Edit Button Click
+                if ($('#edit').length) {it', function (e) {
                 $('#edit').modal('show');
-                }
+                }d = $(this).data('id');
                 getRow(id);
-            }
-            });
-
+            }f (id) {
+            }); if ($('#edit').length) {
+                $('#edit').modal('show');
             // Handle Delete Button Click
             $(document).on('click', '.delete', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
 
-            if (id) {
-                if ($('#delete').length) {
+            if (id) { Delete Button Click
+                if ($('#delete').length) {te', function (e) {
                 $('#delete').modal('show');
-                }
+                }d = $(this).data('id');
                 getRow(id);
-            }
-            });
-
+            }f (id) {
+            }); if ($('#delete').length) {
+                $('#delete').modal('show');
             // Handle Edit Photo Button Click
             $(document).on('click', '.photo', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
 
-            if (id) {
-                if ($('#edit_photo').length) {
+            if (id) { Edit Photo Button Click
+                if ($('#edit_photo').length) {function (e) {
                 $('#edit_photo').modal('show');
-                }
+                }d = $(this).data('id');
                 getRow(id);
-            }
-            });
-
+            }f (id) {
+            }); if ($('#edit_photo').length) {
+                $('#edit_photo').modal('show');
             // Close Modal on Button Click
             $(document).on('click', '.close-modal', function () {
             var modal = $(this).closest('.modal');
             if (modal.length) {
                 modal.modal('hide');
-            }
-            });
-        });
-
+            }/ Close Modal on Button Click
+            });ocument).on('click', '.close-modal', function () {
+        }); var modal = $(this).closest('.modal');
+            if (modal.length) {
         // Function to fetch row data
         function getRow(id) {
             console.log("Fetching data for ID:", id);
             // Ensure the function is defined in your script
         }
-    </script>
-
-<script>
-    function getRow(id){
+    </script>nction to fetch row data
+        function getRow(id) {
+<script>    console.log("Fetching data for ID:", id);
+    function getRow(id){e function is defined in your script
       $.ajax({
         type: 'POST',
         url: 'water_bill_row.php',
         data: {
-          id: id
-        },
+          id: idRow(id){
+        },ax({
         dataType: 'json',
         success: function(response) {
           $('.id').val(response.id);
@@ -306,7 +311,12 @@ body.modal-open {
           $('#edit_date_receive').val(response.date_receive);
           $('#edit_total_amount_wb').val(response.total_amount_wb);
           $('.fullname').html(response.month_wb + ' ' + response.date_receive);
-        }
+        } $('.id').val(response.id);
+      }); $('#edit_month_wb').val(response.month_wb);
+    }     $('#edit_date_receive').val(response.date_receive);
+    </script>#edit_total_amount_wb').val(response.total_amount_wb);
+  </body> $('.fullname').html(response.month_wb + ' ' + response.date_receive);
+</html> }
       });
     }
     </script>

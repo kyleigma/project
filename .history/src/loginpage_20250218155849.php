@@ -2,44 +2,30 @@
       session_start();
       if(isset($_SESSION['admin'])){
         header('location:home.php');
-      }	
+      }  
   ?>
 
     <?php include 'includes/header.php'; ?>
 
   <style>
-    body {
-      background-image: url('/project/images/logbg.svg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100%;
-      width: 100%;
-    }
     .auth-form-light {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.56);
       border-radius: 10px; /* Add rounded corners */
-      background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
     }
-    .container-scroller {
+    .blurred-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 100%;
-    }
-    .container-fluid {
-      height: 100%;
-    }
-    .content-wrapper {
-      height: 100%;
-      background: transparent !important;
-    }
-    .page-body-wrapper {
-      padding-top: 0;
-    }
-    html, body {
-      height: 100%;
+      background: #1F3BB3;
+      backdrop-filter: blur(5px);
+      z-index: -1;
     }
   </style>
 
   <body>
+    <div class="blurred-background"></div>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth px-0">
