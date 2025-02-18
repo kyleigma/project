@@ -17,7 +17,7 @@ if (isset($_POST['edit'])) {
     }
 
     if (empty($access_point) || !is_numeric($access_point) || (int)$access_point === 0) {
-        $_SESSION['error'] = 'Access Point cannot be 0 or empty';
+        $_SESSION['error'] = 'Access Point cannot be 0 or empty.';
         header('location: municipal.php');
         exit();
     }
@@ -33,7 +33,7 @@ if (isset($_POST['edit'])) {
     if ($result->num_rows > 0) {
         // Ensure status is being passed correctly
         if (!in_array($status, ['active', 'inactive'])) {
-            $_SESSION['error'] = 'Invalid status selected';
+            $_SESSION['error'] = 'Invalid status selected.';
             header('location: municipal.php');
             exit();
         }
@@ -43,16 +43,16 @@ if (isset($_POST['edit'])) {
         $stmt->bind_param("isiisi", $project_name, $address, $municipality, $access_point, $status, $id);
 
         if ($stmt->execute()) {
-            $_SESSION['success'] = 'Project updated successfully';
+            $_SESSION['success'] = 'Project updated successfully!';
         } else {
             $_SESSION['error'] = 'Failed to update project: ' . $stmt->error;
         }
     } else {
-        $_SESSION['error'] = 'Project ID does not exist';
+        $_SESSION['error'] = 'Project ID does not exist.';
     }
 
 } else {
-    $_SESSION['error'] = 'Fill up the edit form first';
+    $_SESSION['error'] = 'Fill up the edit form first.';
 }
 
 header('location: municipal.php');

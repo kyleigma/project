@@ -2,38 +2,66 @@
 <?php include 'includes/session.php'; ?>
 
 <?php
+// Function to get access points count
+function getAccessPointsCount($type, $id) {
+    global $conn; // Use the global database connection
+
+    if ($type === 'project') {
+        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM free_wifi WHERE project_id = ?");
+    } else if ($type === 'municipality') {
+        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM free_wifi WHERE municipality_id = ?");
+    } else {
+        return 0;
+    }
+
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    return $row['count'];
+}
+
 // Sample data for projects and municipalities
 $projects = [
-    ["title" => "IPTB", "description" => "This is a description for card 1.", "image" => "assets/images/dict_proj/iptb.png", "link" => "iptb.php"],
-    ["title" => "MIS Aklan", "description" => "This is a description for card 2.", "image" => "assets/images/dict_proj/misaklan.png", "link" => "mis_aklan.php"],
-    ["title" => "Municipal", "description" => "This is a description for card 3.", "image" => "assets/images/dict_proj/municipal.png", "link" => "municipal.php"],
-    ["title" => "PIALEOS", "description" => "This is a description for card 4.", "image" => "assets/images/dict_proj/pialeos.png", "link" => "pialeos.php"],
-    ["title" => "PICS-PP", "description" => "This is a description for card 5.", "image" => "assets/images/dict_proj/picspp.png", "link" => "pics_pp.php"],
-    ["title" => "Region Initiated", "description" => "This is a description for card 6.", "image" => "assets/images/dict_proj/region.png", "link" => "region_initiated.php"],
-    ["title" => "UISGIDA", "description" => "This is a description for card 7.", "image" => "assets/images/dict_proj/uisgida.png", "link" => "uisgida.php"],
-    ["title" => "VSAT UNDP-CoRe", "description" => "This is a description for card 8.", "image" => "assets/images/dict_proj/vsat.png", "link" => "vsat_undp_core.php"],
-    ["title" => "WITS", "description" => "This is a description for card 9.", "image" => "assets/images/dict_proj/wits.png", "link" => "wits.php"],
+    ["id" => 1, "title" => "IPTB", "image" => "assets/images/dict_proj/iptb.png", "link" => "iptb.php"],
+    ["id" => 2, "title" => "MIS Aklan", "image" => "assets/images/dict_proj/misaklan.png", "link" => "mis_aklan.php"],
+    ["id" => 3, "title" => "Municipal", "image" => "assets/images/dict_proj/municipal.png", "link" => "municipal.php"],
+    ["id" => 4, "title" => "PIALEOS", "image" => "assets/images/dict_proj/pialeos.png", "link" => "pialeos.php"],
+    ["id" => 5, "title" => "PICS-PP", "image" => "assets/images/dict_proj/picspp.png", "link" => "pics_pp.php"],
+    ["id" => 6, "title" => "Region Initiated", "image" => "assets/images/dict_proj/region.png", "link" => "region_initiated.php"],
+    ["id" => 7, "title" => "UISGIDA", "image" => "assets/images/dict_proj/uisgida.png", "link" => "uisgida.php"],
+    ["id" => 8, "title" => "VSAT UNDP-CoRe", "image" => "assets/images/dict_proj/vsat.png", "link" => "vsat_undp_core.php"],
+    ["id" => 9, "title" => "WITS", "image" => "assets/images/dict_proj/wits.png", "link" => "wits.php"],
 ];
 
 $municipalities = [
-    ["title" => "Altavas", "description" => "This is a description for card 1.", "image" => "assets/images/freewifi/altavas.png", "link" => "municipal_1.php"],
-    ["title" => "Balete", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/balete.png", "link" => "municipal_2.php"],
-    ["title" => "Banga", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/banga.png", "link" => "municipal_2.php"],
-    ["title" => "Batan", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/batan.png", "link" => "municipal_2.php"],
-    ["title" => "Buruanga", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/buruanga.png", "link" => "municipal_2.php"],
-    ["title" => "Ibajay", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/ibajay.png", "link" => "municipal_2.php"],
-    ["title" => "Kalibo", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/kalibo.png", "link" => "municipal_2.php"],
-    ["title" => "Lezo", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/lezo.png", "link" => "municipal_2.php"],
-    ["title" => "Libacao", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/libacao.png", "link" => "municipal_2.php"],
-    ["title" => "Madalag", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/madalag.png", "link" => "municipal_2.php"],
-    ["title" => "Makato", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/makato.png", "link" => "municipal_2.php"],
-    ["title" => "Malay", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/malay.png", "link" => "municipal_2.php"],
-    ["title" => "Malinao", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/malinao.png", "link" => "municipal_2.php"],
-    ["title" => "Nabas", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/nabas.png", "link" => "municipal_2.php"],
-    ["title" => "New Washington", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/new_wash.png", "link" => "municipal_2.php"],
-    ["title" => "Numancia", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/numancia.png", "link" => "municipal_2.php"],
-    ["title" => "Tangalan", "description" => "This is a description for card 2.", "image" => "assets/images/freewifi/tangalan.png", "link" => "municipal_2.php"],
+    ["id" => 1, "title" => "Altavas", "image" => "assets/images/freewifi/altavas.png", "link" => "municipal_1.php"],
+    ["id" => 2, "title" => "Balete", "image" => "assets/images/freewifi/balete.png", "link" => "municipal_2.php"],
+    ["id" => 3, "title" => "Banga", "image" => "assets/images/freewifi/banga.png", "link" => "municipal_2.php"],
+    ["id" => 4, "title" => "Batan", "image" => "assets/images/freewifi/batan.png", "link" => "municipal_2.php"],
+    ["id" => 5, "title" => "Buruanga", "image" => "assets/images/freewifi/buruanga.png", "link" => "municipal_2.php"],
+    ["id" => 6, "title" => "Ibajay", "image" => "assets/images/freewifi/ibajay.png", "link" => "municipal_2.php"],
+    ["id" => 7, "title" => "Kalibo", "image" => "assets/images/freewifi/kalibo.png", "link" => "municipal_2.php"],
+    ["id" => 8, "title" => "Lezo", "image" => "assets/images/freewifi/lezo.png", "link" => "municipal_2.php"],
+    ["id" => 9, "title" => "Libacao", "image" => "assets/images/freewifi/libacao.png", "link" => "municipal_2.php"],
+    ["id" => 10, "title" => "Madalag", "image" => "assets/images/freewifi/madalag.png", "link" => "municipal_2.php"],
+    ["id" => 11, "title" => "Makato", "image" => "assets/images/freewifi/makato.png", "link" => "municipal_2.php"],
+    ["id" => 12, "title" => "Malay", "image" => "assets/images/freewifi/malay.png", "link" => "municipal_2.php"],
+    ["id" => 13, "title" => "Malinao", "image" => "assets/images/freewifi/malinao.png", "link" => "municipal_2.php"],
+    ["id" => 14, "title" => "Nabas", "image" => "assets/images/freewifi/nabas.png", "link" => "municipal_2.php"],
+    ["id" => 15, "title" => "New Washington", "image" => "assets/images/freewifi/new_wash.png", "link" => "municipal_2.php"],
+    ["id" => 16, "title" => "Numancia", "image" => "assets/images/freewifi/numancia.png", "link" => "municipal_2.php"],
+    ["id" => 17, "title" => "Tangalan", "image" => "assets/images/freewifi/tangalan.png", "link" => "municipal_2.php"],
 ];
+
+// Add access points count to projects and municipalities
+foreach ($projects as &$project) {
+    $project['access_point'] = getAccessPointsCount('project', $project['id']);
+}
+foreach ($municipalities as &$municipality) {
+    $municipality['access_point'] = getAccessPointsCount('municipality', $municipality['id']);
+}
 ?>
 
 <body>
@@ -48,17 +76,17 @@ $municipalities = [
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="container">
-                    <img src="assets/images/dict_proj/freewifi4all.png" class="img-fluid mb-3 rounded" alt="Header Image">
-                    <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-4">
-                        <h1 class="h3 mb-2 mb-sm-0 text-gray-800">Free Wifi</h1>
-                        <nav class="breadcrumb-container" aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0 d-flex flex-wrap align-items-center">
-                                <li class="breadcrumb-item"><a href="home.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><i class="mdi mdi-menu-right"></i></li>
-                                <li class="breadcrumb-item active" aria-current="page">Free Wifi</li>
-                            </ol>
-                        </nav>
-                    </div>
+                        <img src="assets/images/dict_proj/freewifi4all.png" class="img-fluid mb-4 rounded" alt="Header Image">
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites - IPTB</h1>
+                            <nav style="font-size:85%;" aria-label="breadcrumb">
+                                <ol class="breadcrumb mb-0">
+                                    <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
+                                    <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
+                                    <li class="active" aria-current="page">Free Wifi</a></li>
+                                </ol>
+                            </nav>
+                        </div>
                         <!-- Tab navigation -->
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
                             <li class="nav-item" role="presentation">
@@ -78,8 +106,15 @@ $municipalities = [
                                             <div class="card h-100">
                                                 <img src="<?php echo $project['image']; ?>" class="card-img-top" alt="Image">
                                                 <div class="card-body">
-                                                    <h6 class="card-title"><?php echo $project['title']; ?></h6>
-                                                    <p class="card-text"><?php echo $project['description']; ?></p>
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6 class="card-title"><?php echo $project['title']; ?></h6>
+                                                        </div>
+                                                        <div class="col-6 text-end">
+                                                            <p class="text-muted mb-0">Access Points:</p>
+                                                            <h2 class="card-title text-primary fw-bold" style="font-size: 1.5rem;"><?php echo $project['access_point']; ?></h2>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </a>
@@ -103,8 +138,8 @@ $municipalities = [
                                                             <h4 class="card-title"><?php echo $municipality['title']; ?></h4>
                                                         </div>
                                                         <div class="col-6 text-end">
-                                                            <p class="text-muted mb-0">Total Number:</span></p>
-                                                            <h2 class="card-title text-primary fw-bold" style="font-size: 1.5rem;">9999</h2>
+                                                            <p class="text-muted mb-0">Access Points:</p>
+                                                            <h2 class="card-title text-primary fw-bold" style="font-size: 1.5rem;"><?php echo $municipality['access_point']; ?></h2>
                                                         </div>
                                                     </div>
                                                 </div>

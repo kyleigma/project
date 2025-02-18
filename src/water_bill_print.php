@@ -69,10 +69,9 @@
     
     $pdf->SetFont('Arial','B',$rowFont);
     $pdf->Cell(10 ,5,'No',1,0, 'C');
-    $pdf->Cell(35 ,5,'Month',1,0,'C');
-    $pdf->Cell(35 ,5,'Date OR Receive',1,0,'C');
-    $pdf->Cell(55 ,5,'Picture Attachment',1,0,'C');
-    $pdf->Cell(50 ,5,'Total Amount',1,1,'C');//end of line HEADER
+    $pdf->Cell(60 ,5,'Month',1,0,'C');
+    $pdf->Cell(60,5,'Date OR Receive',1,0,'C');
+    $pdf->Cell(60 ,5,'Total Amount',1,1,'C');//end of line HEADER
     
     // // room CONTENT
      $pdf->SetFont('Arial','',10);
@@ -82,14 +81,12 @@
         $pdf->Cell(10 ,8,$i,1,0, 'C');
         $room = $rooms['month_wb'];
         $desc = $rooms['date_receive'];
-        $address = $rooms['w_photo'];
         $room1 = $rooms['total_amount_wb'];
      
         
-        $pdf->Cell(35 ,8,$room,1,0,'L');
-        $pdf->Cell(35 ,8,$desc,1,0,'L');
-        $pdf->Cell(55 ,8,$address,1,0,'L');
-        $pdf->Cell(50 ,8,$room1,1,1,'L');
+        $pdf->Cell(60 ,8,$room,1,0,'C');
+        $pdf->Cell(60 ,8,$desc,1,0,'C');
+        $pdf->Cell(60 ,8,$room1,1,1,'C');
        
         ++$i;
     }
