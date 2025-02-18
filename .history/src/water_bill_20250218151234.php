@@ -2,9 +2,14 @@
 <?php include 'includes/session.php'; ?>
 
 <style>
-    .datatable th, .datatable td {
-        text-align: center; /* Center-align headers and contents */
-        vertical-align: middle; /* Vertically center contents */
+    .datatable th {
+        white-space: normal; /* Allow text wrapping */
+        word-break: break-word; /* Ensure wrapping */
+        text-align: center; /* Keep headers centered */
+        max-width: 80px; /* Adjust width as needed */
+        min-width: 80px; /* Prevents excessive shrinking */
+        overflow-wrap: break-word; /* Ensures text breaks */
+        padding: 5px; /* Reduces padding to save space */
     }
     .bill-images {
       width: 30px;
@@ -45,7 +50,7 @@
     cursor: pointer;
 }
 
-.close:hover {
+close:hover {
     color: skyblue;
 }
 
@@ -114,7 +119,7 @@ body.modal-open {
                     </a>
                 </div>
             </div>
-            <table class="table responsive table-striped datatable" style="width: 100%;">
+            <table class="table responsive table-striped datatable centered-table" style="width: 100%;">
                 <thead>
                     <tr>
                         <th width="25px">#</th>
@@ -141,8 +146,8 @@ body.modal-open {
                         echo "
                         <tr data-id='" . $row['id'] . "'> 
                             <td class='text-center'>" . $rowNumber . "</td> 
-                            <td>" . $formatted_month_wb . "</td>
-                            <td>" . $row['date_receive'] . "</td>
+                            <td class='text-center'>" . $formatted_month_wb . "</td>
+                            <td class='text-center'>" . $row['date_receive'] . "</td>
                             <td class='text-center'>
                                 <div class='d-flex align-items-center justify-content-center'>
                                     <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
@@ -151,7 +156,7 @@ body.modal-open {
                                     </a>
                                 </div>
                             </td>
-                            <td>" . number_format($row['total_amount_wb'], 2) . "</td>
+                            <td class='text-center'>" . number_format($row['total_amount_wb'], 2) . "</td>
                             <td class='text-center'>
                                 <button class='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
                                     <i class='mdi mdi-square-edit-outline'></i>

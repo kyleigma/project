@@ -2,9 +2,14 @@
 <?php include 'includes/session.php'; ?>
 
 <style>
-    .datatable th, .datatable td {
-        text-align: center; /* Center-align headers and contents */
-        vertical-align: middle; /* Vertically center contents */
+    .datatable th {
+        white-space: normal; /* Allow text wrapping */
+        word-break: break-word; /* Ensure wrapping */
+        text-align: center; /* Keep headers centered */
+        max-width: 80px; /* Adjust width as needed */
+        min-width: 80px; /* Prevents excessive shrinking */
+        overflow-wrap: break-word; /* Ensures text breaks */
+        padding: 5px; /* Reduces padding to save space */
     }
     .bill-images {
       width: 30px;

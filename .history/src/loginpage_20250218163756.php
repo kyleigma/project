@@ -17,9 +17,11 @@
       width: 100%;
     }
     .auth-form-light {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-radius: 10px; /* Add rounded corners */
-      background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.7); /* More transparent to show blur */
+  backdrop-filter: blur(10px); /* Add blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
     }
     .container-scroller {
       height: 100%;

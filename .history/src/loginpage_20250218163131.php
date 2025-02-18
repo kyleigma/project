@@ -9,6 +9,7 @@
 
   <style>
     body {
+      filter: blur(1px);
       background-image: url('/project/images/logbg.svg');
       background-size: cover;
       background-position: center;
@@ -17,7 +18,7 @@
       width: 100%;
     }
     .auth-form-light {
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.78);
       border-radius: 10px; /* Add rounded corners */
       background-color: rgba(255, 255, 255, 0.95); /* Semi-transparent white */
     }
