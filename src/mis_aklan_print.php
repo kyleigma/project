@@ -62,15 +62,20 @@ $pdf->Cell(20, 5, 'Status', 1, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $i = 1;
 
-while ($row = mysqli_fetch_assoc($query)) {
-    $pdf->Cell(10, 8, $i, 1, 0, 'C');
-    $pdf->Cell(30, 8, $row['project_name'], 1, 0, 'C'); // Centered
-    $pdf->Cell(30, 8, $row['municipality'], 1, 0, 'C'); // Centered
-    $pdf->Cell(90, 8, $row['address'], 1, 0, 'L'); // Left aligned
-    $pdf->Cell(10, 8, $row['access_point'], 1, 0, 'C');
-    $pdf->Cell(20, 8, ucfirst($row['status']), 1, 1, 'C');
-    ++$i;
+if (mysqli_num_rows($query) > 0) {
+    while ($row = mysqli_fetch_assoc($query)) {
+        $pdf->Cell(10, 8, $i, 1, 0, 'C');
+        $pdf->Cell(30, 8, $row['project_name'], 1, 0, 'C'); // Centered
+        $pdf->Cell(30, 8, $row['municipality'], 1, 0, 'C'); // Centered
+        $pdf->Cell(90, 8, $row['address'], 1, 0, 'L'); // Left aligned
+        $pdf->Cell(10, 8, $row['access_point'], 1, 0, 'C');
+        $pdf->Cell(20, 8, ucfirst($row['status']), 1, 1, 'C');
+        ++$i;
+    }
+} else {
+    $pdf->Cell(189, 8, 'No records found', 1, 1, 'C');
 }
+
 
 // Space before signatories
 $pdf->Cell(189, 10, '', 0, 1);
