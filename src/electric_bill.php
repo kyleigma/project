@@ -144,7 +144,8 @@ body.modal-open {
 
                     while ($row = $query->fetch_assoc()) {
                         $total = $row['gtc'] + $row['dr'] + $row['uc'] + $row['evax'] + $row['other_ca'] + $row['annex'];
-                        $image = !empty($row['e_photo']) ? 'assets/images/' . $row['e_photo'] : 'assets/images/blank.svg';
+                        $imagePath = 'assets/images/' . $row['e_photo'];
+                        $image = (!empty($row['e_photo']) && file_exists($imagePath)) ? $imagePath : 'assets/images/blank.svg';
 
                         echo "
                         <tr data-id='" . $row['id'] . "'> 

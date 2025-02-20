@@ -9,9 +9,9 @@ if (isset($_POST['upload'])) {
     }
 
     $id = $_POST['id'];
-    $filename = $_FILES['w_photo']['name'];
-    $file_tmp = $_FILES['w_photo']['tmp_name'];
-    $file_error = $_FILES['w_photo']['error'];
+    $filename = $_FILES['wifi_photo']['name'];
+    $file_tmp = $_FILES['wifi_photo']['tmp_name'];
+    $file_error = $_FILES['wifi_photo']['error'];
 
     // Validate file upload
     if ($file_error === 0 && !empty($filename)) {
@@ -20,7 +20,7 @@ if (isset($_POST['upload'])) {
 
         if (move_uploaded_file($file_tmp, $target_file)) {
             // Use prepared statements to prevent SQL injection
-            $stmt = $conn->prepare("UPDATE wifi_bill SET w_photo = ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE wifi_bill SET wifi_photo = ? WHERE id = ?");
             $stmt->bind_param("si", $filename, $id);
 
             if ($stmt->execute()) {

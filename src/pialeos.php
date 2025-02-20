@@ -13,12 +13,12 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites - PIALEOS</h1>
+              <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites &nbsp;&nbsp;|&nbsp;&nbsp;<b>PIALEOS</b></h1>
                 <nav style="font-size:85%;" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
                         <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                        <li class=""><a href="free_wifi.php">Free Wifi</a></li>
+                        <li class=""><a href="free_wifi.php">Free Wifi</a></li>&nbsp;&nbsp;&nbsp;
                         <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
                         <li class="active" aria-current="page">PIALEOS</li>
                     </ol>

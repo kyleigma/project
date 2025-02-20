@@ -50,31 +50,18 @@
                         </div>
                         <div class="col-lg-4 d-flex flex-column">
                           <div class="row flex-grow">
+                            <!-- Project-wise AP Distribution -->
                             <div class="col-md-6 col-lg-12 grid-margin stretch-card">
-                              <div class="card bg-primary card-rounded">
-                                <div class="card-body d-flex flex-column justify-content-center align-items-center text-center">
-                                  <h4 class="card-title card-title-dash text-white mb-3 text-wrap">Total APs</h4>
-                                  <h2 class="text-white display-4">
-                                    <?php
-                                      $sql = "SELECT SUM(total_aps) AS total FROM (
-                                          SELECT aps_altavas as total_aps FROM altavas UNION ALL
-                                          SELECT aps_balete as total_aps FROM balete UNION ALL
-                                          SELECT aps_banga as total_aps FROM banga UNION ALL
-                                          SELECT aps_batan as total_aps FROM batan UNION ALL
-                                          SELECT aps_buruanga as total_aps FROM buruanga UNION ALL
-                                          SELECT aps_ibajay as total_aps FROM ibajay UNION ALL
-                                          SELECT aps_uisgida as total_aps FROM kalibo UNION ALL
-                                          SELECT aps_vsat_undp_core as total_aps FROM lezo UNION ALL
-                                          SELECT aps_wits as total_aps FROM libacao  ) AS all_aps ";
-                                      $query = $conn->query($sql);
-                                      $row = $query->fetch_assoc();
-                                      echo $row['total'];
-                                    ?>
-                                  </h2>
+                                <div class="card card-rounded text-center">
+                                    <div class="card-body">
+                                        <h4 class="card-title">APs by Project</h4> <!-- Remove text-white to keep default text color -->
+                                        <div class="chart-container" style="position: relative; height: auto; width: 100%;">
+                                            <canvas id="projectDonutChart"></canvas>
+                                        </div>
+                                        <div id="projectDonutChart-legend" class="mt-4 text-center"></div> <!-- Legend properly displayed -->
+                                    </div>
                                 </div>
-                              </div>
                             </div>
-
                             <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                               <div class="card card-rounded">
                                 <div class="card-body">
@@ -329,38 +316,38 @@
     <!-- container-scroller -->
     <?php include 'includes/scripts.php';?>
     <?php
-include("includes/conn.php");
+      include("includes/conn.php");
 
-// Electricity Bill Data
-$labels101 = [];
-$values101 = [];
-$sqlElectricity = "SELECT month_2, total_amount_2 FROM electric_bill ORDER BY month_2 ASC";
-$resultElectricity = $conn->query($sqlElectricity);
-while ($row = $resultElectricity->fetch_assoc()) {
-    $labels101[] = date("F Y", strtotime($row['month_2']));
-    $values101[] = floatval($row['total_amount_2']);
-}
+      // Electricity Bill Data
+      $labels101 = [];
+      $values101 = [];
+      $sqlElectricity = "SELECT month_2, total_amount_2 FROM electric_bill ORDER BY month_2 ASC";
+      $resultElectricity = $conn->query($sqlElectricity);
+      while ($row = $resultElectricity->fetch_assoc()) {
+          $labels101[] = date("F Y", strtotime($row['month_2']));
+          $values101[] = floatval($row['total_amount_2']);
+      }
 
-// Water Bill Data
-$waterlabel = [];
-$watervalues = [];
-$sqlWater = "SELECT month_wb, total_amount_wb FROM water_bill ORDER BY month_wb ASC";
-$resultWater = $conn->query($sqlWater);
-while ($row = $resultWater->fetch_assoc()) {
-    $waterlabel[] = date("F Y", strtotime($row['month_wb']));
-    $watervalues[] = floatval($row['total_amount_wb']);
-}
+      // Water Bill Data
+      $waterlabel = [];
+      $watervalues = [];
+      $sqlWater = "SELECT month_wb, total_amount_wb FROM water_bill ORDER BY month_wb ASC";
+      $resultWater = $conn->query($sqlWater);
+      while ($row = $resultWater->fetch_assoc()) {
+          $waterlabel[] = date("F Y", strtotime($row['month_wb']));
+          $watervalues[] = floatval($row['total_amount_wb']);
+      }
 
-// WiFi Bill Data
-$wifilabels = [];
-$wifivalues = [];
-$sqlWifi = "SELECT month_1, total_amount_1 FROM wifi_bill ORDER BY month_1 ASC";
-$resultWifi = $conn->query($sqlWifi);
-while ($row = $resultWifi->fetch_assoc()) {
-    $wifilabels[] = date("F Y", strtotime($row['month_1']));
-    $wifivalues[] = floatval($row['total_amount_1']);
-}
-?>
+      // WiFi Bill Data
+      $wifilabels = [];
+      $wifivalues = [];
+      $sqlWifi = "SELECT month_1, total_amount_1 FROM wifi_bill ORDER BY month_1 ASC";
+      $resultWifi = $conn->query($sqlWifi);
+      while ($row = $resultWifi->fetch_assoc()) {
+          $wifilabels[] = date("F Y", strtotime($row['month_1']));
+          $wifivalues[] = floatval($row['total_amount_1']);
+      }
+    ?>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -508,5 +495,68 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 </style>
 
+<?php
+include("includes/conn.php");
+
+// Retrieve access points per project
+$projectLabels = [];
+$projectValues = [];
+
+$sqlProject = "SELECT p.name AS project_name, SUM(fw.access_point) AS total_ap 
+               FROM free_wifi fw
+               INNER JOIN free_wifi_projects p ON fw.project_id = p.id
+               GROUP BY p.name";
+$resultProject = $conn->query($sqlProject);
+while ($row = $resultProject->fetch_assoc()) {
+    $projectLabels[] = $row['project_name'];
+    $projectValues[] = intval($row['total_ap']);
+}
+?>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var ctxProject = document.getElementById("projectDonutChart").getContext("2d");
+
+    // Star Admin 2 Blue Shades
+    var starAdminBlueShades = ["#4B49AC", "#007BFF", "#6C757D", "#17A2B8", "#5A5C69", "#1F3BB3"];
+
+    var projectChart = new Chart(ctxProject, {
+        type: "doughnut",
+        data: {
+            labels: <?php echo json_encode($projectLabels); ?>,
+            datasets: [{
+                data: <?php echo json_encode($projectValues); ?>,
+                backgroundColor: starAdminBlueShades,
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false // Hide default legend, we will create a custom one
+                }
+            }
+        }
+    });
+
+    // ✅ Create a custom legend
+    var legendContainer = document.getElementById("projectDonutChart-legend");
+    legendContainer.innerHTML = ""; // Clear any previous content
+
+    <?php $i = 0; foreach ($projectLabels as $label) { ?>
+        var legendItem = document.createElement("div");
+        legendItem.style.display = "inline-flex";
+        legendItem.style.alignItems = "center";
+        legendItem.style.margin = "5px 10px";
+        legendItem.innerHTML = `
+            <span style="width: 12px; height: 12px; background-color: ${starAdminBlueShades[<?php echo $i; ?>]}; display: inline-block; margin-right: 8px; border-radius: 50%;"></span>
+            <span style="font-size: 14px;"><?php echo $label; ?></span>
+        `;
+        legendContainer.appendChild(legendItem);
+    <?php $i++; } ?>
+});
+</script>
   </body>
 </html>

@@ -7,9 +7,9 @@ function getAccessPointsCount($type, $id) {
     global $conn; // Use the global database connection
 
     if ($type === 'project') {
-        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM free_wifi WHERE project_id = ?");
+        $stmt = $conn->prepare("SELECT SUM(access_point) as count FROM free_wifi WHERE project_id = ?");
     } else if ($type === 'municipality') {
-        $stmt = $conn->prepare("SELECT COUNT(*) as count FROM free_wifi WHERE municipality_id = ?");
+        $stmt = $conn->prepare("SELECT SUM(access_point) as count FROM free_wifi WHERE municipality_id = ?");
     } else {
         return 0;
     }
@@ -19,50 +19,44 @@ function getAccessPointsCount($type, $id) {
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
-    return $row['count'];
+    return $row['count'] ?? 0; // Return 0 if NULL
 }
 
-// Sample data for projects and municipalities
-$projects = [
-    ["id" => 1, "title" => "IPTB", "image" => "assets/images/dict_proj/iptb.png", "link" => "iptb.php"],
-    ["id" => 2, "title" => "MIS Aklan", "image" => "assets/images/dict_proj/misaklan.png", "link" => "mis_aklan.php"],
-    ["id" => 3, "title" => "Municipal", "image" => "assets/images/dict_proj/municipal.png", "link" => "municipal.php"],
-    ["id" => 4, "title" => "PIALEOS", "image" => "assets/images/dict_proj/pialeos.png", "link" => "pialeos.php"],
-    ["id" => 5, "title" => "PICS-PP", "image" => "assets/images/dict_proj/picspp.png", "link" => "pics_pp.php"],
-    ["id" => 6, "title" => "Region Initiated", "image" => "assets/images/dict_proj/region.png", "link" => "region_initiated.php"],
-    ["id" => 7, "title" => "UISGIDA", "image" => "assets/images/dict_proj/uisgida.png", "link" => "uisgida.php"],
-    ["id" => 8, "title" => "VSAT UNDP-CoRe", "image" => "assets/images/dict_proj/vsat.png", "link" => "vsat_undp_core.php"],
-    ["id" => 9, "title" => "WITS", "image" => "assets/images/dict_proj/wits.png", "link" => "wits.php"],
-];
+// Fetch projects from free_wifi_projects table
+$projects = [];
+$projectQuery = "SELECT id, name FROM free_wifi_projects";
+$result = $conn->query($projectQuery);
 
-$municipalities = [
-    ["id" => 1, "title" => "Altavas", "image" => "assets/images/freewifi/altavas.png", "link" => "municipal_1.php"],
-    ["id" => 2, "title" => "Balete", "image" => "assets/images/freewifi/balete.png", "link" => "municipal_2.php"],
-    ["id" => 3, "title" => "Banga", "image" => "assets/images/freewifi/banga.png", "link" => "municipal_2.php"],
-    ["id" => 4, "title" => "Batan", "image" => "assets/images/freewifi/batan.png", "link" => "municipal_2.php"],
-    ["id" => 5, "title" => "Buruanga", "image" => "assets/images/freewifi/buruanga.png", "link" => "municipal_2.php"],
-    ["id" => 6, "title" => "Ibajay", "image" => "assets/images/freewifi/ibajay.png", "link" => "municipal_2.php"],
-    ["id" => 7, "title" => "Kalibo", "image" => "assets/images/freewifi/kalibo.png", "link" => "municipal_2.php"],
-    ["id" => 8, "title" => "Lezo", "image" => "assets/images/freewifi/lezo.png", "link" => "municipal_2.php"],
-    ["id" => 9, "title" => "Libacao", "image" => "assets/images/freewifi/libacao.png", "link" => "municipal_2.php"],
-    ["id" => 10, "title" => "Madalag", "image" => "assets/images/freewifi/madalag.png", "link" => "municipal_2.php"],
-    ["id" => 11, "title" => "Makato", "image" => "assets/images/freewifi/makato.png", "link" => "municipal_2.php"],
-    ["id" => 12, "title" => "Malay", "image" => "assets/images/freewifi/malay.png", "link" => "municipal_2.php"],
-    ["id" => 13, "title" => "Malinao", "image" => "assets/images/freewifi/malinao.png", "link" => "municipal_2.php"],
-    ["id" => 14, "title" => "Nabas", "image" => "assets/images/freewifi/nabas.png", "link" => "municipal_2.php"],
-    ["id" => 15, "title" => "New Washington", "image" => "assets/images/freewifi/new_wash.png", "link" => "municipal_2.php"],
-    ["id" => 16, "title" => "Numancia", "image" => "assets/images/freewifi/numancia.png", "link" => "municipal_2.php"],
-    ["id" => 17, "title" => "Tangalan", "image" => "assets/images/freewifi/tangalan.png", "link" => "municipal_2.php"],
-];
-
-// Add access points count to projects and municipalities
-foreach ($projects as &$project) {
-    $project['access_point'] = getAccessPointsCount('project', $project['id']);
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $projects[] = [
+            "id" => $row['id'],
+            "title" => $row['name'],
+            "image" => "assets/images/dict_proj/".strtolower(str_replace(' ', '_', $row['name'])).".png", // Auto-generate image path
+            "link" => strtolower(str_replace(' ', '_', $row['name'])).".php",
+            "access_point" => getAccessPointsCount('project', $row['id'])
+        ];
+    }
 }
-foreach ($municipalities as &$municipality) {
-    $municipality['access_point'] = getAccessPointsCount('municipality', $municipality['id']);
+
+// Fetch municipalities from municipalities table
+$municipalities = [];
+$municipalityQuery = "SELECT id, name FROM municipalities";
+$result = $conn->query($municipalityQuery);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $municipalities[] = [
+            "id" => $row['id'],
+            "title" => $row['name'],
+            "image" => "assets/images/freewifi/".strtolower(str_replace(' ', '_', $row['name'])).".png", // Auto-generate image path
+            "link" => "municipal_".$row['id'].".php",
+            "access_point" => getAccessPointsCount('municipality', $row['id'])
+        ];
+    }
 }
 ?>
+
 
 <body>
     <div class="container-scroller">
@@ -78,7 +72,7 @@ foreach ($municipalities as &$municipality) {
                     <div class="container">
                         <img src="assets/images/dict_proj/freewifi4all.png" class="img-fluid mb-4 rounded" alt="Header Image">
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites - IPTB</h1>
+                            <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites</h1>
                             <nav style="font-size:85%;" aria-label="breadcrumb">
                                 <ol class="breadcrumb mb-0">
                                     <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
@@ -147,6 +141,7 @@ foreach ($municipalities as &$municipality) {
                                         </a>
                                     </div>
                                     <?php endforeach; ?>
+                                    
                                 </div>
                             </div>
                         </div>

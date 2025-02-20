@@ -9,31 +9,58 @@
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="vsat_undp_core_add.php">
                 <div class="form-group">
-                    <label for="projectname_wits" class="col-sm-3 control-label">Project Name</label>
+                    <label for="project_name" class="col-sm-3 control-label">Project Name</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="projectname_vsat_undp_core" name="projectname_vsat_undp_core" required>
+                      <!-- Hidden input for the project ID -->
+                      <input type="hidden" id="project_id" name="project_id" value="<?php 
+                        // Query to fetch the VSAT UNDP CoRe project ID
+                        $sql = "SELECT id FROM free_wifi_projects WHERE name = 'VSAT UNDP CoRe' LIMIT 1";
+                        $result = $conn->query($sql);
+                        
+                        if ($result->num_rows > 0) {
+                            $row = $result->fetch_assoc();
+                            echo $row['id'];  // Set VSAT UNDP CoRe project ID
+                        }
+                      ?>">
+                      <!-- Text input for displaying the project name -->
+                      <input type="text" class="form-control" id="project_name" name="project_name" value="VSAT UNDP CoRe" readonly>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="barangay_vsat_undp_core" class="col-sm-3 control-label">Location</label>
+                    <label for="municipality_name" class="col-sm-3 control-label">Municipality</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="barangay_vsat_undp_core" name="barangay_vsat_undp_core" required>
+                      <select class="form-control" id="municipality_name" name="municipality_name" required>
+                        <option value="">Select Municipality</option>
+                        <?php
+                          // Assuming you have a connection to the database
+                          $sql = "SELECT id, name FROM municipalities";
+                          $result = $conn->query($sql);
+                          
+                          if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                              echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                            }
+                          } else {
+                            echo "<option value=''>No municipalities available</option>";
+                          }
+                        ?>
+                      </select>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="project_7" class="col-sm-3 control-label">Address</label>
+                    <label for="address" class="col-sm-3 control-label">Address</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="project_7" name="project_7" required>
+                      <input type="text" class="form-control" id="address" name="address" required>
                     </div>
                 </div>
             <div class="form-group">
-                    <label for="aps_vsat_undp_core" class="col-sm-3 control-label">APs</label>
+                    <label for="access_point" class="col-sm-3 control-label">APs</label>
 
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="aps_vsat_undp_core" name="aps_vsat_undp_core" required>
+                      <input type="number" class="form-control" id="access_point" name="access_point" required>
                     </div>
                 </div>
             </div>
@@ -46,43 +73,102 @@
     </div>
 </div>
 
-<!-- Edit -->
+<!-- Edit Modal -->
 <div class="modal fade" id="edit">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><b>Edit Project</b></h4>
+                <h4 class="modal-title"><b>Edit Locality</b></h4>
                 <button type="button" class="btn-close close close-modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="vsat_undp_core_edit.php">
                 <input type="hidden" class="id" name="id">
                 <div class="form-group">
-                    <label for="edit_projectname_vsat_undp_core" class="col-sm-3 control-label">Project Name</label>
+                  <label for="edit_project_name" class="col-sm-3 control-label">Project Name</label>
+                  <div class="col-sm-12">
+                      <select class="form-control" id="edit_project_name" name="project_name" required>
+                          <option value="">Select Project</option>
+                          <?php
+                              // Assuming you have a connection to the database
+                              $sql = "SELECT id, name FROM free_wifi_projects";
+                              $result = $conn->query($sql);
 
+                              if ($result->num_rows > 0) {
+                                  while ($row = $result->fetch_assoc()) {
+                                      // Check if the current project_id matches the one from the database
+                                      $selected = ($row['id'] == $project_id) ? 'selected' : '';
+                                      echo "<option value='" . $row['id'] . "' $selected>" . $row['name'] . "</option>";
+                                  }
+                              } else {
+                                  echo "<option value=''>No projects available</option>";
+                              }
+                          ?>
+                      </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_municipality_name" class="col-sm-3 control-label">Municipality</label>
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_projectname_vsat_undp_core" name="projectname_vsat_undp_core">
+                        <select class="form-control" id="edit_municipality_name" name="municipality_name" required>
+                            <option value="">Select Municipality</option>
+                            <?php
+                                // Assuming you have a connection to the database
+                                $sql = "SELECT id, name FROM municipalities";
+                                $result = $conn->query($sql);
+                                
+                                if ($result->num_rows > 0) {
+                                    while($row = $result->fetch_assoc()) {
+                                        // Check if the current municipality matches the one from the database
+                                        if ($row['id'] == $municipality_id) {
+                                            echo "<option value='" . $row['id'] . "' selected>" . $row['name'] . "</option>";
+                                        } else {
+                                            echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                                        }
+                                    }
+                                } else {
+                                    echo "<option value=''>No municipalities available</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit_address" class="col-sm-3 control-label">Address</label>
+                    <div class="col-sm-12">
+                      <input type="text" class="form-control" id="edit_address" name="address">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_barangay_vsat_undp_core" class="col-sm-3 control-label">Location</label>
-
+                    <label for="edit_access_point" class="col-sm-3 control-label">APs</label>
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_barangay_vsat_undp_core" name="barangay_vsat_undp_core">
+                      <input type="number" class="form-control" id="edit_access_point" name="access_point">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="edit_project_7" class="col-sm-3 control-label">Address</label>
-
+                    <label for="edit_status" class="col-sm-3 control-label">Status</label>
                     <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_project_7" name="project_7">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_aps_vsat_undp_core" class="col-sm-3 control-label">APs</label>
+                        <select class="form-control" id="edit_status" name="status" required>
+                            <option value="">Select Status</option>
+                            <?php
+                                // Fetch the current status for the specific row you're editing
+                                $sql = "SELECT status FROM free_wifi WHERE id = ?";
+                                $stmt = $conn->prepare($sql);
+                                $stmt->bind_param("i", $id);  // Bind the ID to the query
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                $currentStatus = $result->fetch_assoc()['status'] ?? '';  // Retrieve the status of the row you're editing
 
-                    <div class="col-sm-12">
-                      <input type="text" class="form-control" id="edit_aps_vsat_undp_core" name="aps_vsat_undp_core">
+                                $statuses = ['active', 'inactive']; // Explicit list of possible statuses
+
+                                // Loop through each status option and check if it matches the current status
+                                foreach ($statuses as $statusOption) {
+                                    $selected = ($currentStatus == $statusOption) ? 'selected' : '';  // Set selected option if it matches
+                                    echo "<option value='$statusOption' $selected>" . ucfirst($statusOption) . "</option>";
+                                }
+                            ?>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -94,6 +180,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- Delete -->
 <div class="modal fade" id="delete">
@@ -120,4 +207,5 @@
     </div>
 </div>
 
-     
+
+

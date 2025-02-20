@@ -15,7 +15,7 @@
                       <!-- Hidden input for the project ID -->
                       <input type="hidden" id="project_id" name="project_id" value="<?php 
                         // Query to fetch the IPTB project ID
-                        $sql = "SELECT id FROM free_wifi_projects WHERE name = 'iptb' LIMIT 1";
+                        $sql = "SELECT id FROM free_wifi_projects WHERE name = 'IPTB' LIMIT 1";
                         $result = $conn->query($sql);
                         
                         if ($result->num_rows > 0) {

@@ -135,7 +135,8 @@ body.modal-open {
                             $rowNumber = 1;
 
                             while ($row = $query->fetch_assoc()) {
-                                $image = !empty($row['w_photo']) ? 'assets/images/' . $row['w_photo'] : 'assets/images/blank.svg';
+                                $imagePath = 'assets/images/' . $row['w_photo'];
+                                $image = (!empty($row['w_photo']) && file_exists($imagePath)) ? $imagePath : 'assets/images/blank.svg';
 
                                 // Format the month_wb to "Month Year"
                                 $month_wb = new DateTime($row['month_wb']);
