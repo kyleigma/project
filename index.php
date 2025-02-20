@@ -108,7 +108,7 @@ https://templatemo.com/tm-575-leadership-event
                 </div>
 
                 <div class="video-wrap">
-                    <img src="images/DICTSTREET/dictstreetview.jpeg" alt="Street View" class="custom-image">
+                    <img src="images/DICTSTREET/dictstreetview.png" alt="Street View" class="custom-image">
                 </div>
             </section>
 
