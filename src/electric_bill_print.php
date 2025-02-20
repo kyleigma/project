@@ -5,22 +5,30 @@
             // Page header
             function Header()
             {
-            // Logo
-            $this->Image('assets/images/dictlogo.png', 145, 8, 18,18);
-            $this->Cell(189 ,17,'',0,1, "L");
+                // Define page width
+                $pageWidth = 297; // A4 landscape width in mm
 
-                // Arial bold 15
-                $this->SetFont('Arial','',10,);
-                // Title
-                $this->Cell(189 ,5,'DEPARTMENT OF INFORMATION AND COMMUNICATIONS TECHNOLOGY',0,1, "R");
-                $this->Cell(189 ,5,'Mabini Street, Poblacion, Kalibo, Aklan',0,1, "R");
+                // Logo adjustments
+                $logoWidth = 20; // Adjust based on actual image size
+                $logoX = ($pageWidth - $logoWidth) / 2; // Center the logo dynamically
+                $this->Image('assets/images/dictlogo.png', $logoX, 8, $logoWidth, 18);
 
-                $this->Cell(189 ,5,'',0,1, "");
-                // Arial bold 15
-                $this->SetFont('Arial','B',12);
-            
+                // Empty cell to push down content
+                $this->Cell($pageWidth, 22, '', 0, 1, 'C');
+
+                // Arial bold 10
+                $this->SetFont('Arial', '', 10);
+                
                 // Title
-                $this->Cell(189 ,5,'Electric Bill Reports',0,1, "R");
+                $this->Cell($pageWidth, 5, 'DEPARTMENT OF INFORMATION AND COMMUNICATIONS TECHNOLOGY', 0, 1, "C");
+                $this->Cell($pageWidth, 5, 'Mabini Street, Poblacion, Kalibo, Aklan', 0, 1, "C");
+
+                $this->Cell($pageWidth, 5, '', 0, 1, "C");
+
+                // Bold title for report name
+                $this->SetFont('Arial', 'B', 12);
+                $this->Cell($pageWidth, 5, 'Electric Bill Reports', 0, 1, "C");
+                
                 // Line break
                 $this->Ln(10);
             }
@@ -120,6 +128,22 @@
         
         //make a dummy empty cell as a vertical spacer   ---------------------- SIGNATORIES ------------------
         $pdf->Cell(189 ,10,'',0,1);//end of line
+        $pdf->Cell(189 ,10,'',0,1);//end of line
+
+
+        $pdf->SetFont('Arial','',$rowFont);
+        $pdf->Cell(20 ,5,'Prepared by:',0,1, 'L');
+        
+        //make a dummy empty cell as a vertical spacer
+        $pdf->Cell(189 ,10,'',0,1);//end of line
+        
+        $pdf->SetFont('Arial','B',$rowFont);
+        $pdf->Cell(90 ,5,'DICT Student-Interns',0,0);
+        $pdf->Cell(90 ,5,'',0,1);
+        // $pdf->SetFont('Arial','',$rowFont);
+        // $pdf->Cell(90 ,5,'Chairperson, Computer Science Program',0,0);
+        // $pdf->Cell(90 ,5,'',0,0);
+
         
         $pdf->SetFont('Arial','',$rowFont);
         $pdf->Cell(20 ,5,'Noted:',0,1, 'L');

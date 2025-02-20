@@ -8,7 +8,7 @@ if (isset($_POST['add'])) {
     $access_point = (int)$_POST['access_point'];
 
     if ($access_point === 0) {
-        $_SESSION['error'] = 'Access Point cannot be 0';
+        $_SESSION['error'] = 'Access Point cannot be 0.';
         header('location: iptb.php');
         exit();
     }
@@ -31,15 +31,15 @@ if (isset($_POST['add'])) {
                                 VALUES (?, ?, ?, ?, ?)");
         $stmt->bind_param("isiss", $project_id, $address, $municipality, $access_point, $status);
         if ($stmt->execute()) {
-            $_SESSION['success'] = 'Project added successfully';
+            $_SESSION['success'] = 'Project added successfully!';
         } else {
             $_SESSION['error'] = $stmt->error;
         }
     } else {
-        $_SESSION['error'] = 'Project Name does not exist';
+        $_SESSION['error'] = 'Project Name does not exist!';
     }
 } else {
-    $_SESSION['error'] = 'Fill up the form first';
+    $_SESSION['error'] = 'Fill up the form first.';
 }
 
 header('location: iptb.php');

@@ -4,7 +4,7 @@ include 'includes/session.php';
 if (isset($_POST['upload'])) {
     if (!isset($_POST['id']) || empty($_POST['id'])) {
         $_SESSION['error'] = 'Invalid request: ID is missing';
-        header('location: water_bill.php');
+        header('location: wifi_bill.php');
         exit();
     }
 
@@ -20,7 +20,7 @@ if (isset($_POST['upload'])) {
 
         if (move_uploaded_file($file_tmp, $target_file)) {
             // Use prepared statements to prevent SQL injection
-            $stmt = $conn->prepare("UPDATE water_bill SET w_photo = ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE wifi_bill SET w_photo = ? WHERE id = ?");
             $stmt->bind_param("si", $filename, $id);
 
             if ($stmt->execute()) {
@@ -40,6 +40,6 @@ if (isset($_POST['upload'])) {
     $_SESSION['error'] = 'Select photo to update first.';
 }
 
-header('location: water_bill.php');
+header('location: wifi_bill.php');
 exit();
 ?>

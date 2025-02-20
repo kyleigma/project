@@ -16,16 +16,16 @@ if (isset($_POST['delete'])) {
         $stmt->bind_param("i", $id);
         
         if ($stmt->execute()) {
-            $_SESSION['success'] = 'Project deleted successfully';
+            $_SESSION['success'] = 'Project deleted successfully!';
         } else {
             $_SESSION['error'] = 'Failed to execute the delete query: ' . $stmt->error;
         }
     } else {
-        $_SESSION['error'] = 'Project ID does not exist';
+        $_SESSION['error'] = 'Project ID does not exist.';
     }
 
 } else {
-    $_SESSION['error'] = 'Select a project to delete first';
+    $_SESSION['error'] = 'Select a project to delete first.';
 }
 
 header('location: mis_aklan.php');

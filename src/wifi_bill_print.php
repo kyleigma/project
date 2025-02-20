@@ -1,13 +1,12 @@
-
-
 <?php
     require('assets/vendors/fpdf186/fpdf.php'); 
     include ('includes/conn.php');
+    
     class PDF extends FPDF{
         // Page header
         function Header()
         {
-            // Logox
+            // Logo
             $this->Image('assets/images/dictlogo.png', 95, 8, 18,18);
             $this->Cell(189 ,17,'',0,1, "L");
 
@@ -24,7 +23,7 @@
             $this->SetFont('Arial','B',12);
            
             // Title
-            $this->Cell(189 ,5,'Water Bill Report',0,1, "C");
+            $this->Cell(189 ,5,'WiFi Bill Report',0,1, "C");
             // Line break
             $this->Ln(10);
         }
@@ -40,57 +39,46 @@
             $this->Cell(0,10,'Page '.$this->PageNo().' / 1',0,0,'C');
         }
     }
-	  
-    
+      
     $pdf = new PDF('P','mm','A4');
     $pdf->AddPage();
     
-     $rowFont =11;
-     $lineBreak = 1;
+    $rowFont = 11;
+    $lineBreak = 1;
        
-    
     //set font to arial, regular, 12pt
     $pdf->SetFont('Arial','',$rowFont);
     
-   
-
     $pdf->Cell(40 ,5,'Utility :',0,0);
-    $pdf->Cell(40 ,5,'Water Bill',0,1);//end of line
+    $pdf->Cell(40 ,5,'WiFi Bill',0,1);//end of line
     
     //make a dummy empty cell as a vertical spacer
-    // $pdf->Cell(189 ,10,'',0,1);//end of line
-    
-    
-  
-    $query_room = mysqli_query($conn,"SELECT * FROM water_bill");
-  
-    // //make a dummy empty cell as a vertical spacer
-     $pdf->Cell(189 ,$lineBreak,'',0,1);//end of line 
+    $pdf->Cell(189 ,$lineBreak,'',0,1);//end of line 
     
     $pdf->SetFont('Arial','B',$rowFont);
     $pdf->Cell(10 ,5,'No',1,0, 'C');
-    $pdf->Cell(60 ,5,'Month',1,0,'C');
-    $pdf->Cell(60,5,'Date OR Receive',1,0,'C');
-    $pdf->Cell(60 ,5,'Total Amount',1,1,'C');//end of line HEADER
+    $pdf->Cell(65 ,5,'Month',1,0,'C');
+    $pdf->Cell(65 ,5,'Date OR Receive',1,0,'C');
+    $pdf->Cell(50 ,5,'Total Amount',1,1,'C');//end of line HEADER
     
-    // // room CONTENT
-     $pdf->SetFont('Arial','',10);
-     $i = 1;
+    // Content
+    $pdf->SetFont('Arial','',10);
+    $i = 1;
     
-    while($rooms=mysqli_fetch_array($query_room)){
+    $query_wifi = mysqli_query($conn,"SELECT * FROM wifi_bill");
+    
+    while($wifi = mysqli_fetch_array($query_wifi)){
         $pdf->Cell(10 ,8,$i,1,0, 'C');
-        $room = $rooms['month_wb'];
-        $desc = $rooms['date_receive'];
-        $room1 = $rooms['total_amount_wb'];
+        $month = $wifi['month_1'];
+        $date = $wifi['date_1'];
+        $amount = $wifi['total_amount_1'];
      
-        
-        $pdf->Cell(60 ,8,$room,1,0,'C');
-        $pdf->Cell(60 ,8,$desc,1,0,'C');
-        $pdf->Cell(60 ,8,$room1,1,1,'C');
-       
-        ++$i;
+        $pdf->Cell(65 ,8,$month,1,0,'C');
+        $pdf->Cell(65 ,8,$date,1,0,'C');
+        $pdf->Cell(50 ,8,number_format($amount,2),1,1,'C');
+        $i++;
     }
-       
+
     //make a dummy empty cell as a vertical spacer   ---------------------- SIGNATORIES ------------------
     $pdf->Cell(189 ,10,'',0,1);//end of line
     
@@ -108,8 +96,5 @@
     // $pdf->Cell(90 ,5,'',0,0);
 
     $pdf->Output();
-
-
-	
 
 ?>

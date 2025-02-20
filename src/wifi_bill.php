@@ -5,9 +5,7 @@
 .datatable th,
 .datatable td {
     text-align: center;
-    /* Center-align headers and contents */
     vertical-align: middle;
-    /* Vertically center contents */
 }
 
 .bill-images {
@@ -20,7 +18,6 @@
     display: none;
     position: fixed;
     z-index: 1050;
-    /* Higher than sidebar and navbar */
     left: 0;
     top: 0;
     width: 100%;
@@ -29,7 +26,6 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* Prevents scrolling */
 }
 
 #modal-container.active {
@@ -55,68 +51,64 @@
     color: skyblue;
 }
 
-/* Disable scrolling when modal is open */
 body.modal-open {
     overflow: hidden;
-
 }
 </style>
 
 <body>
     <div class="container-scroller">
-        <!-- partial:../../partials/_navbar.html -->
         <?php include 'includes/navbar.php'; ?>
-        <!-- partial -->
         <div class="container-fluid page-body-wrapper">
-            <!-- partial:../../partials/_sidebar.html -->
             <?php include 'includes/sidebar.php'; ?>
-            <!-- partial -->
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800 mb-3">Water Bill</h1>
-                    <nav style="font-size:85%;" aria-label="breadcrumb">
-                        <ol class="breadcrumb mb-0">
-                            <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
-                            <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                            <li class="active" aria-current="page">Water Bill</li>
-                        </ol>
-                    </nav>
-                </div>
+                        <h1 class="h3 mb-0 text-gray-800 mb-3">WiFi Bill</h1>
+                        <nav style="font-size:85%;" aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0">
+                                <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
+                                <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
+                                <li class="active" aria-current="page">WiFi Bill</li>
+                            </ol>
+                        </nav>
+                    </div>
 
                     <?php
-                if (isset($_SESSION['error'])) {
-                    echo "
-                        <div class='alert alert-danger alert-dismissible fade show d-flex align-items-center' role='alert'>
-                            <i class='mdi mdi-alert-circle mdi-24px me-2'></i> 
-                            <span>".$_SESSION['error']."</span>
-                            <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
-                        </div>
-                    ";
-                    unset($_SESSION['error']);
-                }
-                if (isset($_SESSION['success'])) {
-                    echo "
-                        <div class='alert alert-success alert-dismissible fade show d-flex align-items-center' role='alert'>
-                            <i class='mdi mdi-check-circle mdi-24px me-2'></i> 
-                            <span>".$_SESSION['success']."</span>
-                            <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
-                        </div>
-                    ";
-                    unset($_SESSION['success']);
-                }
-            ?>
+                    if (isset($_SESSION['error'])) {
+                        echo "
+                            <div class='alert alert-danger alert-dismissible fade show d-flex align-items-center' role='alert'>
+                                <i class='mdi mdi-alert-circle mdi-24px me-2'></i> 
+                                <span>".$_SESSION['error']."</span>
+                                <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                        ";
+                        unset($_SESSION['error']);
+                    }
+                    if (isset($_SESSION['success'])) {
+                        echo "
+                            <div class='alert alert-success alert-dismissible fade show d-flex align-items-center' role='alert'>
+                                <i class='mdi mdi-check-circle mdi-24px me-2'></i> 
+                                <span>".$_SESSION['success']."</span>
+                                <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                        ";
+                        unset($_SESSION['success']);
+                    }
+                    ?>
+
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
                         <div class="ml-auto">
-                            <a href="water_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
+                            <a href="wifi_bill_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
                                 <i class="mdi mdi-printer-outline"></i> Print
                             </a>
-                            <a href="water_bill_excel.php" target="_blank" class="btn btn-md btn-primary btn-flat">
+                            <a href="wifi_bill_excel.php" target="_blank" class="btn btn-md btn-primary btn-flat">
                                 <i class="mdi mdi-file-excel"></i> Excel
                             </a>
                         </div>
                     </div>
+
                     <table class="table responsive table-striped datatable" style="width: 100%;">
                         <thead>
                             <tr>
@@ -130,22 +122,22 @@ body.modal-open {
                         </thead>
                         <tbody>
                             <?php
-                            $sql = "SELECT * FROM water_bill";
+                            $sql = "SELECT * FROM wifi_bill";
                             $query = $conn->query($sql);
                             $rowNumber = 1;
 
                             while ($row = $query->fetch_assoc()) {
-                                $image = !empty($row['w_photo']) ? 'assets/images/' . $row['w_photo'] : 'assets/images/blank.svg';
+                                $image = !empty($row['wifi_photo']) ? 'assets/images/' . $row['wifi_photo'] : 'assets/images/blank.svg';
 
-                                // Format the month_wb to "Month Year"
-                                $month_wb = new DateTime($row['month_wb']);
-                                $formatted_month_wb = $month_wb->format('F Y');
+                                // Format the month_1 to "Month Year"
+                                $month_1 = new DateTime($row['month_1']);
+                                $formatted_month_1 = $month_1->format('F Y');
 
                                 echo "
                                 <tr data-id='" . $row['id'] . "'> 
                                     <td class='hidden text-center'></td>
-                                    <td class='text-start'>" . $formatted_month_wb . "</td>
-                                    <td class='text-start'>" . $row['date_receive'] . "</td>
+                                    <td class='text-start'>" . $formatted_month_1 . "</td>
+                                    <td class='text-start'>" . $row['date_1'] . "</td>
                                     <td class='text-center'>
                                         <div class='d-flex align-items-center justify-content-center'>
                                             <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
@@ -154,7 +146,7 @@ body.modal-open {
                                             </a>
                                         </div>
                                     </td>
-                                    <td class='text-start'>" . number_format($row['total_amount_wb'], 2) . "</td>
+                                    <td class='text-start'>" . number_format($row['total_amount_1'], 2) . "</td>
                                     <td class='text-center'>
                                         <button class='btn btn-success btn-sm edit' data-id='" . $row['id'] . "'>
                                             <i class='mdi mdi-square-edit-outline'></i>
@@ -173,17 +165,12 @@ body.modal-open {
                         <img id="modal-content">
                     </div>
                 </div>
-                <!-- content-wrapper ends -->
-                <!-- partial:../../partials/_footer.html -->
                 <?php include 'includes/footer.php';?>
-                <!-- partial -->
             </div>
-            <!-- main-panel ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <?php include 'includes/water_bill_modal.php';?>
+
+    <?php include 'includes/wifi_bill_modal.php';?>
     <?php include 'includes/scripts.php';?>
 
     <!-- DataTables CSS and JS -->
@@ -295,17 +282,17 @@ body.modal-open {
     function getRow(id) {
         $.ajax({
             type: 'POST',
-            url: 'water_bill_row.php',
+            url: 'wifi_bill_row.php',
             data: {
                 id: id
             },
             dataType: 'json',
             success: function(response) {
                 $('.id').val(response.id);
-                $('#edit_month_wb').val(response.month_wb);
-                $('#edit_date_receive').val(response.date_receive);
-                $('#edit_total_amount_wb').val(response.total_amount_wb);
-                $('.fullname').html(response.month_wb + ' ' + response.date_receive);
+                $('#edit_month_1').val(response.month_1);
+                $('#edit_date_1').val(response.date_1);
+                $('#edit_total_amount_1').val(response.total_amount_1);
+                $('.fullname').html(response.month_1 + ' ' + response.date_1);
             }
         });
     }
