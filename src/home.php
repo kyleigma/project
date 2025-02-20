@@ -54,11 +54,11 @@
                             <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                                 <div class="card card-rounded text-center">
                                     <div class="card-body">
-                                        <h4 class="card-title">APs by Project</h4> <!-- Remove text-white to keep default text color -->
+                                        <h4 class="card-title">APs by Project</h4>
                                         <div class="chart-container" style="position: relative; height: auto; width: 100%;">
                                             <canvas id="projectDonutChart"></canvas>
                                         </div>
-                                        <div id="projectDonutChart-legend" class="mt-4 text-center"></div> <!-- Legend properly displayed -->
+                                        <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div> <!-- ✅ Custom legend here -->
                                     </div>
                                 </div>
                             </div>
@@ -97,8 +97,8 @@
                                 <div class="card-body">
                                   <div class="d-sm-flex justify-content-between align-items-start">
                                     <div>
-                                      <h4 class="card-title card-title-dash">Electric Bill</h4>
-                                      <p class="card-subtitle card-subtitle-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                                      <h4 class="card-title card-title-dash">Electricity Bills</h4>
+                                      <p class="card-subtitle card-subtitle-dash"></p>
                                     </div>
                                   </div>
                                   <div class="d-sm-flex align-items-center mt-1 justify-content-between">
@@ -119,8 +119,8 @@
                                 <div class="card-body">
                                   <div class="d-sm-flex justify-content-between align-items-start">
                                     <div>
-                                      <h4 class="card-title card-title-dash">Usage Rate</h4>
-                                      <p class="card-subtitle card-subtitle-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                                      <h4 class="card-title card-title-dash">WiFi Bills</h4>
+                                      <p class="card-subtitle card-subtitle-dash"></p>
                                     </div>
                                   </div>
                                   <div class="d-sm-flex align-items-center mt-1 justify-content-between">
@@ -141,8 +141,8 @@
                                 <div class="card-body">
                                   <div class="d-sm-flex justify-content-between align-items-start">
                                     <div>
-                                      <h4 class="card-title card-title-dash">Water Bill</h4>
-                                      <p class="card-subtitle card-subtitle-dash">Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                                      <h4 class="card-title card-title-dash">Water Bills</h4>
+                                      <p class="card-subtitle card-subtitle-dash"></p>
                                     </div>
                                   </div>
                                   <div class="d-sm-flex align-items-center mt-1 justify-content-between">
@@ -520,13 +520,55 @@ document.addEventListener("DOMContentLoaded", function () {
     // Star Admin 2 Blue Shades
     var starAdminBlueShades = ["#4B49AC", "#007BFF", "#6C757D", "#17A2B8", "#5A5C69", "#1F3BB3"];
 
+    // Get project labels and values from PHP
+    var projectLabels = <?php echo json_encode($projectLabels); ?>;
+    var projectValues = <?php echo json_encode($projectValues); ?>;
+
+    // Ensure each label has a color (cycle through if more labels than colors)
+    var backgroundColors = projectLabels.map((_, i) => starAdminBlueShades[i % starAdminBlueShades.length]);
+
+    // Track original values to restore when re-enabling
+    var originalValues = [...projectValues];
+
+    // ✅ Calculate Total Amount
+    function calculateTotal() {
+        return projectValues.reduce((acc, val) => acc + val, 0);
+    }
+
+    // ✅ Custom Chart.js Plugin for Center Text (with Page Font Style)
+    const centerTextPlugin = {
+        id: "centerText",
+        beforeDraw: function (chart) {
+            let width = chart.width,
+                height = chart.height,
+                ctx = chart.ctx;
+
+            // ✅ Get the computed font from the page
+            let sampleText = document.body; // Change this if you want to match a specific element
+            let computedFont = window.getComputedStyle(sampleText).font; // Gets the page font style
+
+            ctx.save();
+            ctx.font = computedFont; // Apply the page's font style dynamically
+            ctx.fillStyle = "#333"; // Dark text for visibility
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            let total = calculateTotal();
+            let text = total > 0 ? `Total: ${total}` : "No Data";
+
+            ctx.fillText(text, width / 2, height / 2);
+            ctx.restore();
+        }
+    };
+
+    // ✅ Create the Chart
     var projectChart = new Chart(ctxProject, {
         type: "doughnut",
         data: {
-            labels: <?php echo json_encode($projectLabels); ?>,
+            labels: projectLabels,
             datasets: [{
-                data: <?php echo json_encode($projectValues); ?>,
-                backgroundColor: starAdminBlueShades,
+                data: projectValues,
+                backgroundColor: backgroundColors,
                 borderWidth: 2
             }]
         },
@@ -535,28 +577,59 @@ document.addEventListener("DOMContentLoaded", function () {
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    display: false // Hide default legend, we will create a custom one
+                    display: false // Hide default legend, using custom one
                 }
             }
-        }
+        },
+        plugins: [centerTextPlugin] // ✅ Add the plugin here
     });
 
-    // ✅ Create a custom legend
+    // ✅ Custom Legend with Interactivity
     var legendContainer = document.getElementById("projectDonutChart-legend");
     legendContainer.innerHTML = ""; // Clear any previous content
 
-    <?php $i = 0; foreach ($projectLabels as $label) { ?>
+    projectLabels.forEach((label, index) => {
         var legendItem = document.createElement("div");
         legendItem.style.display = "inline-flex";
         legendItem.style.alignItems = "center";
         legendItem.style.margin = "5px 10px";
+        legendItem.style.cursor = "pointer"; // Clickable for toggling visibility
+        legendItem.dataset.index = index;
+
+        // Generate legend item
         legendItem.innerHTML = `
-            <span style="width: 12px; height: 12px; background-color: ${starAdminBlueShades[<?php echo $i; ?>]}; display: inline-block; margin-right: 8px; border-radius: 50%;"></span>
-            <span style="font-size: 14px;"><?php echo $label; ?></span>
+            <span class="legend-color" style="width: 12px; height: 12px; background-color: ${backgroundColors[index]}; display: inline-block; margin-right: 8px; border-radius: 50%;"></span>
+            <span class="legend-label" style="font-size: 14px;">${label}</span>
         `;
+
+        // ✅ Toggle dataset visibility on click
+        legendItem.addEventListener("click", function () {
+            var dataset = projectChart.data.datasets[0];
+            var labelText = legendItem.querySelector(".legend-label");
+            var legendColor = legendItem.querySelector(".legend-color");
+
+            if (dataset.data[index] === 0) {
+                // Restore original value
+                dataset.data[index] = originalValues[index];
+                legendColor.style.opacity = "1"; // Show color
+                labelText.style.textDecoration = "none"; // Remove strikethrough
+                labelText.style.color = ""; // Restore default text color
+            } else {
+                // Hide dataset value
+                dataset.data[index] = 0;
+                legendColor.style.opacity = "0.4"; // Dim legend color
+                labelText.style.textDecoration = "line-through"; // Cross out text
+                labelText.style.color = "#6c757d"; // Muted text color
+            }
+
+            // ✅ Update total text inside donut hole
+            projectChart.update();
+        });
+
         legendContainer.appendChild(legendItem);
-    <?php $i++; } ?>
+    });
 });
+
 </script>
   </body>
 </html>

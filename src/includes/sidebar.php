@@ -78,7 +78,7 @@
             </a>
             <div class="collapse" id="user-accounts" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="userAccounts.php">Manage User Accounts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="accounts.php">Manage User Accounts</a></li>
                 </ul>
             </div>
         </li>

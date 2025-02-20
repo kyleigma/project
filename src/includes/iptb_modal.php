@@ -200,7 +200,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
-              <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="mdi mdi-trash-can"></i> Delete</button>
+                <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="mdi mdi-trash-can"></i> Delete</button>
               </form>
             </div>
         </div>

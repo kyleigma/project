@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Add WiFi Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="wifi_bill_add.php" enctype="multipart/form-data">
@@ -38,7 +38,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+                <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="mdi mdi-content-save"></i> Save</button>
               </form>
             </div>
@@ -52,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Update WiFi Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="wifi_bill_edit.php">
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+                <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="mdi mdi-content-save-edit"></i> Update</button>
               </form>
             </div>
@@ -95,7 +95,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b><span class="fullname"></span></b></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="wifi_bill_photo.php" enctype="multipart/form-data">
@@ -109,7 +109,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+                <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="mdi mdi-content-save-edit"></i> Update</button>
               </form>
             </div>
@@ -123,7 +123,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Delete WiFi Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="wifi_bill_delete.php">
@@ -134,7 +134,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+                <button type="button" class="btn btn-light btn-flat pull-leftl" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="fa fa-trash"></i> Delete</button>
               </form>
             </div>

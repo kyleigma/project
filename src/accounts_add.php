@@ -19,7 +19,7 @@ if(isset($_POST['add'])) {
         $_SESSION['error'] = 'Error adding account';
     }
     
-    header('location: userAccounts.php');
+    header('location: accounts.php');
     exit();
 }
 
@@ -120,6 +120,6 @@ if(isset($_POST['id'])) {
     echo json_encode($response);
 }
 
-header('location: userAccounts.php');
+header('location: accounts.php');
 exit();
 ?>

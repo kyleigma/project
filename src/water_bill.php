@@ -52,7 +52,7 @@
 }
 
 .close:hover {
-    color: skyblue;
+    color: lightgray;
 }
 
 /* Disable scrolling when modal is open */
@@ -135,7 +135,7 @@ body.modal-open {
                             $rowNumber = 1;
 
                             while ($row = $query->fetch_assoc()) {
-                                $imagePath = 'assets/images/' . $row['w_photo'];
+                                $imagePath = 'assets/images/bills/water' . $row['w_photo'];
                                 $image = (!empty($row['w_photo']) && file_exists($imagePath)) ? $imagePath : 'assets/images/blank.svg';
 
                                 // Format the month_wb to "Month Year"
@@ -277,7 +277,15 @@ body.modal-open {
         });
 
         // Close Modal on Button Click
-        $(document).on('click', '.close-modal', function() {
+        $(document).on('click', '.close-modal', function () {
+        var modal = $(this).closest('.modal');
+        if (modal.length) {
+            modal.modal('hide');
+        }
+        });
+        
+        // Bootstrap default modal close behavior
+        $(document).on('click', '[data-dismiss="modal"]', function () {
             var modal = $(this).closest('.modal');
             if (modal.length) {
                 modal.modal('hide');

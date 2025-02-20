@@ -48,7 +48,7 @@
 }
 
 .close:hover {
-    color: skyblue;
+    color: lightgray;
 }
 
 body.modal-open {
@@ -127,7 +127,7 @@ body.modal-open {
                             $rowNumber = 1;
 
                             while ($row = $query->fetch_assoc()) {
-                                $imagePath = 'assets/images/' . $row['wifi_photo'];
+                                $imagePath = 'assets/images/bills/wifi' . $row['wifi_photo'];
                                 $image = (!empty($row['wifi_photo']) && file_exists($imagePath)) ? $imagePath : 'assets/images/blank.svg';
 
                                 // Format the month_1 to "Month Year"
@@ -139,7 +139,7 @@ body.modal-open {
                                     <td class='hidden text-center'></td>
                                     <td class='text-start'>" . $formatted_month_1 . "</td>
                                     <td class='text-start'>" . $row['date_1'] . "</td>
-                                    <td class='text-center'>
+                                    <td>
                                         <div class='d-flex align-items-center justify-content-center'>
                                             <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
                                             <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "'>
@@ -264,7 +264,14 @@ body.modal-open {
         });
 
         // Close Modal on Button Click
-        $(document).on('click', '.close-modal', function() {
+        $(document).on('click', '.close-modal', function () {
+        var modal = $(this).closest('.modal');
+        if (modal.length) {
+            modal.modal('hide');
+        }
+        });
+        // Bootstrap default modal close behavior
+        $(document).on('click', '[data-dismiss="modal"]', function () {
             var modal = $(this).closest('.modal');
             if (modal.length) {
                 modal.modal('hide');

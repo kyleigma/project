@@ -4,23 +4,23 @@ include 'includes/session.php';
 if (isset($_POST['upload'])) {
     if (!isset($_POST['id']) || empty($_POST['id'])) {
         $_SESSION['error'] = 'Invalid request: ID is missing';
-        header('location: wifi_bill.php');
+        header('location: accounts.php');
         exit();
     }
 
     $id = $_POST['id'];
-    $filename = $_FILES['wifi_photo']['name'];
-    $file_tmp = $_FILES['wifi_photo']['tmp_name'];
-    $file_error = $_FILES['wifi_photo']['error'];
+    $filename = $_FILES['photo']['name'];
+    $file_tmp = $_FILES['photo']['tmp_name'];
+    $file_error = $_FILES['photo']['error'];
 
     // Validate file upload
     if ($file_error === 0 && !empty($filename)) {
-        $target_dir = 'assets/images/bills/wifi'; // Ensure this directory exists
+        $target_dir = 'assets/images/accounts'; // Ensure this directory exists
         $target_file = $target_dir . basename($filename);
 
         if (move_uploaded_file($file_tmp, $target_file)) {
             // Use prepared statements to prevent SQL injection
-            $stmt = $conn->prepare("UPDATE wifi_bill SET wifi_photo = ? WHERE id = ?");
+            $stmt = $conn->prepare("UPDATE accounts SET photo = ? WHERE id = ?");
             $stmt->bind_param("si", $filename, $id);
 
             if ($stmt->execute()) {
@@ -40,6 +40,6 @@ if (isset($_POST['upload'])) {
     $_SESSION['error'] = 'Select photo to update first.';
 }
 
-header('location: wifi_bill.php');
+header('location: accounts.php');
 exit();
 ?>

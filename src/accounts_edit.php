@@ -8,11 +8,11 @@ if(isset($_POST['edit'])) {
     
     // Validate and sanitize inputs
     $id = filter_var($_POST['id'], FILTER_SANITIZE_NUMBER_INT);
-    $firstname = filter_var(trim($_POST['firstname']), FILTER_SANITIZE_STRING);
-    $lastname = filter_var(trim($_POST['lastname']), FILTER_SANITIZE_STRING);
-    $username = filter_var(trim($_POST['username']), FILTER_SANITIZE_STRING);
-    $password = trim($_POST['password']);
-    $role = filter_var(trim($_POST['role']), FILTER_SANITIZE_STRING);
+    $firstname = filter_var(trim($_POST['edit_firstname']), FILTER_SANITIZE_STRING);
+    $lastname = filter_var(trim($_POST['edit_lastname']), FILTER_SANITIZE_STRING);
+    $username = filter_var(trim($_POST['edit_username']), FILTER_SANITIZE_STRING);
+    $password = trim($_POST['edit_password']);
+    $role = filter_var(trim($_POST['edit_role']), FILTER_SANITIZE_STRING);
     
     // Validation checks
     if(empty($firstname)) $errors[] = "First name is required";
@@ -62,6 +62,6 @@ if(isset($_POST['edit'])) {
     $_SESSION['error'] = 'Fill up edit form first';
 }
 
-header('location: userAccounts.php');
+header('location: accounts.php');
 exit();
 ?>

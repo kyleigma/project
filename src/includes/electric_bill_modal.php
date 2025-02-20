@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Add Electric Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="electric_bill_add.php" enctype="multipart/form-data">
@@ -96,7 +96,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Update Electric Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="electric_bill_edit.php">
@@ -167,7 +167,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="mdi mdi-content-save-edit"></i> Update</button>
               </form>
             </div>
@@ -181,7 +181,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b><span class="fullname"></span></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="electric_bill_photo.php" enctype="multipart/form-data">
@@ -192,7 +192,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="mdi mdi-content-save-edit"></i> Update</button>
               </form>
             </div>
@@ -200,13 +200,14 @@
     </div>
 </div>
 
+
 <!-- Delete -->
 <div class="modal fade" id="delete">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Delete Electric Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="pics_pp_delete.php">
@@ -217,57 +218,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
-              <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="mdi mdi-trash-can"></i> Delete</button>
-              </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Update Photo -->
-<div class="modal fade" id="edit_photo">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"><b><span class="fullname"></span></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="electric_bill_photo.php" enctype="multipart/form-data">
-                <input type="hidden" class="id" name="id">
-                <div class="form-group mb-3">
-                  <label for="e_photo" class="control-label">Photo</label>
-                  <input type="file" class="form-control" id="e_photo" name="e_photo" required>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
-              <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="mdi mdi-content-save-edit"></i> Update</button>
-              </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Delete -->
-<div class="modal fade" id="delete">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title"><b>Delete Electric Bill</b></h4>
-                <button type="button" class="btn-close close-modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <form class="form-horizontal" method="POST" action="pics_pp_delete.php">
-                <input type="hidden" class="id" name="id">
-                <div class="text-center">
-                    <p>Confirm deletion?</p>
-                    <h2 class="bold description"></h2>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left close-modal">Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="mdi mdi-trash-can"></i> Delete</button>
               </form>
             </div>

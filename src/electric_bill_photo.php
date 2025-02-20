@@ -15,7 +15,7 @@ if (isset($_POST['upload'])) {
 
     // Validate file upload
     if ($file_error === 0 && !empty($filename)) {
-        $target_dir = 'assets/images/'; // Ensure this directory exists
+        $target_dir = 'assets/images/bills/electric'; // Ensure this directory exists
         $target_file = $target_dir . basename($filename);
 
         if (move_uploaded_file($file_tmp, $target_file)) {
