@@ -320,7 +320,7 @@ strong {
 }
 
 .brand-text {
-  display: inline-block;
+  display: flex;
   vertical-align: center;
 }
 

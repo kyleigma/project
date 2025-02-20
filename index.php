@@ -1295,18 +1295,10 @@ https://templatemo.com/tm-575-leadership-event
                         <div class="d-flex">
                             <a href="index.html" class="navbar-brand">
                                 <img src="images/DICTLogo.png" alt="" style="height: 100px; width: 100px;">
-                                <span class="brand-text">Department of Information and Communications Technology (DICT) <br> Aklan Provincial Field Office</span>
+                                <span class="brand-text">DICT-Aklan Provincial Field Office</span>
                             </a>
 
-                            <ul class="social-icon ms-auto">
-                                <li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-
-                                <li><a href="#" class="social-icon-link bi-youtube"></a></li>
-                            </ul>
+                          
                         </div>
                     </div>
 
