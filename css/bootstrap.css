@@ -621,7 +621,7 @@ progress {
 .img-fluid {
   width: 100%; /* Adapts to container width */
   height: 100%;
-  max-width: 300px; /* Prevents it from getting too large */
+  max-width: 400px; /* Prevents it from getting too large */
   max-height: 200px; 
 }
 .img-fluid1 {
