@@ -12,8 +12,9 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
+            <img src="assets/images/dict_proj/tech4ed.png" class="img-fluid mb-4 rounded" alt="Header Image">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Tech4Ed</h1>
+              <h1 class="h3 mb-0 text-gray-800 mb-3"><b>Tech4Ed</b></h1>
                 <nav style="font-size:85%;" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
@@ -45,10 +46,8 @@
                 }
             ?>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <a href="#addnew" data-toggle="modal" class="btn btn-md btn-primary btn-flat mr-2">
-                    <i class="mdi mdi-plus"></i> New
-                </a>
-                <a href="iptb_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
+                <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
+                <a href="tech4ed_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
                     <i class="mdi mdi-printer-outline"></i> Print
                 </a>
             </div>
@@ -56,30 +55,37 @@
                 <thead>
                     <tr>
                         <th class="hidden"></th>
-                        <th>No.</th>
                         <th>Center Name</th>
                         <th>Center Location</th>
                         <th>LGU</th>
                         <th>District</th>
+                        <th>Status</th>
                         <th width="120">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM tech4ed ORDER BY id ASC";
+                    $sql = "SELECT t.id, t.center_name, t.center_loc, m.name AS municipality_name, t.district_no, t.status
+                            FROM tech4ed t
+                            INNER JOIN municipalities m ON t.municipality_id = m.id
+                            ORDER BY t.id ASC;
+                            ";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
+                    $statusBadge = $row['status'] == 'active' ? 'badge-success' : 'badge-danger';
                       echo "
                         <tr>
                           <td class='hidden'></td>
-                          <td>".$row['id']."</td>
                           <td>".$row['center_name']."</td>
                           <td>".$row['center_loc']."</td>
-                          <td>".$row['municipal']."</td>
-                          <td>".$row['district_no']."</td>
-                          <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                          <td>".$row['municipality_name']."</td>
+                          <td>District ".$row['district_no']."</td>
+                          <td class='text-center'>
+                              <span class='badge rounded-pill $statusBadge' style='font-size: 0.75rem;'>".ucfirst($row['status'])."</span>
+                          </td>
+                          <td width='50' class='text-center'>
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='mdi mdi-square-edit-outline'></i> </button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='mdi mdi-trash-can'></i> </button>                          
                           </td>
                         </tr>
                       ";
@@ -98,7 +104,7 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    <?php include 'includes/iptb_modal.php';?>
+    <?php include 'includes/tech4ed_modal.php';?>
     <?php include 'includes/scripts.php';?>
 
     <!-- DataTables CSS and JS -->
@@ -112,39 +118,70 @@
 
     <!-- Initialize DataTable -->
     <script>
-      $(function(){
-        $(document).on('click', '.edit', function(e){
-            e.preventDefault();
-            $('#edit').modal('show');
-            var id = $(this).data('id');
-            getRow(id);
-        });
-
-        $(document).on('click', '.delete', function(e){
-            e.preventDefault();
-            $('#delete').modal('show');
-            var id = $(this).data('id');
-            getRow(id);
-        });
-
-        });
-
-        function getRow(id){
-        $.ajax({
-            type: 'POST',
-            url: 'tech4ed_row.php',
-            data: {id:id},
-            dataType: 'json',
-            success: function(response){
-            $('.id').val(response.id);
-            $('#edit_center_name').val(response.center_name);
-            $('#edit_center_loc').val(response.center_loc);
-            $('#edit_municipal').val(response.municipal);
-            $('#edit_district_no').val(response.district_no);
-            $('.center_name').html(response.center_name);
-            }
-        });
+    $(document).ready(function () {
+      // Handle "Add New" Button Click
+      $(document).on('click', '.addnew', function (e) {
+        e.preventDefault();
+        if ($('#addnew').length) {
+          $('#addnew').modal('show');
         }
-    </script>
+      });
+
+      // Handle Edit Button Click
+      $(document).on('click', '.edit', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+
+        if (id) {
+          if ($('#edit').length) {
+            $('#edit').modal('show');
+          }
+          getRow(id); // Fetch the data for the selected project
+        }
+      });
+
+      // Handle Delete Button Click
+      $(document).on('click', '.delete', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+
+        if (id) {
+          if ($('#delete').length) {
+            $('#delete').modal('show');
+          }
+          getRow(id); // Fetch the data for deletion
+        }
+      });
+
+      // Close Modal on Button Click
+      $(document).on('click', '.close-modal', function () {
+        var modal = $(this).closest('.modal');
+        if (modal.length) {
+          modal.modal('hide');
+        }
+      });
+    });
+
+    // Function to fetch row data for the Edit modal
+    function getRow(id) {
+      $.ajax({
+        type: 'POST',
+        url: 'tech4ed_row.php', // Ensure this file exists and fetches the data
+        data: {id:id},
+        dataType: 'json',
+        success: function(response) {
+          // Set the values in the Edit modal
+          $('.id').val(response.id); // Set hidden ID input
+          $('#edit_center_name').val(response.enter_name); // Set center name
+          $('#edit_center_loc').val(response.center_loc); // Set center location
+          $('#edit_municipal').val(response.municipal); // Set lgu
+          $('#edit_district_no').val(response.district_no); // Set district
+          $('#edit_status').val(response.status); // Set status
+        }
+      });
+    }
+  </script>
+
+
   </body>
 </html>

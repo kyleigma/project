@@ -32,8 +32,8 @@ if ($result->num_rows > 0) {
         $projects[] = [
             "id" => $row['id'],
             "title" => $row['name'],
-            "image" => "assets/images/dict_proj/".strtolower(str_replace(' ', '_', $row['name'])).".png", // Auto-generate image path
-            "link" => strtolower(str_replace(' ', '_', $row['name'])).".php",
+            "image" => "assets/images/dict_proj/" . strtolower(str_replace([' ', '-'], '_', $row['name'])) . ".png",
+            "link" => strtolower(str_replace([' ', '-'], '_', $row['name'])) . ".php",
             "access_point" => getAccessPointsCount('project', $row['id'])
         ];
     }
@@ -50,12 +50,13 @@ if ($result->num_rows > 0) {
             "id" => $row['id'],
             "title" => $row['name'],
             "image" => "assets/images/freewifi/".strtolower(str_replace(' ', '_', $row['name'])).".png", // Auto-generate image path
-            "link" => "municipal_".$row['id'].".php",
+            "link" => "free_wifi_municipalities.php?id=" . $row['id'], // Updated filename for municipality page
             "access_point" => getAccessPointsCount('municipality', $row['id'])
         ];
     }
 }
 ?>
+
 
 
 <body>

@@ -16,7 +16,7 @@ if (isset($_POST['login'])) {
     $password = trim($_POST['password']);
 
     // Check in admin table first
-    $sql_admin = "SELECT * FROM admin WHERE username = ?";
+    $sql_admin = "SELECT * FROM accounts WHERE username = ?";
     $stmt_admin = $conn->prepare($sql_admin);
     $stmt_admin->bind_param("s", $username);
     $stmt_admin->execute();

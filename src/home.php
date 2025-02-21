@@ -54,11 +54,11 @@
                             <div class="col-md-6 col-lg-12 grid-margin stretch-card">
                                 <div class="card card-rounded text-center">
                                     <div class="card-body">
-                                        <h4 class="card-title">APs by Project</h4>
+                                        <h4 class="card-title">Access Points by Projects</h4>
                                         <div class="chart-container" style="position: relative; height: auto; width: 100%;">
                                             <canvas id="projectDonutChart"></canvas>
                                         </div>
-                                        <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div> <!-- ✅ Custom legend here -->
+                                        <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -232,15 +232,28 @@
                             <div class="col-12 grid-margin stretch-card">
                               <div class="card card-rounded">
                                 <div class="card-body">
-                                  <div class="row">
+                                  <div class="row flex-grow">
                                     <div class="col-lg-12">
                                       <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="card-title card-title-dash">Type By Amount</h4>
+                                          <h4 class="card-title card-title-dash">Project Distribution</h4>
                                       </div>
-                                      <div>
-                                        <canvas class="my-auto" id="doughnutChart"></canvas>
+                                      
+                                      <!-- Add this spinner inside the same container -->
+                                      <div id="loadingSpinner" class="spinner-container">
+                                          <div class="dot-spinner">
+                                              <div class="dot"></div>
+                                              <div class="dot"></div>
+                                              <div class="dot"></div>
+                                          </div>
                                       </div>
-                                      <div id="doughnutChart-legend" class="mt-5 text-center"></div>
+
+                                      <!-- Canvas for the Pie Chart -->
+                                      <div class="chart-container" style="position: relative; height: auto; width: 100%;">
+                                            <canvas id="projectPieChart"></canvas>
+                                      </div>
+                                      
+                                      <!-- Legend for Pie Chart -->
+                                      <div id="projectPieChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
                                     </div>
                                   </div>
                                 </div>
@@ -315,6 +328,7 @@
     </div>
     <!-- container-scroller -->
     <?php include 'includes/scripts.php';?>
+    
     <?php
       include("includes/conn.php");
 
@@ -629,7 +643,198 @@ document.addEventListener("DOMContentLoaded", function () {
         legendContainer.appendChild(legendItem);
     });
 });
-
 </script>
+
+<!-- Add this spinner in your HTML -->
+<div id="loadingSpinner" style="display: none; text-align: center;">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var ctxProject = document.getElementById("projectPieChart").getContext("2d");
+
+    // Star Admin 2 Blue Shades (or choose your own color palette)
+    var starAdminBlueShades = ["#4B49AC", "#007BFF", "#6C757D", "#17A2B8", "#5A5C69", "#1F3BB3"];
+
+    function showLoading() {
+        document.getElementById('loadingSpinner').style.display = 'block';
+    }
+
+    function hideLoading() {
+        document.getElementById('loadingSpinner').style.display = 'none';
+    }
+
+    // Function to fetch project data using AJAX
+    function fetchProjectData() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'neon_fetch_projects.php', true);
+
+        // Show loading spinner before the request starts
+        showLoading();
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var projectData = JSON.parse(xhr.responseText); // Assuming PHP returns JSON data
+                if (Array.isArray(projectData) && projectData.length > 0) {
+                    renderChart(projectData);
+                } else {
+                    console.error("No valid project data received");
+                }
+
+                // Hide loading spinner after data is loaded
+                hideLoading();
+            }
+        };
+        xhr.send();
+    }
+
+    // Function to render the chart with the fetched data
+    function renderChart(projectData) {
+        var projectLabels = projectData.map(project => project.name); // Project names
+        var projectValues = projectData.map(project => project.value); // Activities count
+        var participants = projectData.map(project => project.participants); // Number of participants
+
+        // Ensure each label has a color (cycle through if more labels than colors)
+        var backgroundColors = projectLabels.map((_, i) => starAdminBlueShades[i % starAdminBlueShades.length]);
+
+        // Track original values to restore when re-enabling
+        var originalValues = [...projectValues];
+
+        // ✅ Create the Pie Chart (not Donut Chart)
+        var projectChart = new Chart(ctxProject, {
+            type: "pie", // Changed to pie chart
+            data: {
+                labels: projectLabels, // Project names
+                datasets: [{
+                    data: projectValues,
+                    backgroundColor: backgroundColors,
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true, // Keep the aspect ratio for chart to avoid extra space
+                layout: {
+                    padding: {
+                        bottom: 0 // Remove the bottom padding
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Hide default legend, using custom one
+                    }
+                }
+            }
+        });
+
+        // ✅ Custom Legend with Interactivity
+        var legendContainer = document.getElementById("projectPieChart-legend");
+        legendContainer.innerHTML = ""; // Clear any previous content
+
+        projectData.forEach((project, index) => {
+            var legendItem = document.createElement("div");
+            legendItem.style.display = "inline-flex";
+            legendItem.style.alignItems = "center";
+            legendItem.style.margin = "5px 10px";
+            legendItem.style.cursor = "pointer"; // Clickable for toggling visibility
+            legendItem.dataset.index = index;
+
+            // Generate legend item
+            legendItem.innerHTML = ` 
+                <span class="legend-color" style="width: 12px; height: 12px; background-color: ${backgroundColors[index]}; display: inline-block; margin-right: 8px; border-radius: 50%;"></span>
+                <span class="legend-label" style="font-size: 14px;">${project.name}</span>
+            `;
+
+            // ✅ Toggle dataset visibility on click
+            legendItem.addEventListener("click", function () {
+                var dataset = projectChart.data.datasets[0];
+                var labelText = legendItem.querySelector(".legend-label");
+                var legendColor = legendItem.querySelector(".legend-color");
+
+                if (dataset.data[index] === 0) {
+                    // Restore original value
+                    dataset.data[index] = originalValues[index];
+                    legendColor.style.opacity = "1"; // Show color
+                    labelText.style.textDecoration = "none"; // Remove strikethrough
+                    labelText.style.color = ""; // Restore default text color
+                } else {
+                    // Hide dataset value
+                    dataset.data[index] = 0;
+                    legendColor.style.opacity = "0.4"; // Dim legend color
+                    labelText.style.textDecoration = "line-through"; // Cross out text
+                    labelText.style.color = "#6c757d"; // Muted text color
+                }
+
+                // ✅ Update total text inside pie chart
+                projectChart.update();
+            });
+
+            legendContainer.appendChild(legendItem);
+        });
+    }
+
+    // Fetch data from the PHP file
+    fetchProjectData();
+});
+</script>
+
+
+<style>
+/* Container for centering the spinner */
+.spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers spinner */
+    display: none; /* Hidden by default */
+}
+
+/* Styling for dot spinner */
+.dot-spinner {
+    display: inline-block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+}
+
+.dot {
+    position: absolute;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    background-color: #007bff;
+    border-radius: 50%;
+    animation: dot 1.2s infinite ease-in-out;
+}
+
+.dot:nth-child(1) {
+    left: 0;
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    left: 20px;
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    left: 40px;
+    animation-delay: 0.4s;
+}
+
+@keyframes dot {
+    0%, 100% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+</style>
+
+
   </body>
 </html>
