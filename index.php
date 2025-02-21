@@ -1299,7 +1299,7 @@ https://templatemo.com/tm-575-leadership-event
                             </a>
 
                           
-                        </div>
+                        </div> 
                     </div>
 
                     <div class="col-lg-7 col-12">
