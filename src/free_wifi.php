@@ -83,14 +83,26 @@ if ($result->num_rows > 0) {
                             </nav>
                         </div>
                         <!-- Tab navigation -->
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <ul class="nav nav-tabs mb-4" id="myTab" role="tablist" style="border-bottom: 2px solid #e9ecef;">
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects" type="button" role="tab" aria-controls="projects" aria-selected="true">Projects</button>
+                                <button class="nav-link active" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projects" type="button" role="tab" aria-controls="projects" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Projects</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="municipality-tab" data-bs-toggle="tab" data-bs-target="#municipality" type="button" role="tab" aria-controls="municipality" aria-selected="false">Municipality</button>
+                                <button class="nav-link" id="municipality-tab" data-bs-toggle="tab" data-bs-target="#municipality" type="button" role="tab" aria-controls="municipality" aria-selected="false" style="padding: 12px 24px; font-weight: 500; color: #6c757d; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Municipality</button>
                             </li>
                         </ul>
+                        <style>
+                            .nav-tabs .nav-link:hover {
+                                color: #1F3BB3 !important;
+                                border-bottom: 2px solid #1F3BB3 !important;
+                            }
+                            .nav-tabs .nav-link.active {
+                                color: #1F3BB3 !important;
+                                border-bottom: 2px solid #1F3BB3 !important;
+                                background-color: transparent !important;
+                                font-weight: 700 !important;
+                            }
+                        </style>
                         <div class="tab-content" id="myTabContent">
                             <!-- Projects Tab -->
                             <div class="tab-pane fade show active" id="projects" role="tabpanel" aria-labelledby="projects-tab">

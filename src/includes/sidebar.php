@@ -31,7 +31,7 @@
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="free_wifi.php">Free Wifi</a></li>
                     <li class="nav-item"><a class="nav-link" href="tech4ed.php">Tech4Ed</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">PNPKI</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pnpki.php">PNPKI</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">ILCDB</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">eGOVph</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">IIDB</a></li>

@@ -17,93 +17,117 @@
                             <!-- Home Tab -->
                             <div class="home-tab">
                                 <h2 class="mb-4">Dashboard</h2>
-                                <div class="d-sm-flex align-items-center justify-content-end border-bottom">
-                                    <div>
-                                        <!-- Placeholder for possible buttons (Share, Print, Export) -->
-                                    </div>
-                                </div>
-
-                                <!-- Bills Section -->
-                                <div class="row" id="bills-section">
-                                    <!-- Monthly Bills Card -->
-                                    <div class="col-12 mb-4 mt-4">
-                                        <div class="card card-rounded">
-                                            <div class="card-body">
-                                                <div class="d-sm-flex justify-content-between align-items-start">
-                                                    <div>
-                                                        <h4 class="card-title card-title-dash">Monthly Bills</h4>
-                                                        <h5 class="card-subtitle card-subtitle-dash">Overview of Electricity, Water, and WiFi Bills</h5>
+                                
+                                <!-- Tab Navigation -->
+                                <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist" style="border-bottom: 2px solid #e9ecef;">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="bills-tab" data-bs-toggle="tab" data-bs-target="#billsSection" type="button" role="tab" aria-controls="billsSection" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Bills Overview</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsSection" type="button" role="tab" aria-controls="projectsSection" aria-selected="false" style="padding: 12px 24px; font-weight: 500; color: #6c757d; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Projects Overview</button>
+                                    </li>
+                                </ul>
+                                <style>
+                                    .nav-tabs .nav-link:hover {
+                                        color: #1F3BB3 !important;
+                                        border-bottom: 2px solid #1F3BB3 !important;
+                                    }
+                                    .nav-tabs .nav-link.active {
+                                        color: #4B49AC !important;
+                                        border-bottom: 2px solid #1F3BB3 !important;
+                                        background-color: transparent !important;
+                                        font-weight: 700 !important;
+                                    }
+                                </style>
+                                
+                                <!-- Tab Content -->
+                                <div class="tab-content" id="dashboardTabContent">
+                                    <!-- Bills Section -->
+                                    <div class="tab-pane fade show active" id="billsSection" role="tabpanel" aria-labelledby="bills-tab">
+                                        <div class="row" id="bills-section">
+                                            <!-- Monthly Bills Card -->
+                                            <div class="col-12 mb-4 mt-4">
+                                                <div class="card card-rounded">
+                                                    <div class="card-body">
+                                                        <div class="d-sm-flex justify-content-between align-items-start">
+                                                            <div>
+                                                                <h4 class="card-title card-title-dash">Monthly Bills</h4>
+                                                                <h5 class="card-subtitle card-subtitle-dash">Overview of Electricity, Water, and WiFi Bills</h5>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Monthly Bills Card -->
+                                                        <div class="chartjs-wrapper mt-4" style="width: 100%; min-height: 250px;">
+                                                            <canvas id="overviewChart" style="width: 100%; height: 250px;"></canvas>
+                                                        </div>
+                                                        <div id="overviewChart-legend" class="text-center d-flex flex-wrap justify-content-center"></div>
                                                     </div>
                                                 </div>
-                                                <!-- Monthly Bills Card -->
-                                                <div class="chartjs-wrapper mt-4" style="width: 100%; min-height: 250px;">
-                                                    <canvas id="overviewChart" style="width: 100%; height: 250px;"></canvas>
-                                                    <div id="overviewChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
+                                            </div>
+                                            <!-- Individual Charts -->
+                                            <div class="col-12 col-lg-6 mb-4">
+                                                <div class="card card-rounded">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title card-title-dash">Electricity Bills</h4>
+                                                        <div class="chartjs-bar-wrapper mt-3">
+                                                            <canvas id="electricityChart" style="height: 400px;"></canvas>
+                                                        </div>
+                                                        <div id="electricityChart-legend" class="text-center d-flex flex-wrap justify-content-center"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Electricity Usage Rate Card -->
+                                            <div class="col-12 col-lg-6 mb-4">
+                                                <div class="card card-rounded">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title card-title-dash">Electricity Usage Rate</h4>
+                                                        <div class="chartjs-bar-wrapper mt-3">
+                                                            <canvas id="usageRateChart" style="height: 400px;"></canvas>
+                                                        </div>
+                                                        <div id="usageRateChart-legend" class="text-center d-flex flex-wrap justify-content-center"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Water Bills Card -->
+                                            <div class="col-12 col-lg-6 mb-4">
+                                                <div class="card card-rounded">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title card-title-dash">Water Bills</h4>
+                                                        <div class="chartjs-bar-wrapper mt-3">
+                                                            <canvas id="waterChart" style="height: 400px;"></canvas>
+                                                        </div>
+                                                        <div id="waterChart-legend" class="text-center d-flex flex-wrap justify-content-center"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- WiFi Bills Card -->
+                                            <div class="col-12 col-lg-6 mb-4">
+                                                <div class="card card-rounded">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title card-title-dash">WiFi Bills</h4>
+                                                        <div class="chartjs-bar-wrapper mt-3">
+                                                            <canvas id="wifiChart" style="height: 400px;"></canvas>
+                                                        </div>
+                                                        <div id="wifiChart-legend" class="text-center d-flex flex-wrap justify-content-center"></div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Individual Charts -->
-                                    <div class="col-12 col-lg-6 mb-4">
-                                        <div class="card card-rounded">
-                                            <div class="card-body">
-                                                <h4 class="card-title card-title-dash">Electricity Bills</h4>
-                                                <div class="chartjs-bar-wrapper mt-3">
-                                                    <canvas id="electricityChart" style="height: 400px;"></canvas>
+                                    <!-- Donut & Pie Charts Section -->
+                                    <div class="collapse show" id="projectsSection">
+                                        <div class="row" id="charts-section">
+                                        <!-- Access Points by Projects Donut Chart -->
+                                        <div class="col-12 col-lg-6 mb-4">
+                                            <div class="card card-rounded">
+                                                <div class="card-body">
+                                                    <h4 class="card-title card-title-dash">Access Points by Projects</h4>
+                                                    <div class="chart-container" style="position: relative; height: auto; width: 100%;">
+                                                        <canvas id="projectDonutChart"></canvas>
+                                                    </div>
+                                                    <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- Electricity Usage Rate Card -->
-                                    <div class="col-12 col-lg-6 mb-4">
-                                        <div class="card card-rounded">
-                                            <div class="card-body">
-                                                <h4 class="card-title card-title-dash">Electricity Usage Rate</h4>
-                                                <div class="chartjs-bar-wrapper mt-3">
-                                                    <canvas id="usageRateChart" style="height: 400px;"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Water Bills Card -->
-                                    <div class="col-12 col-lg-6 mb-4">
-                                        <div class="card card-rounded">
-                                            <div class="card-body">
-                                                <h4 class="card-title card-title-dash">Water Bills</h4>
-                                                <div class="chartjs-bar-wrapper mt-3">
-                                                    <canvas id="waterChart" style="height: 400px;"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- WiFi Bills Card -->
-                                    <div class="col-12 col-lg-6 mb-4">
-                                        <div class="card card-rounded">
-                                            <div class="card-body">
-                                                <h4 class="card-title card-title-dash">WiFi Bills</h4>
-                                                <div class="chartjs-bar-wrapper mt-3">
-                                                    <canvas id="wifiChart" style="height: 400px;"></canvas>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Donut & Pie Charts Section -->
-                                <div class="row" id="charts-section">
-                                    <!-- Access Points by Projects Donut Chart -->
-                                    <div class="col-12 col-lg-6 mb-4">
-                                        <div class="card card-rounded">
-                                            <div class="card-body">
-                                                <h4 class="card-title card-title-dash">Access Points by Projects</h4>
-                                                <div class="chart-container" style="position: relative; height: auto; width: 100%;">
-                                                    <canvas id="projectDonutChart"></canvas>
-                                                </div>
-                                                <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                     <!-- Project Distribution Pie Chart -->
                                     <div class="col-12 col-lg-6 mb-4">
                                         <div class="card card-rounded">
@@ -177,6 +201,57 @@
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // Function to create a custom legend
+        function createCustomLegend(chart, containerId) {
+            const legendContainer = document.getElementById(containerId);
+            legendContainer.innerHTML = ''; // Clear existing content
+
+            const legendWrapper = document.createElement('div');
+            legendWrapper.style.display = 'flex';
+            legendWrapper.style.flexWrap = 'wrap';
+            legendWrapper.style.justifyContent = 'center';
+            
+            chart.data.datasets.forEach((dataset, index) => {
+                const legendItem = document.createElement('div');
+                legendItem.style.display = 'inline-flex';
+                legendItem.style.alignItems = 'center';
+                legendItem.style.margin = '5px 15px';
+                legendItem.style.cursor = 'pointer';
+                legendItem.style.padding = '8px 12px';
+                legendItem.style.borderRadius = '4px';
+                legendItem.style.transition = 'all 0.3s ease';
+
+                legendItem.innerHTML = `
+                    <span class="legend-color" style="width: 12px; height: 12px; background-color: ${dataset.borderColor}; display: inline-block; margin-right: 8px; border-radius: 50%;"></span>
+                    <span class="legend-label" style="font-size: 14px; color: #333;">${dataset.label}</span>
+                `;
+
+                legendItem.addEventListener('click', () => {
+                    const isDatasetVisible = chart.isDatasetVisible(index);
+                    const labelText = legendItem.querySelector('.legend-label');
+                    const legendColor = legendItem.querySelector('.legend-color');
+
+                    if (isDatasetVisible) {
+                        chart.hide(index);
+                        legendColor.style.opacity = '0.4';
+                        labelText.style.textDecoration = 'line-through';
+                        labelText.style.color = '#6c757d';
+                        legendItem.style.backgroundColor = '#f8f9fa';
+                    } else {
+                        chart.show(index);
+                        legendColor.style.opacity = '1';
+                        labelText.style.textDecoration = 'none';
+                        labelText.style.color = '#333';
+                        legendItem.style.backgroundColor = 'transparent';
+                    }
+                });
+
+                legendWrapper.appendChild(legendItem);
+            });
+
+            legendContainer.appendChild(legendWrapper);
+        }
+
         var electricityValues = <?php echo json_encode($values101); ?>;
         var electricityLabels = <?php echo json_encode($labels101); ?>;
         
@@ -246,10 +321,11 @@
                     }
                 }
             });
+            return chart;
         }
 
         // Individual Charts with Unique X-Axis Labels
-        createChart(
+        const electricityChart = createChart(
             document.getElementById("electricityChart"),
             electricityLabels,
             "Electricity Bill",
@@ -259,7 +335,7 @@
             getMaxValue(electricityValues)
         );
 
-        createChart(
+        const waterChart = createChart(
             document.getElementById("waterChart"),
             waterLabels,
             "Water Bill",
@@ -269,7 +345,7 @@
             getMaxValue(waterValues)
         );
 
-        createChart(
+        const wifiChart = createChart(
             document.getElementById("wifiChart"),
             wifiLabels,
             "WiFi Bill",
@@ -281,16 +357,17 @@
 
         // Usage Rate Chart
         var usageRateCanvas = document.getElementById("usageRateChart");
+        var usageRateChart;
         if (usageRateCanvas) {
-            new Chart(usageRateCanvas, {
+            usageRateChart = new Chart(usageRateCanvas, {
                 type: "bar",
                 data: {
                     labels: electricityLabels,
                     datasets: [{
                         label: "Usage Rate",
                         data: <?php echo json_encode($rate101); ?>,
-                        backgroundColor: "#ff573333",
-                        borderColor: "#ff5733",
+                        backgroundColor: "#E29E0933",
+                        borderColor: "#E29E09",
                         borderWidth: 1.5,
                         hidden: false // Add this to track visibility
                     }]
@@ -331,8 +408,9 @@
         }
         // Overview Chart (Shared Timeline)
         var overviewCanvas = document.getElementById("overviewChart");
+        var overviewChart;
         if (overviewCanvas) {
-            new Chart(overviewCanvas, {
+            overviewChart = new Chart(overviewCanvas, {
                 type: "line",
                 data: {
                     labels: [...new Set([...electricityLabels, ...waterLabels, ...wifiLabels])],
@@ -401,6 +479,13 @@
                     }
                 }
             });
+            
+            // Create custom legends for all charts
+            createCustomLegend(overviewChart, 'overviewChart-legend');
+            createCustomLegend(electricityChart, 'electricityChart-legend');
+            createCustomLegend(waterChart, 'waterChart-legend');
+            createCustomLegend(wifiChart, 'wifiChart-legend');
+            createCustomLegend(usageRateChart, 'usageRateChart-legend');
         } else {
             console.error("overviewChart canvas element not found!");
         }
