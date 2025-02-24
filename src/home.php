@@ -35,8 +35,10 @@
                                                         <h5 class="card-subtitle card-subtitle-dash">Overview of Electricity, Water, and WiFi Bills</h5>
                                                     </div>
                                                 </div>
+                                                <!-- Monthly Bills Card -->
                                                 <div class="chartjs-wrapper mt-4" style="width: 100%; min-height: 250px;">
                                                     <canvas id="overviewChart" style="width: 100%; height: 250px;"></canvas>
+                                                    <div id="overviewChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,8 +94,8 @@
                                     <!-- Access Points by Projects Donut Chart -->
                                     <div class="col-12 col-lg-6 mb-4">
                                         <div class="card card-rounded">
-                                            <div class="card-body text-center">
-                                                <h4 class="card-title">Access Points by Projects</h4>
+                                            <div class="card-body">
+                                                <h4 class="card-title card-title-dash">Access Points by Projects</h4>
                                                 <div class="chart-container" style="position: relative; height: auto; width: 100%;">
                                                     <canvas id="projectDonutChart"></canvas>
                                                 </div>
@@ -106,7 +108,7 @@
                                     <div class="col-12 col-lg-6 mb-4">
                                         <div class="card card-rounded">
                                             <div class="card-body">
-                                                <h4 class="card-title">Project Distribution</h4>
+                                                <h4 class="card-title card-title-dash">Project Distribution</h4>
                                                 <div id="loadingSpinner" class="spinner-container">
                                                     <div class="dot-spinner">
                                                         <div class="dot"></div>
@@ -192,7 +194,7 @@
 
         // Function to create a chart
         function createChart(ctx, labels, label, data, borderColor, backgroundColor, maxY) {
-            new Chart(ctx, {
+            const chart = new Chart(ctx, {
                 type: "line",
                 data: {
                     labels: labels,
@@ -203,16 +205,17 @@
                         backgroundColor: backgroundColor,
                         borderWidth: 1.5,
                         fill: true,
-                        pointRadius: 3,
-                        pointHoverRadius: 3,
-                        tension: 0.4
+                        pointRadius: 2.5,
+                        pointHoverRadius: 2.5,
+                        tension: 0.5,
+                        hidden: false // Add this to track visibility
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true },
+                        legend: { display: false },
                         tooltip: {
                             callbacks: {
                                 label: function (tooltipItem) {
@@ -288,14 +291,15 @@
                         data: <?php echo json_encode($rate101); ?>,
                         backgroundColor: "#ff573333",
                         borderColor: "#ff5733",
-                        borderWidth: 2
+                        borderWidth: 1.5,
+                        hidden: false // Add this to track visibility
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true },
+                        legend: { display: false },
                         tooltip: {
                             callbacks: {
                                 label: function (tooltipItem) {
@@ -340,9 +344,10 @@
                             backgroundColor: "#ff573333", 
                             borderWidth: 1.5, 
                             fill: true,
-                            pointRadius: 3,
-                            pointHoverRadius: 3,
-                            tension: 0.4
+                            pointRadius: 2.5,
+                            pointHoverRadius: 2.5,
+                            tension: 0.4,
+                            hidden: false
                         },
                         { 
                             label: "Water Bill", 
@@ -351,9 +356,10 @@
                             backgroundColor: "#3498db33", 
                             borderWidth: 1.5, 
                             fill: true,
-                            pointRadius: 3,
-                            pointHoverRadius: 3,
-                            tension: 0.4
+                            pointRadius: 2.5,
+                            pointHoverRadius: 2.5,
+                            tension: 0.4,
+                            hidden: false
                         },
                         { 
                             label: "WiFi Bill", 
@@ -362,9 +368,10 @@
                             backgroundColor: "#2ecc7133", 
                             borderWidth: 1.5, 
                             fill: true,
-                            pointRadius: 3,
-                            pointHoverRadius: 3,
-                            tension: 0.4
+                            pointRadius: 2.5,
+                            pointHoverRadius: 2.5,
+                            tension: 0.4,
+                            hidden: false
                         }
                     ]
                 },
@@ -372,7 +379,7 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: true },
+                        legend: { display: false },
                         tooltip: {
                             callbacks: {
                                 label: function (tooltipItem) {
@@ -399,13 +406,6 @@
         }
     });
     </script>
-
-    <style>
-        /* Set a fixed height for charts */
-        .chart-container {
-            height: 1000px; /* Adjust height as needed */
-        }
-    </style>
 
     <?php
     include("includes/conn.php");
