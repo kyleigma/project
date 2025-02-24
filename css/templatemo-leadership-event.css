@@ -48,7 +48,7 @@ https://templatemo.com/tm-575-leadership-event
   --p-color:                      #717275;
   --highlight-icon-color:         #ff0100;
 
-  --body-font-family:             'DM Sans', sans-serif;
+  --body-font-family:             'Manrope', sans-serif;
 
   --h1-font-size:                 48px;
   --h2-font-size:                 48px;
@@ -1127,7 +1127,7 @@ strong {
   box-sizing: border-box;
 }
 
-body { font-family: sans-serif; }
+body { font-family: Manrope; }
 
 .gallery {
   background: #EEE;
