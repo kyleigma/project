@@ -1,12 +1,64 @@
-<?php
-    include 'includes/session.php';
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php include 'includes/header.php'; ?>
-    <title>Bills Overview - DICT Aklan</title>
-</head>
+<?php include 'includes/header.php';?>
+<?php include 'includes/session.php'; ?>
+
+<style>
+.datatable th {
+    white-space: normal;
+    word-break: break-word;
+    text-align: center;
+    max-width: 80px;
+    min-width: 80px;
+    overflow-wrap: break-word;
+    padding: 5px;
+}
+.bill-images {
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+#modal-container {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#modal-container.active {
+    display: flex;
+}
+
+#modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 35px;
+    color: white;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: skyblue;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+</style>
+
 <body>
     <div class="container-scroller">
         <?php include 'includes/navbar.php'; ?>
@@ -24,100 +76,141 @@
                             </ol>
                         </nav>
                     </div>
-                    <div class="row">
-                        <div class="col-12 grid-margin stretch-card">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                                        <div class="ml-auto">
-                                            <button onclick="window.print()" class="btn btn-md btn-primary btn-flat">
-                                                <i class="mdi mdi-printer-outline"></i> Print
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-striped datatable" style="width: 100%;">
-                                            <thead>
-                                                <tr>
-                                                    <th class="hidden"></th>
-                                                    <th>Billing Period</th>
-                                                    <th>Bill Type</th>
-                                                    <th>Total Amount</th>
-                                                    <th>Usage/Details</th>
-                                                    <th>Date Received</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                include 'includes/conn.php';
 
-                                                // Unified query for all bill types using UNION
-                                                $sql = "(SELECT 
-                                                            month_2 as bill_month,
-                                                            month_1 as bill_month_end,
-                                                            date_2 as bill_date,
-                                                            total_amount_2 as amount,
-                                                            CONCAT('Usage Rate: ', ur, ' kWh<br>Gen. & Trans.: ₱', FORMAT(gtc, 2)) as details,
-                                                            'Electricity' as bill_type
-                                                        FROM electric_bill)
-                                                        UNION ALL
-                                                        (SELECT 
-                                                            month_wb as bill_month,
-                                                            month_wb as bill_month_end,
-                                                            month_wb as bill_date,
-                                                            total_amount_wb as amount,
-                                                            'Standard Rate' as details,
-                                                            'Water' as bill_type
-                                                        FROM water_bill)
-                                                        UNION ALL
-                                                        (SELECT 
-                                                            month_1 as bill_month,
-                                                            month_1 as bill_month_end,
-                                                            date_1 as bill_date,
-                                                            total_amount_1 as amount,
-                                                            'Internet Service' as details,
-                                                            'WiFi' as bill_type
-                                                        FROM wifi_bill)
-                                                        ORDER BY bill_month DESC";
-
-                                                $query = $conn->query($sql);
-                                                while($row = $query->fetch_assoc()) {
-                                                    $billing_period = $row['bill_type'] == 'Electricity' ? 
-                                                        date('F Y', strtotime($row['bill_month'])) . ' - ' . date('F Y', strtotime($row['bill_month_end'])) : 
-                                                        date('F Y', strtotime($row['bill_month']));
-                                                    
-                                                    echo "<tr>
-                                                        <td class='hidden'></td>
-                                                        <td>{$billing_period}</td>
-                                                        <td>{$row['bill_type']}</td>
-                                                        <td>₱" . number_format($row['amount'], 2) . "</td>
-                                                        <td>{$row['details']}</td>
-                                                        <td>" . date('M d, Y', strtotime($row['bill_date'])) . "</td>
-                                                        <td><span class='badge badge-success'>Paid</span></td>
-                                                    </tr>";
-                                                }
-                                                ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                    <?php
+                    if (isset($_SESSION['error'])) {
+                        echo "
+                            <div class='alert alert-danger alert-dismissible fade show d-flex align-items-center' role='alert'>
+                                <i class='mdi mdi-alert-circle mdi-24px me-2'></i> 
+                                <span>".$_SESSION['error']."</span>
+                                <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
                             </div>
-                        </div>
+                        ";
+                        unset($_SESSION['error']);
+                    }
+                    if (isset($_SESSION['success'])) {
+                        echo "
+                            <div class='alert alert-success alert-dismissible fade show d-flex align-items-center' role='alert'>
+                                <i class='mdi mdi-check-circle mdi-24px me-2'></i> 
+                                <span>".$_SESSION['success']."</span>
+                                <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
+                            </div>
+                        ";
+                        unset($_SESSION['success']);
+                    }
+                    ?>
+
+                    <table class="table responsive table-striped datatable" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th class="hidden" width="2rem"></th>
+                                <th>Bill Type</th>
+                                <th>Billing Period</th>
+                                <th>Date OR Receive</th>
+                                <th>Picture</th>
+                                <th>Total Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            // Electric Bills
+                            $sql_electric = "SELECT 'Electricity' as bill_type, 
+                                           CONCAT(DATE_FORMAT(month_2, '%M %Y'), ' - ', DATE_FORMAT(month_1, '%M %Y')) as billing_period, 
+                                           date_2 as date_receive, e_photo as photo, 
+                                           (gtc + dr + uc + evax + other_ca + annex) as total_amount, 
+                                           id, 'electric' as source FROM electric_bill";
+
+                            // Water Bills
+                            $sql_water = "SELECT 'Water' as bill_type, DATE_FORMAT(month_wb, '%M %Y') as billing_period,
+                                         date_receive, w_photo as photo, total_amount_wb as total_amount,
+                                         id, 'water' as source FROM water_bill";
+
+                            // WiFi Bills
+                            $sql_wifi = "SELECT 'WiFi' as bill_type, DATE_FORMAT(month_1, '%M %Y') as billing_period,
+                                        date_1 as date_receive, wifi_photo as photo, total_amount_1 as total_amount,
+                                        id, 'wifi' as source FROM wifi_bill";
+
+                            // Combine all queries
+                            $sql = "($sql_electric) UNION ALL ($sql_water) UNION ALL ($sql_wifi) ORDER BY date_receive DESC";
+                            $query = $conn->query($sql);
+
+                            while ($row = $query->fetch_assoc()) {
+                                $imagePath = 'assets/images/bills/' . $row['source'] . $row['photo'];
+                                $image = (!empty($row['photo']) && file_exists($imagePath)) ? $imagePath : 'assets/images/blank.svg';
+                                $billBadge = ($row['bill_type'] === 'Electricity') ? 'badge-warning' : 
+                                               (($row['bill_type'] === 'Water') ? 'badge-primary' : 'badge-success');
+                                echo "
+                                <tr data-id='" . $row['id'] . "' data-source='" . $row['source'] . "'> 
+                                    <td class='hidden text-center'></td>
+                                    <td class='text-center'><span class='badge rounded-pill $billBadge' style='font-size: 0.75rem;'>".ucfirst($row['bill_type'])."</span></td>
+                                    <td>" . $row['billing_period'] . "</td>
+                                    <td>" . $row['date_receive'] . "</td>
+                                    <td class='text-center'>
+                                        <div class='d-flex align-items-center justify-content-center'>
+                                            <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
+                                            <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "' data-source='" . $row['source'] . "'>
+                                                <span class='mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>" . number_format($row['total_amount'], 2) . "</td>
+                                    <td class='text-center'>
+                                        <a href='" . $row['source'] . "_bill.php' class='btn btn-info btn-sm'>
+                                            <i class='mdi mdi-eye'></i>
+                                        </a>
+                                    </td>
+                                </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+
+                    <div id="modal-container">
+                        <span class="close" style="opacity: 1;">&times;</span>
+                        <img id="modal-content">
                     </div>
                 </div>
-                <?php include 'includes/footer.php'; ?>
+                <?php include 'includes/footer.php';?>
             </div>
         </div>
     </div>
-    <?php include 'includes/scripts.php'; ?>
+
+    <?php include 'includes/scripts.php';?>
+
+    <!-- DataTables CSS and JS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/js/select.dataTables.min.css">
+    
+    <!-- jQuery (must be included before DataTables JS) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
     <script>
-        $(document).ready(function() {
-            $('.datatable').DataTable({
-                "order": [[0, "desc"]],
-                "pageLength": 25
+    document.addEventListener('DOMContentLoaded', function() {
+        var modalContainer = document.getElementById('modal-container');
+        var modalContent = document.getElementById('modal-content');
+        var closeBtn = document.querySelector('#modal-container .close');
+        var galleryImgs = document.querySelectorAll('.bill-images');
+
+        galleryImgs.forEach(function(img) {
+            img.addEventListener('click', function() {
+                modalContent.src = this.src;
+                modalContainer.classList.add('active');
             });
         });
+
+        closeBtn.addEventListener('click', function() {
+            modalContainer.classList.remove('active');
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === modalContainer) {
+                modalContainer.classList.remove('active');
+            }
+        });
+    });
     </script>
 </body>
 </html>

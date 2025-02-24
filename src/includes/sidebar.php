@@ -49,6 +49,7 @@
             </a>
             <div class="collapse" id="utilities" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="bills.php">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" href="electric_bill.php">Electricity Bill</a></li>
                     <li class="nav-item"><a class="nav-link" href="water_bill.php">Water Bill</a></li>
                     <li class="nav-item"><a class="nav-link" href="wifi_bill.php">Wi-Fi Bill</a></li>

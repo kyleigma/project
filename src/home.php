@@ -21,20 +21,20 @@
                                 <!-- Tab Navigation -->
                                 <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist" style="border-bottom: 2px solid #e9ecef;">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="bills-tab" data-bs-toggle="tab" data-bs-target="#billsSection" type="button" role="tab" aria-controls="billsSection" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Bills Overview</button>
+                                        <button class="nav-link active" id="bills-tab" data-bs-toggle="tab" data-bs-target="#billsSection" type="button" role="tab" aria-controls="billsSection" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 14px;">Bills Overview</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsSection" type="button" role="tab" aria-controls="projectsSection" aria-selected="false" style="padding: 12px 24px; font-weight: 500; color: #6c757d; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Projects Overview</button>
+                                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsSection" type="button" role="tab" aria-controls="projectsSection" aria-selected="false" style="padding: 12px 24px; font-weight: 500; color: #6c757d; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 14px;">Projects Overview</button>
                                     </li>
                                 </ul>
                                 <style>
                                     .nav-tabs .nav-link:hover {
-                                        color: #1F3BB3 !important;
-                                        border-bottom: 2px solid #1F3BB3 !important;
+                                        color: #4B49AC !important;
+                                        border-bottom: 2px solid #4B49AC !important;
                                     }
                                     .nav-tabs .nav-link.active {
                                         color: #4B49AC !important;
-                                        border-bottom: 2px solid #1F3BB3 !important;
+                                        border-bottom: 2px solid #4B49AC !important;
                                         background-color: transparent !important;
                                         font-weight: 700 !important;
                                     }
@@ -236,7 +236,7 @@
                         legendColor.style.opacity = '0.4';
                         labelText.style.textDecoration = 'line-through';
                         labelText.style.color = '#6c757d';
-                        legendItem.style.backgroundColor = '#f8f9fa';
+                        legendItem.style.backgroundColor = '#ffffff';
                     } else {
                         chart.show(index);
                         legendColor.style.opacity = '1';
