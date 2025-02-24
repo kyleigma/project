@@ -9,10 +9,31 @@ https://templatemo.com/tm-575-leadership-event
 /*---------------------------------------
   LOGO             
 -----------------------------------------*/
-.navbar-brand .DICT-logo{
+.navbar-brand {
+  font-size: 20px;
+  line-height: 1.2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
 
-  height: 10px;
-  width: 10px;
+.brand-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(14px, 2vw, 20px);
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-brand {
+    gap: 0.3rem;
+  }
 }
 /*---------------------------------------
   CUSTOM PROPERTIES ( VARIABLES )             
@@ -856,15 +877,24 @@ strong {
   height: 50px;
   line-height: 50px;
   text-align: center;
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
+  position: fixed;
+  bottom: 20px;
+  right: 50%;
+  transform: translateX(50%);
+  z-index: 99;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 40%);
+  transition: box-shadow 0.3s ease;
 }
 
 .arrow-icon:hover {
   background: var(--primary-color);
   color: var(--white-color);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.25);
 }
-
 
 /*---------------------------------------
   CUSTOM FORM               
@@ -1090,3 +1120,33 @@ strong {
   }
 }
 
+/* external css: flickity.css */
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body { font-family: sans-serif; }
+
+.gallery {
+  background: #EEE;
+}
+
+.gallery-cell {
+  width: 66%;
+  height: 200px;
+  margin-right: 10px;
+  background: #8C8;
+  counter-increment: gallery-cell;
+}
+
+/* cell number */
+.gallery-cell:before {
+  display: block;
+  text-align: center;
+  content: counter(gallery-cell);
+  line-height: 200px;
+  font-size: 80px;
+  color: white;
+}
