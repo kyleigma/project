@@ -1134,122 +1134,262 @@ https://templatemo.com/tm-575-leadership-event
             </section>
 
             <section class="speakers section-padding" id="section_6">
-                <div class="container">
-                    <div class="row">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-12 mb-4 mb-lg-0">
+                <div class="speakers-text-info">
+                    <h2 class="mb-4">Our <u class="text-info">Developers</u></h2>
+                    <p>We are passionate developers committed to building innovative, efficient, and seamless digital experiences through clean code and creative problem-solving.</p>
+                </div>
+            </div>
 
-                        <div class="col-lg-6 col-12 d-flex flex-column justify-content-center align-items-center">
-                            <div class="speakers-text-info">
-                                <h2 class="mb-4">Our <u class="text-info">Developers</u></h2>
+            <div class="col-lg-7 col-12">
+                <div class="speakers-thumb">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">AJ C. Tomco</h5>
+                        <p class="speakers-text mb-0">FrontEnd Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-google"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                <p>We are passionate developers committed to building innovative, efficient, and seamless digital experiences through clean code and creative problem-solving.</p>
-                            </div>
-                        </div>
 
-                        <div class="col-lg-6 col-12">
-                            <div class="speakers-thumb">
-                                <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+        <div class="col-lg-12 col-12">
+    <div class="speakers-carousel">
+        <div class="speakers-scroll">
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Kyle Igma</h5>
+                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-                                <small class="speakers-featured-text">Featured</small>
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-                                <div class="speakers-info">
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-                                    <h5 class="speakers-title mb-0">AJ C. Tomco</h5>
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Developer 3</h5>
+                        <p class="speakers-text mb-0">Full Stack Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                    <p class="speakers-text mb-0">FrontEnd Developer</p>
-
-                                    <ul class="social-icon">
-                                        <li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-                                        <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                        <li><a href="#" class="social-icon-link bi-google"></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12 col-12">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
-
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">Kyle Igma</h5>
-
-                                            <p class="speakers-text mb-0">BackEnd Developer</p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
-
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0">Keanu Inlab</h5>
-
-                                            <p class="speakers-text mb-0">BackEnd Developer</p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
-
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0"></h5>
-
-                                            <p class="speakers-text mb-0"></p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-facebook"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-3 col-md-6 col-12">
-                                    <div class="speakers-thumb speakers-thumb-small">
-                                        <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
-
-                                        <div class="speakers-info">
-                                            <h5 class="speakers-title mb-0"></h5>
-
-                                            <p class="speakers-text mb-0"></p>
-
-                                            <ul class="social-icon">
-                                                <li><a href="#" class="social-icon-link bi-instagram"></a></li>
-
-                                                <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+<style>
+    .card-hover {
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .speakers-carousel {
+        width: 100%;
+        overflow: hidden;
+        padding: 20px 0;
+    }
+    .speakers-scroll {
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        gap: 20px;
+        padding: 10px;
+    }
+    .speakers-scroll::-webkit-scrollbar {
+        height: 8px;
+    }
+    .speakers-scroll::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    .speakers-scroll::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 4px;
+    }
+    .speakers-scroll::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+    .speakers-card {
+        flex: 0 0 auto;
+        width: 300px;
+    }
+</style>
                             </div>
                         </div>
 
                     </div>
+                    </div>
+</section>
+
+<style>
+    @media (max-width: 991px) {
+        .speakers-text-info {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+    }
+</style>
+
+                  <section class="developers">
+                <div class="container">
+                    <div id="developersCarousel" class="carousel slide" data-bs-ride="carousel" style="max-width: 600px; margin: 0 auto;">
+                        <h1 class="ourdevs" style="text-align: center;">OUR DEVELOPERS</h1>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/DICTAKLAN.jpg" class="w-100 h-100" alt="Development Team" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">AJ C. Tomco</h5>
+                                        <p class="card-text">Frontend Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/developers/dev2.jpg" class="w-100 h-100" alt="Team Collaboration" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Kyle Igma</h5>
+                                        <p class="card-text">Backend Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/developers/dev3.jpg" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Keanu Inlab</h5>
+                                        <p class="card-text">Backend Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#developersCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#developersCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                                                <style>
+                            .card-hover {
+                                transition: all 0.3s ease;
+                                cursor: pointer;
+                            }
+                            .card-hover:hover {
+                                transform: translateY(-10px);
+                                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+                            }
+                            /* Add these styles for carousel controls */
+                            .carousel-control-prev,
+                            .carousel-control-next {
+                                width: 50px;
+                                height: 50px;
+                                background-color: rgba(0, 0, 0, 0.7);
+                                border-radius: 50%;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                                transition: all 0.3s ease;
+                            }
+                            .carousel-control-prev:hover,
+                            .carousel-control-next:hover {
+                                background-color: rgba(0, 0, 0, 0.9);
+                                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+                            }
+                            .carousel-control-prev {
+                                left: 10px;
+                            }
+                            .carousel-control-next {
+                                right: 10px;
+                            }
+                        </style>
+                    </div>
                 </div>
             </section>
-
             <!-- <section class="contact section-padding" id="section_7">
                 <div class="container">
                     <div class="row">
@@ -1302,7 +1442,7 @@ https://templatemo.com/tm-575-leadership-event
                         </div> 
                     </div>
 
-                    <div class="col-lg-7 col-12">
+                    <div class="col-lg-7 col-12 pb-5">
                         <ul class="footer-menu d-flex flex-wrap">
                             <li class="footer-menu-item"><a href="#" class="footer-menu-link">Our Department</a></li>
 

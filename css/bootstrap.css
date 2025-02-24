@@ -140,7 +140,7 @@
 
 /* Optional: Add space between buttons */
 .nav-link {
-    margin-right: 10px;
+    margin-right: 0vh;
 }
 
 
@@ -6489,7 +6489,7 @@ fieldset:disabled .btn {
   display: table-cell !important;
 }
 .d-flex {
-  display: flex !important;
+  display: contents !important;
 }
 .d-inline-flex {
   display: inline-flex !important;
