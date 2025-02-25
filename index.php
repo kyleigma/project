@@ -1145,7 +1145,7 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="col-lg-7 col-12">
                 <div class="speakers-thumb">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/marvin.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">AJ C. Tomco</h5>
                         <p class="speakers-text mb-0">FrontEnd Developer</p>
@@ -1165,7 +1165,7 @@ https://templatemo.com/tm-575-leadership-event
         <div class="speakers-scroll">
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/hadasa.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Kyle Igma</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1179,7 +1179,7 @@ https://templatemo.com/tm-575-leadership-event
             
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/earl.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Keanu Inlab</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1193,7 +1193,7 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/engr.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Keanu Inlab</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1207,7 +1207,7 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/carol.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Keanu Inlab</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1221,7 +1221,20 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/nelia.png" class="img-fluid speakers-image" alt="">
+                    <div class="speakers-info">
+                        <h5 class="speakers-title mb-0">Developer 3</h5>
+                        <p class="speakers-text mb-0">Full Stack Developer</p>
+                        <ul class="social-icon">
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="speakers-card">
+                <div class="speakers-thumb speakers-thumb-small card-hover">
+                    <img src="images/DICTofficers/juliet.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Developer 3</h5>
                         <p class="speakers-text mb-0">Full Stack Developer</p>
@@ -1340,39 +1353,7 @@ https://templatemo.com/tm-575-leadership-event
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
-                                                <style>
-                            .card-hover {
-                                transition: all 0.3s ease;
-                                cursor: pointer;
-                            }
-                            .card-hover:hover {
-                                transform: translateY(-10px);
-                                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                            }
-                            /* Add these styles for carousel controls */
-                            .carousel-control-prev,
-                            .carousel-control-next {
-                                width: 50px;
-                                height: 50px;
-                                background-color: rgba(0, 0, 0, 0.7);
-                                border-radius: 50%;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                                transition: all 0.3s ease;
-                            }
-                            .carousel-control-prev:hover,
-                            .carousel-control-next:hover {
-                                background-color: rgba(0, 0, 0, 0.9);
-                                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-                            }
-                            .carousel-control-prev {
-                                left: 10px;
-                            }
-                            .carousel-control-next {
-                                right: 10px;
-                            }
-                        </style>
+                               
                     </div>
                 </div>
             </section>
