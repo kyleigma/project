@@ -19,7 +19,7 @@
                                 <h2 class="mb-4">Dashboard</h2>
                                 
                                 <!-- Tab Navigation -->
-                                <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist" style="border-bottom: 2px solid #e9ecef;">
+                                <ul class="nav nav-tabs" id="dashboardTabs" role="tablist" style="border-bottom: 2px solid #e9ecef;">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="bills-tab" data-bs-toggle="tab" data-bs-target="#billsSection" type="button" role="tab" aria-controls="billsSection" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 14px;">Bills Overview</button>
                                     </li>
