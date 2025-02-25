@@ -545,8 +545,13 @@ strong {
 
 
 .hero .arrow-icon {
-  position: relative;
-  top: 50px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -13vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .video-wrap {
