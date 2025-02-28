@@ -1,35 +1,45 @@
 
-<!-- Date Range Modal -->
+<!-- Custom Bill Filter Modal -->
 <div class="modal fade" id="dateRangeModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"><b>Select Date Range</b></h4>
+                <h4 class="modal-title"><b>Custom Bill Filter</b></h4>
                 <button type="button" class="btn-close close-modal" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="bills_print.php" method="get" target="_blank" id="dateRangeForm" onsubmit="return validateDateRange()">
-                <div class="modal-body">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="startDate" class="form-label">Start Month</label>
-                                <input type="month" class="form-control" id="startDate" name="date_from" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="endDate" class="form-label">End Month</label>
-                                <input type="month" class="form-control" id="endDate" name="date_to" required>
-                            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="billType" class="form-label">Bill Type</label>
+                            <select class="form-control" id="billType" name="bill_type" required>
+                                <option value="all">All Bills</option>
+                                <option value="electric">Electric Bill</option>
+                                <option value="water">Water Bill</option>
+                                <option value="wifi">WiFi Bill</option>
+                            </select>
                         </div>
                     </div>
-                    <div id="dateError" class="text-danger mt-2" style="display: none;"></div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="startDate" class="form-label">Start Month</label>
+                            <input type="month" class="form-control" id="startDate" name="date_from" required>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="endDate" class="form-label">End Month</label>
+                            <input type="month" class="form-control" id="endDate" name="date_to" required>
+                        </div>
+                    </div>
                 </div>
-                <div class="modal-footer justify-content-end">
-                    <button type="button" class="btn btn-light close-modal" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary"><i class="mdi mdi-file-pdf me-1"></i>Generate Report</button>
-                </div>
-            </form>
+                <div id="dateError" class="text-danger mt-2" style="display: none;"></div>
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" class="btn btn-light close-modal" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success excel-btn" style="display: none;" onclick="submitDateRange('excel')"><i class="mdi mdi-file-excel me-1"></i>Download</button>
+                <button type="button" class="btn btn-info print-btn" style="display: none;" onclick="submitDateRange('pdf')"><i class="mdi mdi-printer me-1"></i>Print</button>
+            </div>
         </div>
     </div>
 </div>
@@ -40,29 +50,49 @@ function validateDateRange() {
     const endDate = document.getElementById('endDate').value;
     const errorDiv = document.getElementById('dateError');
 
-    if (startDate && endDate) {
-        if (startDate > endDate) {
-            errorDiv.textContent = 'End date cannot be earlier than start date';
-            errorDiv.style.display = 'block';
-            return false;
-        }
-        errorDiv.style.display = 'none';
-        return true;
+    if (!startDate || !endDate) {
+        errorDiv.textContent = 'Please select both start and end dates.';
+        errorDiv.style.display = 'block';
+        return false;
     }
+
+    if (startDate > endDate) {
+        errorDiv.textContent = 'Start date must be before or equal to end date.';
+        errorDiv.style.display = 'block';
+        return false;
+    }
+
+    errorDiv.style.display = 'none';
     return true;
 }
 
+// Show appropriate button based on which dropdown was clicked
 document.addEventListener('DOMContentLoaded', function() {
-    const modal = document.getElementById('dateRangeModal');
-    const closeButtons = modal.querySelectorAll('.close-modal');
-    
-    closeButtons.forEach(button => {
+    const printBtn = document.querySelector('.print-btn');
+    const excelBtn = document.querySelector('.excel-btn');
+
+    document.querySelectorAll('[data-bs-target="#dateRangeModal"]').forEach(button => {
         button.addEventListener('click', function() {
-            const bsModal = bootstrap.Modal.getInstance(modal);
-            if (bsModal) {
-                bsModal.hide();
-            }
+            const isExcel = this.closest('.excel-dropdown') !== null;
+            const isPrint = this.closest('.print-dropdown') !== null;
+            
+            printBtn.style.display = isPrint ? 'inline-block' : 'none';
+            excelBtn.style.display = isExcel ? 'inline-block' : 'none';
         });
     });
 });
+
+function submitDateRange(type) {
+    if (!validateDateRange()) return;
+
+    const billType = document.getElementById('billType').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    let url = type === 'excel' ? 'bills_excel.php' : 'bills_print.php';
+    url += `?bill_type=${billType}&date_from=${startDate}&date_to=${endDate}`;
+    
+    window.open(url, '_blank');
+    document.querySelector('.close-modal').click();
+}
 </script>

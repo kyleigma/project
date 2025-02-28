@@ -13,7 +13,7 @@
         // Page header
         function Header()
         {
-            // Logox
+            // Logo
             $this->Image('assets/images/dictlogo.png', 95, 8, 18,18);
             $this->Cell(189 ,17,'',0,1, "L");
 
@@ -63,7 +63,7 @@
         $filter_text = ucfirst($bill_type) . ' Bills';
     }
     if($date_from && $date_to) {
-        $filter_text .= ' (' . date('M d, Y', strtotime($date_from)) . ' - ' . date('M d, Y', strtotime($date_to)) . ')';
+        $filter_text .= ' (' . date('F Y', strtotime($date_from)) . ' - ' . date('F Y', strtotime($date_to)) . ')';
     }
     $pdf->Cell(150 ,5,$filter_text,0,1);
     
@@ -90,77 +90,55 @@
 
     // Apply date filters if provided
     if($date_from && $date_to) {
+        // Format dates for SQL comparison (add day to make it complete date)
+        $date_from = $date_from . '-01';
+        $date_to = date('Y-m-t', strtotime($date_to . '-01')); // Get last day of the month
+        
         $sql_electric .= " WHERE month_1 BETWEEN '$date_from' AND '$date_to'";
         $sql_water .= " WHERE month_wb BETWEEN '$date_from' AND '$date_to'";
         $sql_wifi .= " WHERE month_1 BETWEEN '$date_from' AND '$date_to'";
     }
 
-    // Combine queries based on bill type filter
-    if($bill_type == 'all') {
-        $sql = "($sql_electric) UNION ALL ($sql_water) UNION ALL ($sql_wifi)";
-    } else {
-        switch($bill_type) {
-            case 'electricity':
-                $sql = $sql_electric;
-                break;
-            case 'water':
-                $sql = $sql_water;
-                break;
-            case 'wifi':
-                $sql = $sql_wifi;
-                break;
-            default:
-                $sql = "($sql_electric) UNION ALL ($sql_water) UNION ALL ($sql_wifi)";
+    // Initialize the final query based on bill type
+    $final_query = '';
+    if ($bill_type == 'all' || $bill_type == 'electric') {
+        $final_query = $sql_electric;
+    }
+    if ($bill_type == 'all' || $bill_type == 'water') {
+        $final_query .= ($final_query ? ' UNION ALL ' : '') . $sql_water;
+    }
+    if ($bill_type == 'all' || $bill_type == 'wifi') {
+        $final_query .= ($final_query ? ' UNION ALL ' : '') . $sql_wifi;
+    }
+    $final_query .= " ORDER BY date_receive ASC";
+
+    $result = $conn->query($final_query);
+
+    // Table headers
+    $pdf->SetFont('Arial','B',$rowFont);
+    $pdf->Cell(50 ,5,'Bill Type',1,0);
+    $pdf->Cell(60 ,5,'Billing Period',1,0);
+    $pdf->Cell(35 ,5,'Date Received',1,0);
+    $pdf->Cell(44 ,5,'Total Amount',1,1);
+    
+    // Reset font
+    $pdf->SetFont('Arial','',$rowFont);
+    
+    $total = 0;
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $pdf->Cell(50 ,5,$row['bill_type'],1,0);
+            $pdf->Cell(60 ,5,$row['billing_period'],1,0);
+            $pdf->Cell(35 ,5,date('m/d/Y', strtotime($row['date_receive'])),1,0);
+            $pdf->Cell(44 ,5,'PHP ' . number_format($row['total_amount'], 2),1,1);
+            $total += $row['total_amount'];
         }
     }
-
-    $sql .= " ORDER BY date_receive DESC";
-    $query_room = mysqli_query($conn, $sql);
     
+    // Print total
     $pdf->SetFont('Arial','B',$rowFont);
-    $pdf->Cell(10 ,5,'No',1,0, 'C');
-    $pdf->Cell(40 ,5,'Bill Type',1,0,'C');
-    $pdf->Cell(60 ,5,'Billing Period',1,0,'C');
-    $pdf->Cell(40,5,'Date OR Receive',1,0,'C');
-    $pdf->Cell(40 ,5,'Total Amount',1,1,'C');
+    $pdf->Cell(145 ,5,'Total:',1,0);
+    $pdf->Cell(44 ,5,'PHP ' . number_format($total, 2),1,1);
     
-    $pdf->SetFont('Arial','',10);
-    $i = 1;
-    $total_amount = 0;
-
-    while($rooms=mysqli_fetch_array($query_room)){
-        $pdf->Cell(10 ,8,$i,1,0, 'C');
-        $pdf->Cell(40 ,8,$rooms['bill_type'],1,0,'C');
-        $pdf->Cell(60 ,8,$rooms['billing_period'],1,0,'C');
-        $pdf->Cell(40 ,8,$rooms['date_receive'],1,0,'C');
-        $pdf->Cell(40 ,8,number_format($rooms['total_amount'], 2),1,1,'C');
-        
-        $total_amount += $rooms['total_amount'];
-        ++$i;
-    }
-    
-    // Add total row
-    $pdf->SetFont('Arial','',$rowFont);
-    $pdf->Cell(150 ,8,'Total Amount: ',0,0,'R');
-    $pdf->SetFont('Arial','B',$rowFont);
-    $pdf->Cell(40 ,8,number_format($total_amount, 2),0,1,'C');
-    
-    // Draw outer border for total row
-    $pdf->Line($pdf->GetX(), $pdf->GetY()-8, $pdf->GetX()+190, $pdf->GetY()-8);
-    $pdf->Line($pdf->GetX(), $pdf->GetY(), $pdf->GetX()+190, $pdf->GetY());
-    $pdf->Line($pdf->GetX(), $pdf->GetY()-8, $pdf->GetX(), $pdf->GetY());
-    $pdf->Line($pdf->GetX()+190, $pdf->GetY()-8, $pdf->GetX()+190, $pdf->GetY());
-       
-    $pdf->Cell(189 ,10,'',0,1);
-    
-    $pdf->SetFont('Arial','',$rowFont);
-    $pdf->Cell(20 ,5,'Prepared by:',0,1, 'L');
-    
-    $pdf->Cell(189 ,10,'',0,1);
-    
-    $pdf->SetFont('Arial','B',$rowFont);
-    $pdf->Cell(90 ,5,'DICT Student-Interns',0,0);
-    $pdf->Cell(90 ,5,'',0,1);
-
     $pdf->Output();
 ?>

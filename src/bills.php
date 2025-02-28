@@ -122,9 +122,22 @@ body.modal-open {
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal">Custom Date Range</a></li>
                                 </ul>
                             </div>
-                            <a href="water_bill_excel.php" target="_blank" class="btn btn-primary">
-                                <i class="mdi mdi-file-excel"></i> Excel
-                            </a>
+                            <div class="dropdown">
+                                <button class="btn btn-primary dropdown-toggle" type="button" id="excelOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="mdi mdi-file-excel"></i> Excel
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="excelOptionsDropdown">
+                                    <li><a class="dropdown-item" href="bills_excel.php" target="_blank">All Bills</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><h6 class="dropdown-header">By Type</h6></li>
+                                    <li><a class="dropdown-item" href="electric_bill_excel" target="_blank">Electricity Bills</a></li>
+                                    <li><a class="dropdown-item" href="water_bill_excel" target="_blank">Water Bills</a></li>
+                                    <li><a class="dropdown-item" href="wifi_bill_excel" target="_blank">WiFi Bills</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><h6 class="dropdown-header">By Date Range</h6></li>
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal">Custom Date Range</a></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
@@ -184,7 +197,7 @@ body.modal-open {
                                     </td>
                                     <td>" . number_format($row['total_amount'], 2) . "</td>
                                     <td class='text-center'>
-                                        <a href='" . $row['source'] . "_bill.php' class='btn btn-info btn-sm'>
+                                        <a href='" . $row['source'] . "_bill.php?id=" . $row['id'] . "' class='btn btn-info btn-sm'>
                                             <i class='mdi mdi-eye'></i>
                                         </a>
                                     </td>
@@ -218,48 +231,23 @@ body.modal-open {
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Image modal handling
-        var modalContainer = document.getElementById('modal-container');
-        var modalContent = document.getElementById('modal-content');
-        var closeBtn = document.querySelector('#modal-container .close');
-        var galleryImgs = document.querySelectorAll('.bill-images');
-
-        galleryImgs.forEach(function(img) {
-            img.addEventListener('click', function() {
-                modalContent.src = this.src;
-                modalContainer.classList.add('active');
-            });
-        });
-
-        closeBtn.addEventListener('click', function() {
-            modalContainer.classList.remove('active');
-        });
-
-        window.addEventListener('click', function(e) {
-            if (e.target === modalContainer) {
-                modalContainer.classList.remove('active');
+        // Get the ID from URL if present
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        
+        if (id) {
+            // Find the row with matching ID
+            const targetRow = document.querySelector(`tr[data-id='${id}']`);
+            if (targetRow) {
+                // Scroll the row into view with smooth animation
+                targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Add a highlight effect
+                targetRow.style.backgroundColor = '#fff3cd';
+                setTimeout(() => {
+                    targetRow.style.transition = 'background-color 0.5s ease';
+                    targetRow.style.backgroundColor = '';
+                }, 2000);
             }
-        });
-
-        // Date range modal handling
-        var dateRangeModal = document.getElementById('dateRangeModal');
-        if (dateRangeModal) {
-            dateRangeModal.addEventListener('show.bs.modal', function () {
-                // Remove any existing backdrops before showing new modal
-                var existingBackdrops = document.querySelectorAll('.modal-backdrop');
-                existingBackdrops.forEach(function(backdrop) {
-                    backdrop.remove();
-                });
-            });
-            
-            dateRangeModal.addEventListener('hidden.bs.modal', function () {
-                // Remove any extra backdrops when modal is closed
-                var extraBackdrops = document.querySelectorAll('.modal-backdrop');
-                extraBackdrops.forEach(function(backdrop) {
-                    backdrop.remove();
-                });
-                document.body.classList.remove('modal-open');
-            });
         }
     });
     </script>
