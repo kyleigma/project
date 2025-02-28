@@ -79,6 +79,8 @@ body.modal-open {
                         <ol class="breadcrumb mb-0">
                             <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
                             <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
+                            <li class=""><a href="bills.php">Bills Overview</a></li>&nbsp;&nbsp;&nbsp;
+                            <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
                             <li class="active" aria-current="page">Water Bill</li>
                         </ol>
                     </nav>

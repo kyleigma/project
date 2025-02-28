@@ -37,7 +37,7 @@
     .datatable th.amount-column,
     .datatable td.amount-column {
         min-width: 100px;
-        text-align: right;
+        text-align: left;
     }
     .datatable th.hidden,
     .datatable td.hidden {
@@ -48,52 +48,52 @@
     width: 30px;
     height: auto;
     cursor: pointer;
-}
+    }
 
-#modal-container {
-    display: none;
-    position: fixed;
-    z-index: 1050;
-    /* Higher than sidebar and navbar */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    /* Prevents scrolling */
-}
+    #modal-container {
+        display: none;
+        position: fixed;
+        z-index: 1050;
+        /* Higher than sidebar and navbar */
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        /* Prevents scrolling */
+    }
 
-#modal-container.active {
-    display: flex;
-}
+    #modal-container.active {
+        display: flex;
+    }
 
-#modal-content {
-    max-width: 90vw;
-    max-height: 90vh;
-    border-radius: 5px;
-}
+    #modal-content {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 5px;
+    }
 
-.close {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-    font-size: 35px;
-    color: white;
-    cursor: pointer;
-}
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 35px;
+        color: white;
+        cursor: pointer;
+    }
 
-.close:hover {
-    color: lightgray;
-}
+    .close:hover {
+        color: lightgray;
+    }
 
-/* Disable scrolling when modal is open */
-body.modal-open {
-    overflow: hidden;
+    /* Disable scrolling when modal is open */
+    body.modal-open {
+        overflow: hidden;
 
-}
+    }
 </style>
 
   <body>
@@ -157,7 +157,7 @@ body.modal-open {
             <table class="table table-striped datatable" style="width: 100%;">
                 <thead>
                     <tr>
-                        <th style="min-width: 10px; max-width: 10px;"></th>
+                        <th style="min-width: 40px; max-width: 40px;"></th>
                         <th class="date-column">Inclusive Months</th>
                         <th class="date-column">Date OR Receive</th>
                         <th class="picture-column">Picture</th>

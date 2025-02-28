@@ -236,19 +236,64 @@ body.modal-open {
         const id = urlParams.get('id');
         
         if (id) {
-            // Find the row with matching ID
-            const targetRow = document.querySelector(`tr[data-id='${id}']`);
-            if (targetRow) {
-                // Scroll the row into view with smooth animation
-                targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                // Add a highlight effect
-                targetRow.style.backgroundColor = '#fff3cd';
-                setTimeout(() => {
-                    targetRow.style.transition = 'background-color 0.5s ease';
-                    targetRow.style.backgroundColor = '';
-                }, 2000);
-            }
+            // Use setTimeout to ensure DOM is fully loaded
+            setTimeout(() => {
+                // Find the row with matching ID
+                const targetRow = document.querySelector(`tr[data-id='${id}']`);
+                if (targetRow) {
+                    // Scroll the row into view with smooth animation
+                    targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Add a more prominent highlight effect
+                    targetRow.style.transition = 'none';
+                    targetRow.style.backgroundColor = '#ffeeba';
+                    targetRow.style.boxShadow = '0 0 10px rgba(255, 193, 7, 0.5)';
+                    
+                    // Fade out the highlight effect
+                    setTimeout(() => {
+                        targetRow.style.transition = 'all 1s ease';
+                        targetRow.style.backgroundColor = '';
+                        targetRow.style.boxShadow = '';
+                    }, 2000);
+                }
+            }, 100);
         }
+
+        // Modal functionality for bill images
+        const modal = document.getElementById('modal-container');
+        const modalImg = document.getElementById('modal-content');
+        const closeBtn = document.querySelector('.close');
+        const billImages = document.querySelectorAll('.bill-images');
+
+        // Open modal when clicking on bill images
+        billImages.forEach(img => {
+            img.addEventListener('click', function() {
+                modal.classList.add('active');
+                modalImg.src = this.src;
+                document.body.classList.add('modal-open');
+            });
+        });
+
+        // Close modal when clicking on close button
+        closeBtn.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+        });
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        });
+
+        // Close modal with escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        });
     });
     </script>
 </body>
