@@ -114,14 +114,14 @@
                                         </div>
                                     </div>
                                     <!-- Projects Section -->
-                                    <div class="tab-pane fade" id="projectsSection" role="tabpanel" aria-labelledby="projects-tab">
+                                    <div class="tab-pane fade mt-4" id="projectsSection" role="tabpanel" aria-labelledby="projects-tab">
                                         <div class="row" id="charts-section">
                                         <!-- Access Points by Projects Donut Chart -->
-                                        <div class="col-12 col-lg-6 mt-4 mb-4">
+                                        <div class="col-12 col-lg-6 mb-4">
                                             <div class="card card-rounded">
                                                 <div class="card-body">
                                                     <h4 class="card-title card-title-dash">Access Points by Projects</h4>
-                                                    <div class="chart-container" style="position: relative; height: auto; width: 100%;">
+                                                    <div style="position: relative; height: 300px;">
                                                         <canvas id="projectDonutChart"></canvas>
                                                     </div>
                                                     <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
@@ -129,7 +129,7 @@
                                             </div>
                                         </div>
                                     <!-- Project Distribution Pie Chart -->
-                                    <div class="col-12 col-lg-6 mt-4 mb-4">
+                                    <div class="col-12 col-lg-6 mb-4">
                                         <div class="card card-rounded">
                                             <div class="card-body">
                                                 <h4 class="card-title card-title-dash">Project Distribution</h4>
