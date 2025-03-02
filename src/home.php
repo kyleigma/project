@@ -113,11 +113,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Donut & Pie Charts Section -->
-                                    <div class="collapse show" id="projectsSection">
+                                    <!-- Projects Section -->
+                                    <div class="tab-pane fade" id="projectsSection" role="tabpanel" aria-labelledby="projects-tab">
                                         <div class="row" id="charts-section">
                                         <!-- Access Points by Projects Donut Chart -->
-                                        <div class="col-12 col-lg-6 mb-4">
+                                        <div class="col-12 col-lg-6 mt-4 mb-4">
                                             <div class="card card-rounded">
                                                 <div class="card-body">
                                                     <h4 class="card-title card-title-dash">Access Points by Projects</h4>
@@ -129,7 +129,7 @@
                                             </div>
                                         </div>
                                     <!-- Project Distribution Pie Chart -->
-                                    <div class="col-12 col-lg-6 mb-4">
+                                    <div class="col-12 col-lg-6 mt-4 mb-4">
                                         <div class="card card-rounded">
                                             <div class="card-body">
                                                 <h4 class="card-title card-title-dash">Project Distribution</h4>

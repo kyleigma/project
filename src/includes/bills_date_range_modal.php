@@ -66,18 +66,42 @@ function validateDateRange() {
     return true;
 }
 
-// Show appropriate button based on which dropdown was clicked
 document.addEventListener('DOMContentLoaded', function() {
     const printBtn = document.querySelector('.print-btn');
     const excelBtn = document.querySelector('.excel-btn');
-
+    const modalElement = document.getElementById('dateRangeModal');
+    
+    // Initialize the modal
+    const dateRangeModal = new bootstrap.Modal(modalElement);
+    
+    // Handle clicks on date range menu items
     document.querySelectorAll('[data-bs-target="#dateRangeModal"]').forEach(button => {
-        button.addEventListener('click', function() {
-            const isExcel = this.closest('.excel-dropdown') !== null;
-            const isPrint = this.closest('.print-dropdown') !== null;
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
             
-            printBtn.style.display = isPrint ? 'inline-block' : 'none';
-            excelBtn.style.display = isExcel ? 'inline-block' : 'none';
+            // Determine which button was clicked (Excel or Print)
+            const parentDropdown = this.closest('.dropdown-menu');
+            const dropdownToggle = parentDropdown ? parentDropdown.previousElementSibling : null;
+            
+            if (dropdownToggle) {
+                const isExcel = dropdownToggle.innerHTML.includes('Excel');
+                const isPrint = dropdownToggle.innerHTML.includes('Print');
+                
+                // Show/hide appropriate buttons
+                printBtn.style.display = isPrint ? 'inline-block' : 'none';
+                excelBtn.style.display = isExcel ? 'inline-block' : 'none';
+            }
+            
+            // Show the modal
+            dateRangeModal.show();
+        });
+    });
+    
+    // Handle modal close
+    document.querySelectorAll('.close-modal').forEach(button => {
+        button.addEventListener('click', function() {
+            dateRangeModal.hide();
         });
     });
 });
@@ -93,6 +117,9 @@ function submitDateRange(type) {
     url += `?bill_type=${billType}&date_from=${startDate}&date_to=${endDate}`;
     
     window.open(url, '_blank');
-    document.querySelector('.close-modal').click();
+    const dateRangeModal = bootstrap.Modal.getInstance(document.getElementById('dateRangeModal'));
+    if (dateRangeModal) {
+        dateRangeModal.hide();
+    }
 }
 </script>

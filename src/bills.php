@@ -6,10 +6,55 @@
     white-space: normal;
     word-break: break-word;
     text-align: center;
-    max-width: 80px;
-    min-width: 80px;
-    overflow-wrap: break-word;
-    padding: 5px;
+    padding: 8px;
+}
+
+.datatable td {
+    padding: 8px;
+    vertical-align: middle;
+}
+
+.datatable th:nth-child(1),
+.datatable td:nth-child(1) {
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+}
+
+.datatable th:nth-child(2),
+.datatable td:nth-child(2) {
+    width: 120px;
+    min-width: 120px;
+}
+
+.datatable th:nth-child(3),
+.datatable td:nth-child(3) {
+    width: 200px;
+    min-width: 200px;
+}
+
+.datatable th:nth-child(4),
+.datatable td:nth-child(4) {
+    width: 150px;
+    min-width: 150px;
+}
+
+.datatable th:nth-child(5),
+.datatable td:nth-child(5) {
+    width: 100px;
+    min-width: 100px;
+}
+
+.datatable th:nth-child(6),
+.datatable td:nth-child(6) {
+    width: 150px;
+    min-width: 150px;
+}
+
+.datatable th:nth-child(7),
+.datatable td:nth-child(7) {
+    width: 100px;
+    min-width: 100px;
 }
 .bill-images {
     width: 30px;
@@ -17,7 +62,7 @@
     cursor: pointer;
 }
 
-#modal-container {
+#imageModal-container {
     display: none;
     position: fixed;
     z-index: 1060;
@@ -31,11 +76,11 @@
     overflow: hidden;
 }
 
-#modal-container.active {
+#imageModal-container.active {
     display: flex;
 }
 
-#modal-content {
+#imageModal-img {
     max-width: 90vw;
     max-height: 90vh;
     border-radius: 5px;
@@ -43,7 +88,7 @@
     z-index: 1061;
 }
 
-.close {
+.imageModal-close {
     position: absolute;
     top: 15px;
     right: 20px;
@@ -53,7 +98,7 @@
     z-index: 1062;
 }
 
-.close:hover {
+.imageModal-close:hover {
     color: skyblue;
 }
 
@@ -103,9 +148,8 @@ body.modal-open {
                     }
                     ?>
 
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
-                        <div class="ml-auto d-flex align-items-center">
+                    <div class="d-sm-flex align-items-center justify-content-end mb-4">
+                        <div class="ml-auto d-flex align-items-end">
                             <div class="dropdown me-2">
                                 <button class="btn btn-primary dropdown-toggle" type="button" id="printOptionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                                     <i class="mdi mdi-printer"></i> Print
@@ -114,7 +158,7 @@ body.modal-open {
                                     <li><a class="dropdown-item" href="bills_print.php" target="_blank">All Bills</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><h6 class="dropdown-header">By Type</h6></li>
-                                    <li><a class="dropdown-item" href="bills_print.php?bill_type=electricity" target="_blank">Electricity Bills</a></li>
+                                    <li><a class="dropdown-item" href="bills_print.php?bill_type=electric" target="_blank">Electricity Bills</a></li>
                                     <li><a class="dropdown-item" href="bills_print.php?bill_type=water" target="_blank">Water Bills</a></li>
                                     <li><a class="dropdown-item" href="bills_print.php?bill_type=wifi" target="_blank">WiFi Bills</a></li>
                                     <li><hr class="dropdown-divider"></li>
@@ -130,9 +174,9 @@ body.modal-open {
                                     <li><a class="dropdown-item" href="bills_excel.php" target="_blank">All Bills</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><h6 class="dropdown-header">By Type</h6></li>
-                                    <li><a class="dropdown-item" href="electric_bill_excel" target="_blank">Electricity Bills</a></li>
-                                    <li><a class="dropdown-item" href="water_bill_excel" target="_blank">Water Bills</a></li>
-                                    <li><a class="dropdown-item" href="wifi_bill_excel" target="_blank">WiFi Bills</a></li>
+                                    <li><a class="dropdown-item" href="electric_bill_excel.php" target="_blank">Electricity Bills</a></li>
+                                    <li><a class="dropdown-item" href="water_bill_excel.php" target="_blank">Water Bills</a></li>
+                                    <li><a class="dropdown-item" href="wifi_bill_excel.php" target="_blank">WiFi Bills</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><h6 class="dropdown-header">By Date Range</h6></li>
                                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#dateRangeModal">Custom Date Range</a></li>
@@ -144,7 +188,7 @@ body.modal-open {
                     <table class="table responsive table-striped datatable" style="width: 100%;">
                         <thead>
                             <tr>
-                                <th class="hidden" width="2rem"></th>
+                                <th class="hidden" style="min-width: 40px; max-width: 40px;"></th>
                                 <th>Bill Type</th>
                                 <th>Billing Period</th>
                                 <th>Date OR Receive</th>
@@ -190,9 +234,6 @@ body.modal-open {
                                     <td>
                                         <div class='d-flex align-items-start justify-content-start'>
                                             <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
-                                            <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "' data-source='" . $row['source'] . "'>
-                                                <span class='mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
-                                            </a>
                                         </div>
                                     </td>
                                     <td>" . number_format($row['total_amount'], 2) . "</td>
@@ -207,9 +248,9 @@ body.modal-open {
                         </tbody>
                     </table>
 
-                    <div id="modal-container">
-                        <span class="close" style="opacity: 1;">&times;</span>
-                        <img id="modal-content">
+                    <div id="imageModal-container">
+                        <span class="imageModal-close" style="opacity: 1;">&times;</span>
+                        <img id="imageModal-img">
                     </div>
                 </div>
                 <?php include 'includes/footer.php';?>
@@ -257,11 +298,11 @@ body.modal-open {
                 }
             }, 100);
         }
-
+    
         // Modal functionality for bill images
-        const modal = document.getElementById('modal-container');
-        const modalImg = document.getElementById('modal-content');
-        const closeBtn = document.querySelector('.close');
+        const modal = document.getElementById('imageModal-container');
+        const modalImg = document.getElementById('imageModal-img');
+        const closeBtn = document.querySelector('.imageModal-close');
         const billImages = document.querySelectorAll('.bill-images');
 
         // Open modal when clicking on bill images
@@ -286,13 +327,42 @@ body.modal-open {
                 document.body.classList.remove('modal-open');
             }
         });
+        
+        // Initialize DataTable
+        $(document).ready(function() {
+            $('.datatable').DataTable();
+            
+            // Initialize Bootstrap modals
+            const dateRangeModal = new bootstrap.Modal(document.getElementById('dateRangeModal'));
 
-        // Close modal with escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                document.body.classList.remove('modal-open');
-            }
+            // Handle date range modal triggers
+            $('[data-bs-target="#dateRangeModal"]').on('click', function(e) {
+                e.preventDefault();
+                dateRangeModal.show();
+            });
+            
+            // Improved modal backdrop handling
+            $(document).on('show.bs.modal', '.modal', function() {
+                // Remove any existing backdrop before adding a new one
+                $('.modal-backdrop').not('.modal-stack').remove();
+            });
+            
+            // Enhanced backdrop cleanup
+            $(document).on('hidden.bs.modal', '.modal', function() {
+                $(this).css('z-index', '');
+                if ($('.modal:visible').length === 0) {
+                    $('body').removeClass('modal-open');
+                    $('.modal-backdrop').remove();
+                } else {
+                    // Adjust z-index of remaining modals and their backdrops
+                    $('.modal:visible').each(function(index) {
+                        const zIndex = 1040 + (10 * index);
+                        $(this).css('z-index', zIndex);
+                        $('.modal-backdrop').eq(index)
+                            .css('z-index', zIndex - 1);
+                    });
+                }
+            });
         });
     });
     </script>

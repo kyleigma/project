@@ -249,6 +249,118 @@
     $(document).ready(function() {
         // Initialize DataTable
         const table = $('.datatable').DataTable();
+
+        // Add new record button click handler
+        $('.addnew').click(function() {
+            $('#addnew').modal('show');
+        });
+
+        // Edit record button click handler
+        $(document).on('click', '.edit', function() {
+            const id = $(this).data('id');
+            getRow(id);
+        });
+
+        // Delete record button click handler
+        $(document).on('click', '.delete', function() {
+            const id = $(this).data('id');
+            $('#del_id').val(id);
+            $('#delete').modal('show');
+        });
+
+        // Confirm delete button click handler
+        $('#confirmDelete').click(function() {
+            const id = $('#del_id').val();
+            $.ajax({
+                url: 'electric_bill_delete.php',
+                type: 'POST',
+                data: {id: id},
+                success: function(response) {
+                    if(response === 'success') {
+                        $('#delete').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('Error deleting record');
+                    }
+                },
+                error: function() {
+                    alert('Error: Could not connect to server');
+                }
+            });
+        });
+        // Function to get row data for editing
+        function getRow(id) {
+            $.ajax({
+                url: 'electric_bill_row.php',
+                type: 'POST',
+                data: {id: id},
+                dataType: 'json',
+                success: function(response) {
+                    $('#edit_month_1').val(response.month_1);
+                    $('#edit_month_2').val(response.month_2);
+                    $('#edit_date_2').val(response.date_2);
+                    $('#edit_gtc').val(response.gtc);
+                    $('#edit_ur').val(response.ur);
+                    $('#edit_dr').val(response.dr);
+                    $('#edit_uc').val(response.uc);
+                    $('#edit_evax').val(response.evax);
+                    $('#edit_other_ca').val(response.other_ca);
+                    $('#edit_annex').val(response.annex);
+                    $('#edit_id').val(response.id);
+                    $('#edit').modal('show');
+                },
+                error: function() {
+                    alert('Error: Could not fetch record data');
+                }
+            });
+        }
+
+        // Handle form submissions
+        $('#addForm').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'electric_bill_add.php',
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if(response === 'success') {
+                        $('#addnew').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('Error adding record');
+                    }
+                },
+                error: function() {
+                    alert('Error: Could not connect to server');
+                }
+            });
+        });
+
+        $('#editForm').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                url: 'electric_bill_edit.php',
+                type: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if(response === 'success') {
+                        $('#edit').modal('hide');
+                        location.reload();
+                    } else {
+                        alert('Error updating record');
+                    }
+                },
+                error: function() {
+                    alert('Error: Could not connect to server');
+                }
+            });
+        });
     // Get the ID from URL if present
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
@@ -268,14 +380,20 @@
             setTimeout(() => {
                 targetRow[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
                 
-                // Add highlight effect
-                targetRow.css('backgroundColor', '#fff3cd');
+                // Add more prominent highlight effect with longer duration
+                targetRow.css('backgroundColor', '#ffeb3b'); // Brighter yellow color
+                targetRow.css('outline', '2px solid #fd7e14'); // Add orange outline
+                targetRow.css('font-weight', 'bold'); // Make text bold
+                
+                // Fade out effect after 5 seconds
                 setTimeout(() => {
                     targetRow.css({
-                        'transition': 'background-color 0.5s ease',
-                        'backgroundColor': ''
+                        'transition': 'all 1.5s ease',
+                        'backgroundColor': '',
+                        'outline': '',
+                        'font-weight': ''
                     });
-                }, 2000);
+                }, 5000);
             }, 100);
         }
     }
