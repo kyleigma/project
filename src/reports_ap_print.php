@@ -84,11 +84,19 @@ $pdf->Cell(20, 5, 'Status', 1, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $i = 1;
 
-if (mysqli_num_rows($query) > 0) {
+// Function to capitalize first letter if ucfirst is not available
+if (!function_exists('ucfirst')) {
+    function ucfirst($str) {
+        return strtoupper(substr($str, 0, 1)) . substr($str, 1);
+    }
+}
+
+// Check if query was successful
+if ($query && $query->num_rows > 0) {
     while ($row = $query->fetch_assoc()) {
         $pdf->Cell(10, 8, $i, 1, 0, 'C');
-        $pdf->Cell(35, 8, $row['project_name'], 1, 0, 'L');
-        $pdf->Cell(35, 8, $row['municipality_name'], 1, 0, 'L');
+        $pdf->Cell(35, 8, $row['project_name'], 1, 0, 'C');
+        $pdf->Cell(35, 8, $row['municipality_name'], 1, 0, 'C');
         $pdf->Cell(75, 8, $row['address'], 1, 0, 'L');
         $pdf->Cell(15, 8, $row['access_point'], 1, 0, 'C');
         $pdf->Cell(20, 8, ucfirst($row['status']), 1, 1, 'C');
