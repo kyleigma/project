@@ -28,7 +28,7 @@
 $(document).ready(function() {
     if (!$.fn.DataTable.isDataTable('.datatable')) {
         var table = $(".datatable").DataTable({
-            "paging": false, 
+            "paging": true, 
             "searching": true,
             "ordering": true,
             "info": true,

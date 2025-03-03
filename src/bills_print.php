@@ -45,8 +45,9 @@ $pdf->Cell(189 ,1,'',0,1);
 
 // Format date range
 if ($date_from && $date_to) {
+    // Add one day to $date_to to include the entire day in the range
     $date_from = date('Y-m-d', strtotime($date_from));
-    $date_to = date('Y-m-d', strtotime($date_to));
+    $date_to = date('Y-m-d', strtotime($date_to . ' +1 day'));
 }
 
 // Electricity Bill Query
@@ -57,7 +58,7 @@ $sql_electric = "SELECT 'Electricity' as bill_type,
                  FROM electric_bill";
 
 if ($date_from && $date_to) {
-    $sql_electric .= " WHERE date_2 >= '$date_from' AND date_2 <= '$date_to'";
+    $sql_electric .= " WHERE date_2 >= '$date_from' AND date_2 < '$date_to'";
 }
 
 // Water Bill Query
@@ -68,7 +69,9 @@ $sql_water = "SELECT 'Water' as bill_type,
               FROM water_bill";
 
 if ($date_from && $date_to) {
-    $sql_water .= " WHERE date_receive >= '$date_from' AND date_receive <= '$date_to'";
+    // Modified to ensure both month_wb and date_receive are properly checked
+    $sql_water .= " WHERE (date_receive >= '$date_from' AND date_receive < '$date_to') OR 
+                  (month_wb >= '$date_from' AND month_wb < '$date_to')";
 }
 
 // WiFi Bill Query
@@ -79,7 +82,7 @@ $sql_wifi = "SELECT 'WiFi' as bill_type,
              FROM wifi_bill";
 
 if ($date_from && $date_to) {
-    $sql_wifi .= " WHERE date_1 >= '$date_from' AND date_1 <= '$date_to'";
+    $sql_wifi .= " WHERE date_1 >= '$date_from' AND date_1 < '$date_to'";
 }
 
 // Construct final query based on bill type
@@ -94,7 +97,7 @@ if ($bill_type == 'all' || $bill_type == 'wifi') {
     $queries[] = $sql_wifi;
 }
 
-$final_query = !empty($queries) ? implode(' UNION ALL ', $queries) . " ORDER BY date_receive ASC" : '';
+$final_query = !empty($queries) ? implode(' UNION ALL ', $queries) . " ORDER BY date_receive DESC" : '';
 
 $result = ($final_query) ? $conn->query($final_query) : false;
 

@@ -29,12 +29,12 @@
                                 </ul>
                                 <style>
                                     .nav-tabs .nav-link:hover {
-                                        color: #4B49AC !important;
-                                        border-bottom: 2px solid #4B49AC !important;
+                                        color: #1F3BB3 !important;
+                                        border-bottom: 2px solid #1F3BB3 !important;
                                     }
                                     .nav-tabs .nav-link.active {
-                                        color: #4B49AC !important;
-                                        border-bottom: 2px solid #4B49AC !important;
+                                        color: #1F3BB3 !important;
+                                        border-bottom: 2px solid #1F3BB3 !important;
                                         background-color: transparent !important;
                                         font-weight: 700 !important;
                                     }
