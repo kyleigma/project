@@ -237,7 +237,7 @@ https://templatemo.com/tm-575-leadership-event
                                             <button class="nav-link" id="nav-DayFive-tab" data-bs-toggle="tab" data-bs-target="#nav-DayFive" type="button" role="tab" aria-controls="nav-DayFive" aria-selected="false">
                                                 <img src="images/iidb/iidb.png" alt="" style="height: 200px; width: 200px; border-radius: 20%;">
                                             </button>
-                                            <button class="nav-link" id="nav-DaySix-tab" data-bs-toggle="tab" data-bs-target="#nav-DaySix" type="button" role="tab" aria-controls="nav-DayFive" aria-selected="false">
+                                            <button class="nav-link" id="nav-DaySix-tab" data-bs-toggle="tab" data-bs-target="#nav-DayFive" type="button" role="tab" aria-controls="nav-DayFive" aria-selected="false">
                                                 <img src="images/freewifi/freewifi.png" alt="" style="height: 200px; width: 200px; border-radius: 20%;">
                                             </button>
                                         </div>
@@ -363,7 +363,7 @@ https://templatemo.com/tm-575-leadership-event
 
                                                 <span class="mx-1 mx-lg-5">
                                                     <i class=" me-2"></i>
-                                                    
+                                                   
                                                 </span>
                                             </div>
                                         </div>
@@ -1143,7 +1143,7 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="col-lg-7 col-12">
                 <div class="speakers-thumb">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/marvin.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">AJ C. Tomco</h5>
                         <p class="speakers-text mb-0">FrontEnd Developer</p>
@@ -1163,7 +1163,7 @@ https://templatemo.com/tm-575-leadership-event
         <div class="speakers-scroll">
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/hadasa.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Kyle Igma</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1177,7 +1177,7 @@ https://templatemo.com/tm-575-leadership-event
             
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/earl.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Keanu Inlab</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1191,7 +1191,7 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/engr.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Keanu Inlab</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1205,7 +1205,7 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/carol.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Keanu Inlab</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
@@ -1219,10 +1219,10 @@ https://templatemo.com/tm-575-leadership-event
 
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/nelia.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
-                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <h5 class="speakers-title mb-0">Developer 3</h5>
+                        <p class="speakers-text mb-0">Full Stack Developer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
                             <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
@@ -1230,10 +1230,9 @@ https://templatemo.com/tm-575-leadership-event
                     </div>
                 </div>
             </div>
-            
             <div class="speakers-card">
                 <div class="speakers-thumb speakers-thumb-small card-hover">
-                    <img src="images/tech4ed/cyber awareness.jpg" class="img-fluid speakers-image" alt="">
+                    <img src="images/DICTofficers/juliet.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Developer 3</h5>
                         <p class="speakers-text mb-0">Full Stack Developer</p>
@@ -1352,39 +1351,7 @@ https://templatemo.com/tm-575-leadership-event
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
-                                                <style>
-                            .card-hover {
-                                transition: all 0.3s ease;
-                                cursor: pointer;
-                            }
-                            .card-hover:hover {
-                                transform: translateY(-10px);
-                                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                            }
-                            /* Add these styles for carousel controls */
-                            .carousel-control-prev,
-                            .carousel-control-next {
-                                width: 50px;
-                                height: 50px;
-                                background-color: rgba(0, 0, 0, 0.7);
-                                border-radius: 50%;
-                                top: 50%;
-                                transform: translateY(-50%);
-                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                                transition: all 0.3s ease;
-                            }
-                            .carousel-control-prev:hover,
-                            .carousel-control-next:hover {
-                                background-color: rgba(0, 0, 0, 0.9);
-                                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-                            }
-                            .carousel-control-prev {
-                                left: 10px;
-                            }
-                            .carousel-control-next {
-                                right: 10px;
-                            }
-                        </style>
+                               
                     </div>
                 </div>
             </section>
@@ -1461,7 +1428,34 @@ https://templatemo.com/tm-575-leadership-event
           
           					<br> <br> Developed by: <br> <a title="CSS Templates" rel="sponsored" href="" target="_blank"><img src="images/DICTLogo.png" alt="" style="height: 50px; width: 50px;">DICT </a></p>
 
-                            <a href="#section_1" class="bi-arrow-up arrow-icon custom-link"></a>
+                            <!-- In the footer section -->
+<a href="#section_1" class="bi-arrow-up arrow-icon custom-link"></a>
+<a href="#section_1" class="bi-arrow-down arrow-down custom-link"></a>
+
+
+
+<script>
+    window.addEventListener('scroll', function() {
+        const arrowDown = document.querySelector('.bi-arrow-down');
+        const arrowUp = document.querySelector('.bi-arrow-up');
+        const isHomeSection = window.scrollY < window.innerHeight;
+
+        if (isHomeSection) {
+            arrowDown.style.opacity = '1';
+            arrowDown.style.visibility = 'visible';
+            arrowUp.style.opacity = '0';
+            arrowUp.style.visibility = 'hidden';
+        } else {
+            arrowDown.style.opacity = '0';
+            arrowDown.style.visibility = 'hidden';
+            arrowUp.style.opacity = '1';
+            arrowUp.style.visibility = 'visible';
+        }
+    });
+
+    // Initial check for arrow visibility
+    window.dispatchEvent(new Event('scroll'));
+</script>
                         </div>
                     </div>
 
