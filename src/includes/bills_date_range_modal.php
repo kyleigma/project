@@ -1,5 +1,6 @@
+
 <!-- Custom Bill Filter Modal -->
-<div class="modal fade" id="dateRangeModal">
+<div class="modal fade" id="dateRangeModal" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -44,82 +45,99 @@
 </div>
 
 <script>
+function validateDateRange() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    const errorDiv = document.getElementById('dateError');
+
+    if (!startDate || !endDate) {
+        errorDiv.textContent = 'Please select both start and end dates.';
+        errorDiv.style.display = 'block';
+        return false;
+    }
+
+    if (startDate > endDate) {
+        errorDiv.textContent = 'Start date must be before or equal to end date.';
+        errorDiv.style.display = 'block';
+        return false;
+    }
+
+    errorDiv.style.display = 'none';
+    return true;
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    const modalElement = document.getElementById('dateRangeModal');
-    const dateRangeModal = new bootstrap.Modal(modalElement);
     const printBtn = document.querySelector('.print-btn');
     const excelBtn = document.querySelector('.excel-btn');
-
-    // Ensure modal opens properly with fade-in effect
-    modalElement.addEventListener('show.bs.modal', function(event) {
+    const modalElement = document.getElementById('dateRangeModal');
+    
+    // Initialize the modal
+    const dateRangeModal = new bootstrap.Modal(modalElement, {
+        backdrop: 'static',
+        keyboard: false
+    });
+    
+    // Handle modal show event
+    modalElement.addEventListener('show.bs.modal', function() {
         document.body.classList.add('modal-open');
+    });
 
-        // Remove existing backdrops before adding a new one
-        setTimeout(() => {
-            document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
-            const backdrop = document.createElement('div');
-            backdrop.className = 'modal-backdrop fade show';
-            document.body.appendChild(backdrop);
-        }, 10);
-
-        // Determine which button was clicked (Excel or Print)
-        const triggerButton = event.relatedTarget;
-        if (triggerButton) {
-            const modalType = triggerButton.getAttribute('data-modal-type');
-            printBtn.style.display = modalType === 'print' ? 'inline-block' : 'none';
-            excelBtn.style.display = modalType === 'excel' ? 'inline-block' : 'none';
+    // Handle modal hide event
+    modalElement.addEventListener('hide.bs.modal', function() {
+        document.body.classList.remove('modal-open');
+        // Remove any lingering backdrops
+        const backdrops = document.getElementsByClassName('modal-backdrop');
+        while(backdrops.length > 0) {
+            backdrops[0].remove();
         }
     });
-
-    // Ensure modal cleans up backdrops when closed
-    modalElement.addEventListener('hidden.bs.modal', function() {
-        document.body.classList.remove('modal-open');
-
-        setTimeout(() => {
-            document.querySelectorAll('.modal-backdrop').forEach(backdrop => {
-                backdrop.classList.remove('show');
-                setTimeout(() => backdrop.remove(), 150);
-            });
-        }, 200);
+    
+    // Handle clicks on date range menu items
+    document.querySelectorAll('[data-bs-target="#dateRangeModal"]').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Determine which button was clicked (Excel or Print)
+            const parentDropdown = this.closest('.dropdown-menu');
+            const dropdownToggle = parentDropdown ? parentDropdown.previousElementSibling : null;
+            
+            if (dropdownToggle) {
+                const isExcel = dropdownToggle.innerHTML.includes('Excel');
+                const isPrint = dropdownToggle.innerHTML.includes('Print');
+                
+                // Show/hide appropriate buttons
+                printBtn.style.display = isPrint ? 'inline-block' : 'none';
+                excelBtn.style.display = isExcel ? 'inline-block' : 'none';
+            }
+            
+            // Show the modal
+            dateRangeModal.show();
+        });
     });
-
-    // Handle modal close button
+    
+    // Handle modal close
     document.querySelectorAll('.close-modal').forEach(button => {
         button.addEventListener('click', function() {
             dateRangeModal.hide();
         });
     });
+});
 
-    // Function to handle date range submission
-    function submitDateRange(type) {
-        const billType = document.getElementById('billType').value;
-        const startDate = document.getElementById('startDate').value;
-        const endDate = document.getElementById('endDate').value;
+function submitDateRange(type) {
+    if (!validateDateRange()) return;
 
-        if (!startDate || !endDate) {
-            document.getElementById('dateError').textContent = 'Please select both start and end dates';
-            document.getElementById('dateError').style.display = 'block';
-            return;
-        }
-
-        if (startDate > endDate) {
-            document.getElementById('dateError').textContent = 'Start date cannot be later than end date';
-            document.getElementById('dateError').style.display = 'block';
-            return;
-        }
-
-        const params = new URLSearchParams({
-            bill_type: billType,
-            date_from: startDate,
-            date_to: endDate
-        });
-
-        const url = type === 'excel' ? 'bills_excel.php' : 'bills_print.php';
-        window.open(`${url}?${params.toString()}`, '_blank');
+    const billType = document.getElementById('billType').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+    
+    let url = type === 'excel' ? 'bills_excel.php' : 'bills_print.php';
+    url += `?bill_type=${billType}&date_from=${startDate}&date_to=${endDate}`;
+    
+    window.open(url, '_blank');
+    const dateRangeModal = bootstrap.Modal.getInstance(document.getElementById('dateRangeModal'));
+    if (dateRangeModal) {
         dateRangeModal.hide();
     }
-
-    // Attach submitDateRange to window for button onclick access
-    window.submitDateRange = submitDateRange;
-});
+}
 </script>

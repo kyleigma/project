@@ -17,8 +17,7 @@
           <div class="content-wrapper">
             <div class="d-flex flex-column flex-md-row align-items-stretch align-items-md-center gap-3 mb-4">
                 <form method="GET" class="d-flex flex-column flex-sm-row align-items-stretch align-items-sm-center gap-2 flex-grow-1">
-                    <label class="mb-0 me-2 d-flex align-items-center" style="color: #484848; font-size: 14px;">Filter:</label>
-                    <select name="project" class="form-select flex-fill" style="width: 100%; min-width: 100px; max-width: 150px; color: #484848; font-size: 14px;" onchange="this.form.submit()">
+                    <select name="project" class="form-select flex-fill" style="width: 100%; min-width: 100px; max-width: 250px; color: #484848; font-size: 14px;" onchange="this.form.submit()">
                         <option value="">All Projects</option>
                         <?php
                             $projectSql = "SELECT DISTINCT fp.id, fp.name FROM free_wifi_projects fp ORDER BY fp.name ASC";
@@ -29,7 +28,7 @@
                             }
                         ?>
                     </select>
-                    <select name="municipality" class="form-select flex-fill" style="width: 100%; min-width: 100px; max-width: 150px; color: #484848; font-size: 14px;" onchange="this.form.submit()">
+                    <select name="municipality" class="form-select flex-fill" style="width: 100%; min-width: 100px; max-width: 250px; color: #484848; font-size: 14px;" onchange="this.form.submit()">
                         <option value="">All Municipalities</option>
                         <?php
                             $municipalitySql = "SELECT DISTINCT m.id, m.name FROM municipalities m ORDER BY m.name ASC";
@@ -43,7 +42,7 @@
                 </form>
                 <div class="d-flex flex-column flex-sm-row gap-2 flex-shrink-0">
                     <a href="reports_ap_excel.php" class="btn btn-md btn-primary btn-flat"><i class="mdi mdi-file-excel"></i> Export</a>
-                    <a href="reports_ap_print.php?project=<?php echo $selectedProject; ?>&municipality=<?php echo $selectedMunicipality; ?>" target="_blank" class="btn btn-md btn-primary btn-flat">
+                    <a href="tech4ed_print.php" target="_blank" class="btn btn-md btn-primary btn-flat">
                         <i class="mdi mdi-printer-outline"></i> Print
                     </a>
                 </div>

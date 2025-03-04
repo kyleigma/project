@@ -152,19 +152,19 @@
                     <?php
                     // Electric Bills
                     $sql_electric = "SELECT 'Electricity' as bill_type, 
-                                    CONCAT(DATE_FORMAT(month_2, '%M %d, %Y'), ' - ', DATE_FORMAT(month_1, '%M %d, %Y')) as billing_period, 
-                                    DATE_FORMAT(date_2, '%M %d, %Y') as date_receive, e_photo as photo, 
+                                    CONCAT(DATE_FORMAT(month_2, '%M %Y'), ' - ', DATE_FORMAT(month_1, '%M %Y')) as billing_period, 
+                                    date_2 as date_receive, e_photo as photo, 
                                     (gtc + dr + uc + evax + other_ca + annex) as total_amount, 
                                     id, 'electric' as source FROM electric_bill";
 
                     // Water Bills
-                    $sql_water = "SELECT 'Water' as bill_type, DATE_FORMAT(month_wb, '%M %d, %Y') as billing_period,
-                                    DATE_FORMAT(date_receive, '%M %d, %Y') as date_receive, w_photo as photo, total_amount_wb as total_amount,
+                    $sql_water = "SELECT 'Water' as bill_type, DATE_FORMAT(month_wb, '%M %Y') as billing_period,
+                                    date_receive, w_photo as photo, total_amount_wb as total_amount,
                                     id, 'water' as source FROM water_bill";
 
                     // WiFi Bills
-                    $sql_wifi = "SELECT 'WiFi' as bill_type, DATE_FORMAT(month_1, '%M %d, %Y') as billing_period,
-                                DATE_FORMAT(date_1, '%M %d, %Y') as date_receive, wifi_photo as photo, total_amount_1 as total_amount,
+                    $sql_wifi = "SELECT 'WiFi' as bill_type, DATE_FORMAT(month_1, '%M %Y') as billing_period,
+                                date_1 as date_receive, wifi_photo as photo, total_amount_1 as total_amount,
                                 id, 'wifi' as source FROM wifi_bill";
 
                     // Combine all queries
