@@ -28,11 +28,11 @@
 $(document).ready(function() {
     if (!$.fn.DataTable.isDataTable('.datatable')) {
         var table = $(".datatable").DataTable({
-            "paging": false, 
+            "paging": true, 
             "searching": true,
             "ordering": true,
             "info": true,
-            "autoWidth": true,
+            "autoWidth": false,
             "responsive": true,
             "scrollX": true,
             "scrollY": "500px",
@@ -43,11 +43,12 @@ $(document).ready(function() {
                 footer: false  // Disable footer fixed if not needed
             },
             "columnDefs": [
-                { "orderable": false, "targets": [-1] }
+                { "orderable": false, "targets": [-1] },
+                { "width": "50px", "targets": 0 }  // Set width for row number column
             ],
             "createdRow": function(row, data, dataIndex) {
                 // Add row number to the first column
-                $('td', row).eq(0).html(dataIndex + 1);
+                $('td', row).eq(0).html(dataIndex + 1).addClass('row-number');
             }
         });
 
@@ -69,7 +70,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
 
 <style>
     /* Make sure the table and header expand correctly */
@@ -94,10 +94,19 @@ table.dataTable thead th {
     z-index: 10;
 }
 
+/* Style for row number column */
+table.dataTable td.row-number {
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
+    text-align: center;
+}
+
 /* Adjust scrolling container when the sidebar is toggled */
 .dataTables_wrapper .dataTables_scrollBody {
     overflow-x: auto !important;
     overflow-y: auto !important;
     width: 100%;
 }
+</style>
   </style>

@@ -49,6 +49,7 @@
             </a>
             <div class="collapse" id="utilities" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="bills.php">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" href="electric_bill.php">Electricity Bill</a></li>
                     <li class="nav-item"><a class="nav-link" href="water_bill.php">Water Bill</a></li>
                     <li class="nav-item"><a class="nav-link" href="wifi_bill.php">Wi-Fi Bill</a></li>
@@ -59,12 +60,12 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="menu-icon mdi mdi-chart-line"></i>
-                <span class="menu-title">Reports & Analytics</span>
+                <span class="menu-title">Reports</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="chartjs.php">ChartJs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports_ap.php">Access Points</a></li>
                 </ul>
             </div>
         </li>
@@ -79,19 +80,6 @@
             <div class="collapse" id="user-accounts" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="accounts.php">Manage User Accounts</a></li>
-                </ul>
-            </div>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#dtr" aria-expanded="false" aria-controls="dtr">
-                <i class="menu-icon mdi mdi-calendar-clock"></i>
-                <span class="menu-title">Daily Time Record</span>
-                <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="dtr" data-parent="#sidebar">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="make_dtr.php">Make DTR</a></li>
                 </ul>
             </div>
         </li>

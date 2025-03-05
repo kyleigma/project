@@ -19,12 +19,12 @@
                                 <h2 class="mb-4">Dashboard</h2>
                                 
                                 <!-- Tab Navigation -->
-                                <ul class="nav nav-tabs mb-4" id="dashboardTabs" role="tablist" style="border-bottom: 2px solid #e9ecef;">
+                                <ul class="nav nav-tabs" id="dashboardTabs" role="tablist" style="border-bottom: 2px solid #e9ecef;">
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="bills-tab" data-bs-toggle="tab" data-bs-target="#billsSection" type="button" role="tab" aria-controls="billsSection" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Bills Overview</button>
+                                        <button class="nav-link active" id="bills-tab" data-bs-toggle="tab" data-bs-target="#billsSection" type="button" role="tab" aria-controls="billsSection" aria-selected="true" style="padding: 12px 24px; font-weight: 500; color: #4B49AC; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 14px;">Bills Overview</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsSection" type="button" role="tab" aria-controls="projectsSection" aria-selected="false" style="padding: 12px 24px; font-weight: 500; color: #6c757d; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 16px;">Projects Overview</button>
+                                        <button class="nav-link" id="projects-tab" data-bs-toggle="tab" data-bs-target="#projectsSection" type="button" role="tab" aria-controls="projectsSection" aria-selected="false" style="padding: 12px 24px; font-weight: 500; color: #6c757d; border: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.3s ease; font-size: 14px;">Projects Overview</button>
                                     </li>
                                 </ul>
                                 <style>
@@ -33,7 +33,7 @@
                                         border-bottom: 2px solid #1F3BB3 !important;
                                     }
                                     .nav-tabs .nav-link.active {
-                                        color: #4B49AC !important;
+                                        color: #1F3BB3 !important;
                                         border-bottom: 2px solid #1F3BB3 !important;
                                         background-color: transparent !important;
                                         font-weight: 700 !important;
@@ -113,15 +113,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- Donut & Pie Charts Section -->
-                                    <div class="collapse show" id="projectsSection">
+                                    <!-- Projects Section -->
+                                    <div class="tab-pane fade mt-4" id="projectsSection" role="tabpanel" aria-labelledby="projects-tab">
                                         <div class="row" id="charts-section">
                                         <!-- Access Points by Projects Donut Chart -->
                                         <div class="col-12 col-lg-6 mb-4">
                                             <div class="card card-rounded">
                                                 <div class="card-body">
                                                     <h4 class="card-title card-title-dash">Access Points by Projects</h4>
-                                                    <div class="chart-container" style="position: relative; height: auto; width: 100%;">
+                                                    <div style="position: relative; height: 300px;">
                                                         <canvas id="projectDonutChart"></canvas>
                                                     </div>
                                                     <div id="projectDonutChart-legend" class="mt-4 text-center d-flex flex-wrap justify-content-center"></div>
@@ -236,7 +236,7 @@
                         legendColor.style.opacity = '0.4';
                         labelText.style.textDecoration = 'line-through';
                         labelText.style.color = '#6c757d';
-                        legendItem.style.backgroundColor = '#f8f9fa';
+                        legendItem.style.backgroundColor = '#ffffff';
                     } else {
                         chart.show(index);
                         legendColor.style.opacity = '1';

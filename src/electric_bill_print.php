@@ -19,15 +19,15 @@
                 // Arial bold 10
                 $this->SetFont('Arial', '', 10);
                 
-                // Title
-                $this->Cell($pageWidth, 5, 'DEPARTMENT OF INFORMATION AND COMMUNICATIONS TECHNOLOGY', 0, 1, "C");
-                $this->Cell($pageWidth, 5, 'Mabini Street, Poblacion, Kalibo, Aklan', 0, 1, "C");
+                // Title - Centered text
+                $this->Cell(0, 5, 'DEPARTMENT OF INFORMATION AND COMMUNICATIONS TECHNOLOGY', 0, 1, "C");
+                $this->Cell(0, 5, 'Mabini Street, Poblacion, Kalibo, Aklan', 0, 1, "C");
 
-                $this->Cell($pageWidth, 5, '', 0, 1, "C");
+                $this->Cell(0, 5, '', 0, 1, "C");
 
                 // Bold title for report name
                 $this->SetFont('Arial', 'B', 12);
-                $this->Cell($pageWidth, 5, 'Electric Bill Reports', 0, 1, "C");
+                $this->Cell(0, 5, 'Electric Bill Reports', 0, 1, "C");
                 
                 // Line break
                 $this->Ln(10);

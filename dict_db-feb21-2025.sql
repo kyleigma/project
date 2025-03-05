@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2025 at 09:53 AM
+-- Generation Time: Mar 03, 2025 at 01:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -332,6 +332,26 @@ INSERT INTO `municipalities` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pnpki`
+--
+
+CREATE TABLE `pnpki` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `project_name` varchar(255) NOT NULL,
+  `status` enum('active','inactive') NOT NULL DEFAULT 'active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pnpki`
+--
+
+INSERT INTO `pnpki` (`id`, `project_id`, `project_name`, `status`) VALUES
+(1, 2, 'Test', 'active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tech4ed`
 --
 
@@ -464,6 +484,12 @@ ALTER TABLE `municipalities`
   ADD UNIQUE KEY `name` (`name`);
 
 --
+-- Indexes for table `pnpki`
+--
+ALTER TABLE `pnpki`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tech4ed`
 --
 ALTER TABLE `tech4ed`
@@ -521,6 +547,12 @@ ALTER TABLE `free_wifi_projects`
 --
 ALTER TABLE `municipalities`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `pnpki`
+--
+ALTER TABLE `pnpki`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tech4ed`

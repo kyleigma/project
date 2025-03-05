@@ -69,6 +69,8 @@ body.modal-open {
                             <ol class="breadcrumb mb-0">
                                 <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
                                 <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
+                                <li class=""><a href="bills.php">Bills Overview</a></li>&nbsp;&nbsp;&nbsp;
+                                <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
                                 <li class="active" aria-current="page">WiFi Bill</li>
                             </ol>
                         </nav>
@@ -134,11 +136,15 @@ body.modal-open {
                                 $month_1 = new DateTime($row['month_1']);
                                 $formatted_month_1 = $month_1->format('F Y');
 
+                                // Format date_1 to word format
+                                $date_1 = new DateTime($row['date_1']);
+                                $formatted_date_1 = $date_1->format('F j, Y');
+
                                 echo "
                                 <tr data-id='" . $row['id'] . "'> 
                                     <td class='hidden text-center'></td>
                                     <td class='text-start'>" . $formatted_month_1 . "</td>
-                                    <td class='text-start'>" . $row['date_1'] . "</td>
+                                    <td class='text-start'>" . $formatted_date_1 . "</td>
                                     <td>
                                         <div class='d-flex align-items-center justify-content-center'>
                                             <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>
