@@ -1138,7 +1138,7 @@ https://templatemo.com/tm-575-leadership-event
         <div class="row align-items-center">
             <div class="col-lg-5 col-12 mb-4 mb-lg-0">
                 <div class="speakers-text-info">
-                    <h2 class="mb-4">Our <u class="text-info">Developers</u></h2>
+                    <h2 class="mb-4">DICT <u class="text-info">Officers</u></h2>
                     <p>We are passionate developers committed to building innovative, efficient, and seamless digital experiences through clean code and creative problem-solving.</p>
                 </div>
             </div>
@@ -1147,8 +1147,8 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb">
                     <img src="images/DICTofficers/marvin.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">AJ C. Tomco</h5>
-                        <p class="speakers-text mb-0">FrontEnd Developer</p>
+                        <h5 class="speakers-title mb-0">Mr. Marvin L. Manuel</h5>
+                        <p class="speakers-text mb-0">Provincial Officer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
@@ -1167,13 +1167,14 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/hadasa.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Kyle Igma</h5>
-                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <h5 class="speakers-title mb-0">Hadasa A. Manalili</h5>
+                        <p class="speakers-text mb-0">Project Development Officer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
                         </ul>
                     </div>
+
                 </div>
             </div>
             
@@ -1181,7 +1182,7 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/earl.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <h5 class="speakers-title mb-0">Mr. Earl Jame Rentillo</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
@@ -1209,7 +1210,7 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/carol.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <h5 class="speakers-title mb-0">Mrs. Carol</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
@@ -1223,7 +1224,7 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/nelia.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Developer 3</h5>
+                        <h5 class="speakers-title mb-0">Mrs. Nelia</h5>
                         <p class="speakers-text mb-0">Full Stack Developer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
@@ -1236,7 +1237,7 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/juliet.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Developer 3</h5>
+                        <h5 class="speakers-title mb-0">Mrs. Juliet</h5>
                         <p class="speakers-text mb-0">Full Stack Developer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
@@ -1314,10 +1315,10 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="carousel-item active">
                                 <div class="text-center">
                                     <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
-                                        <img src="images/DICTAKLAN.jpg" class="w-100 h-100" alt="Development Team" style="object-fit: cover;">
+                                        <img src="images/devs/1.png" class="w-100 h-100" alt="Development Team" style="object-fit: cover;">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">AJ C. Tomco</h5>
+                                        <h5 class="card-title"></h5>
                                         <p class="card-text">Frontend Developer</p>
                                     </div>
                                 </div>
@@ -1325,7 +1326,7 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="carousel-item">
                                 <div class="text-center">
                                     <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
-                                        <img src="images/developers/dev2.jpg" class="w-100 h-100" alt="Team Collaboration" style="object-fit: cover;">
+                                        <img src="images/devs/2.png" class="w-100 h-100" alt="Team Collaboration" style="object-fit: cover;">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Kyle Igma</h5>
@@ -1336,7 +1337,18 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="carousel-item">
                                 <div class="text-center">
                                     <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
-                                        <img src="images/developers/dev3.jpg" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                        <img src="images/devs/3.png.jpg" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Keanu Inlab</h5>
+                                        <p class="card-text">Backend Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/devs/3.png.jpg" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">Keanu Inlab</h5>
