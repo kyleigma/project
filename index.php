@@ -15,10 +15,8 @@
 
         <!-- CSS FILES -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
-        
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
         <link href="css/bootstrap.css?v=1.0.1" rel="stylesheet">
 
@@ -26,7 +24,7 @@
 
         <link href="css/templatemo-leadership-event.css" rel="stylesheet">
         
-<!--
+<!--i
 
 TemplateMo 575 Leadership Event
 

@@ -79,6 +79,8 @@ body.modal-open {
                         <ol class="breadcrumb mb-0">
                             <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
                             <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
+                            <li class=""><a href="bills.php">Bills Overview</a></li>&nbsp;&nbsp;&nbsp;
+                            <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
                             <li class="active" aria-current="page">Water Bill</li>
                         </ol>
                     </nav>
@@ -142,11 +144,15 @@ body.modal-open {
                                 $month_wb = new DateTime($row['month_wb']);
                                 $formatted_month_wb = $month_wb->format('F Y');
 
+                                // Format the date_receive to "Month Day, Year"
+                                $date_receive = new DateTime($row['date_receive']);
+                                $formatted_date_receive = $date_receive->format('F j, Y');
+
                                 echo "
                                 <tr data-id='" . $row['id'] . "'> 
                                     <td class='hidden text-center'></td>
                                     <td class='text-start'>" . $formatted_month_wb . "</td>
-                                    <td class='text-start'>" . $row['date_receive'] . "</td>
+                                    <td class='text-start'>" . $formatted_date_receive . "</td>
                                     <td class='text-center'>
                                         <div class='d-flex align-items-center justify-content-center'>
                                             <img src='" . $image . "' width='50' height='50' class='rounded-circle bill-images me-2'>

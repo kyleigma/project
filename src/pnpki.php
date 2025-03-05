@@ -12,14 +12,14 @@
         <!-- partial -->
         <div class="main-panel">
           <div class="content-wrapper">
-            <img src="assets/images/dict_proj/tech4ed.png" class="img-fluid mb-4 rounded" alt="Header Image">
+            <img src="assets/images/dict_proj/pnpki.png" class="img-fluid mb-4 rounded" alt="Header Image">
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800 mb-3"><b>Tech4Ed</b></h1>
+              <h1 class="h3 mb-0 text-gray-800 mb-3"><b>Philippine National Public Key Infrastructure (PNPKI)</b></h1>
                 <nav style="font-size:85%;" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
                         <li class=""><i class="mdi mdi-menu-right"></i></li>&nbsp;&nbsp;&nbsp;
-                        <li class="active" aria-current="page">Tech4Ed</li>
+                        <li class="active" aria-current="page">PNPKI</li>
                     </ol>
                 </nav>
             </div>
@@ -47,7 +47,7 @@
             ?>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
-                <a href="tech4ed_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
+                <a href="pnpki_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
                     <i class="mdi mdi-printer-outline"></i> Print
                 </a>
             </div>
@@ -55,31 +55,23 @@
                 <thead>
                     <tr>
                         <th class="hidden"></th>
-                        <th>Center Name</th>
-                        <th>Center Location</th>
-                        <th>LGU</th>
-                        <th>District</th>
+                        <th>ID</th>
+                        <th>Project</th>
                         <th>Status</th>
                         <th width="120">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT t.id, t.center_name, t.center_loc, m.name AS municipality_name, t.district_no, t.status
-                            FROM tech4ed t
-                            INNER JOIN municipalities m ON t.municipality_id = m.id
-                            ORDER BY t.id ASC;
-                            ";
+                    $sql = "SELECT * FROM pnpki;";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                     $statusBadge = $row['status'] == 'active' ? 'badge-success' : 'badge-danger';
                       echo "
                         <tr>
                           <td class='hidden'></td>
-                          <td>".$row['center_name']."</td>
-                          <td>".$row['center_loc']."</td>
-                          <td>".$row['municipality_name']."</td>
-                          <td>District ".$row['district_no']."</td>
+                          <td>".$row['id']."</td>
+                          <td>".$row['project_id']."</td>
                           <td class='text-center'>
                               <span class='badge rounded-pill $statusBadge' style='font-size: 0.75rem;'>".ucfirst($row['status'])."</span>
                           </td>
@@ -104,7 +96,7 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    <?php include 'includes/tech4ed_modal.php';?>
+    <?php include 'includes/pnpki_modal.php';?>
     <?php include 'includes/scripts.php';?>
 
     <!-- DataTables CSS and JS -->
@@ -126,33 +118,7 @@
           $('#addnew').modal('show');
         }
       });
-
-      // Handle Edit Button Click
-      $(document).on('click', '.edit', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-
-        if (id) {
-          if ($('#edit').length) {
-            $('#edit').modal('show');
-          }
-          getRow(id); // Fetch the data for the selected project
-        }
-      });
-
-      // Handle Delete Button Click
-      $(document).on('click', '.delete', function (e) {
-        e.preventDefault();
-        var id = $(this).data('id');
-
-        if (id) {
-          if ($('#delete').length) {
-            $('#delete').modal('show');
-          }
-          getRow(id); // Fetch the data for deletion
-        }
-      });
-
+      
       // Close Modal on Button Click
       $(document).on('click', '.close-modal', function () {
         var modal = $(this).closest('.modal');
@@ -161,25 +127,6 @@
         }
       });
     });
-
-    // Function to fetch row data for the Edit modal
-    function getRow(id) {
-      $.ajax({
-        type: 'POST',
-        url: 'tech4ed_row.php', // Ensure this file exists and fetches the data
-        data: {id:id},
-        dataType: 'json',
-        success: function(response) {
-          // Set the values in the Edit modal
-          $('.id').val(response.id); // Set hidden ID input
-          $('#edit_center_name').val(response.enter_name); // Set center name
-          $('#edit_center_loc').val(response.center_loc); // Set center location
-          $('#edit_municipal').val(response.municipal); // Set lgu
-          $('#edit_district_no').val(response.district_no); // Set district
-          $('#edit_status').val(response.status); // Set status
-        }
-      });
-    }
   </script>
 
 

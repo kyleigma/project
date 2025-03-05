@@ -30,12 +30,12 @@
             <div class="collapse" id="ui-basic" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
                     <li class="nav-item"><a class="nav-link" href="free_wifi.php">Free Wifi</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tech4Ed</a></li>
+                    <li class="nav-item"><a class="nav-link" href="tech4ed.php">Tech4Ed</a></li>
+                    <li class="nav-item"><a class="nav-link" href="pnpki.php">PNPKI</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">ILCDB</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">eGOVph</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">GECS</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">IIDB</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">PNPKI</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">GECS</a></li>
                 </ul>
             </div>
         </li>
@@ -49,6 +49,7 @@
             </a>
             <div class="collapse" id="utilities" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"><a class="nav-link" href="bills.php">Bills</a></li>
                     <li class="nav-item"><a class="nav-link" href="electric_bill.php">Electricity Bill</a></li>
                     <li class="nav-item"><a class="nav-link" href="water_bill.php">Water Bill</a></li>
                     <li class="nav-item"><a class="nav-link" href="wifi_bill.php">Wi-Fi Bill</a></li>
@@ -59,12 +60,12 @@
         <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
                 <i class="menu-icon mdi mdi-chart-line"></i>
-                <span class="menu-title">APs Report</span>
+                <span class="menu-title">Reports</span>
                 <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="charts" data-parent="#sidebar">
                 <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" href="chartjs.php">ChartJs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reports_ap.php">Access Points</a></li>
                 </ul>
             </div>
         </li>
@@ -84,7 +85,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link" href="documentation.php">
+            <a class="nav-link" href="activity_monitoring.php">
                 <i class="menu-icon mdi mdi-file-document"></i>
                 <span class="menu-title">Activity Monitoring</span>
             </a>
