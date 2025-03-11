@@ -130,7 +130,7 @@ body.modal-open {
                                             <td>{$row['id']}</td>
                                             <td>
                                                 <div class='d-flex align-items-center justify-content'>
-                                                    <img src='" . $image . "' width='50' height='50' class='rounded-circle user-images me-2'>
+                                                    <img src='" . $image . "' width='50' height='50' class='rounded-circle user-images me-2' alt='User Photo'>
                                                     <a href='#edit_photo' data-toggle='modal' class='photo text-primary d-flex align-items-center' data-id='" . $row['id'] . "'>
                                                         <span class='mdi mdi-square-edit-outline' style='font-size: 1.3rem;'></span>
                                                     </a>

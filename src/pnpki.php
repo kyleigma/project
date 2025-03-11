@@ -55,23 +55,29 @@
                 <thead>
                     <tr>
                         <th class="hidden"></th>
-                        <th>ID</th>
-                        <th>Project</th>
+                        <th>Application Type</th>
+                        <th>Agency/Name</th>
+                        <th>Address</th>
+                        <th>Municipality</th>
                         <th>Status</th>
                         <th width="120">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM pnpki;";
+                    $sql = "SELECT p.*, m.name as municipality_name 
+                           FROM pnpki p 
+                           LEFT JOIN municipalities m ON p.municipality_id = m.id";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                     $statusBadge = $row['status'] == 'active' ? 'badge-success' : 'badge-danger';
                       echo "
                         <tr>
                           <td class='hidden'></td>
-                          <td>".$row['id']."</td>
-                          <td>".$row['project_id']."</td>
+                          <td>".ucfirst($row['application_type'])."</td>
+                          <td>".$row['agency']."</td>
+                          <td>".$row['address']."</td>
+                          <td>".$row['municipality_name']."</td>
                           <td class='text-center'>
                               <span class='badge rounded-pill $statusBadge' style='font-size: 0.75rem;'>".ucfirst($row['status'])."</span>
                           </td>
@@ -127,6 +133,32 @@
         }
       });
     });
+
+    $(function() {
+    $(document).on('click', '.edit', function(e) {
+        e.preventDefault();
+        $('#edit').modal('show');
+        var id = $(this).data('id');
+        getRow(id);
+    });
+});
+
+function getRow(id) {
+    $.ajax({
+        type: 'POST',
+        url: 'pnpki_row.php',
+        data: {id: id},
+        dataType: 'json',
+        success: function(response) {
+            $('.id').val(response.id);
+            $('#edit_application_type').val(response.application_type);
+            $('#edit_agency').val(response.agency);
+            $('#edit_address').val(response.address);
+            $('#edit_municipality_id').val(response.municipality_id);
+            $('#edit_status').val(response.status);
+        }
+    });
+}
   </script>
 
 
