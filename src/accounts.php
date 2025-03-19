@@ -124,7 +124,7 @@ body.modal-open {
                                 $sql = "SELECT * FROM accounts";
                                 $query = $conn->query($sql);
                                 while ($row = $query->fetch_assoc()) {
-                                    $imagePath = 'assets/images/accounts/' . $row['photo'];
+                                    $imagePath = 'assets/images/' . $row['photo'];
                                     $image = (!empty($row['photo']) && file_exists($imagePath)) ? $imagePath : 'assets/images/blank.svg';
                                     echo "<tr>
                                             <td>{$row['id']}</td>

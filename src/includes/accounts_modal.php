@@ -111,7 +111,7 @@
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="accounts_photo.php" enctype="multipart/form-data">
-                <input type="text" class="id" name="edit_photo_id" id="edit_photo_id">
+                <input type="hidden" class="id" name="edit_photo_id" id="edit_photo_id">
                 <div class="form-group">
                     <label for="photo" class="col-sm-3 control-label">Photo</label>
 
@@ -139,7 +139,7 @@
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="accounts_delete.php">
-                <input type="text" class="id" name="id" id="delete_id">
+                <input type="hidden" class="id" name="id" id="delete_id">
                 <div class="text-center">
                     <p>Confirm deletion?</p>
                     <h2 class="bold description"></h2>

@@ -35,7 +35,7 @@
                         <i class="fa fa-circle text-success me-1"></i> Online
                     </small>
                 </div>
-                <a href="#" class="dropdown-item d-flex align-items-center py-2">
+                <a href="#profile" class="dropdown-item d-flex align-items-center py-2" data-bs-toggle="modal" data-bs-target="#profile">
                     <i class="mdi mdi-account-outline text-primary me-2"></i> 
                     <span>Edit Profile</span>
                 </a>

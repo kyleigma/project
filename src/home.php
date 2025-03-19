@@ -163,6 +163,7 @@
     </div>
     <!-- container-scroller -->
     <?php include 'includes/scripts.php';?>
+    <?php include 'includes/profile_update_modal.php';?>
 
     <?php
     include("includes/conn.php");
