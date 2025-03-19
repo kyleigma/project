@@ -48,9 +48,14 @@
             ?>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
-                <a href="wits_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
-                    <i class="mdi mdi-printer-outline"></i> Print
-                </a>
+                <div class="ml-auto">
+                    <a href="wits_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
+                        <i class="mdi mdi-printer-outline"></i> Print
+                    </a>
+                    <a href="wits_excel.php" class="btn btn-md btn-primary btn-flat">
+                        <i class="mdi mdi-file-excel"></i> Export
+                    </a>
+                </div>
             </div>
             <table class="table responsive table-striped datatable">
                 <thead>
