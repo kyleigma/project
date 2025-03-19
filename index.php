@@ -1194,7 +1194,7 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/engr.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Keanu Inlab</h5>
+                        <h5 class="speakers-title mb-0">Mr. Randy</h5>
                         <p class="speakers-text mb-0">BackEnd Developer</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
@@ -1335,10 +1335,10 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="carousel-item">
                                 <div class="text-center">
                                     <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
-                                        <img src="images/devs/3.png.jpg" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                        <img src="images/devs/9.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Keanu Inlab</h5>
+                                        <h5 class="card-title">Keanu Seraspi</h5>
                                         <p class="card-text">Backend Developer</p>
                                     </div>
                                 </div>
@@ -1346,11 +1346,66 @@ https://templatemo.com/tm-575-leadership-event
                             <div class="carousel-item">
                                 <div class="text-center">
                                     <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
-                                        <img src="images/devs/3.png.jpg" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                        <img src="images/devs/7.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">Keanu Inlab</h5>
-                                        <p class="card-text">Backend Developer</p>
+                                        <h5 class="card-title">Jude Tejada</h5>
+                                        <p class="card-text">Full Stack Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/devs/8.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Kyle Tee</h5>
+                                        <p class="card-text">Full Stack Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/devs/4.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Andrea Awayan</h5>
+                                        <p class="card-text">Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/devs/3.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Rose Ann Dalisay</h5>
+                                        <p class="card-text">Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/devs/6.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Randy Begaso</h5>
+                                        <p class="card-text">Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="text-center">
+                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
+                                        <img src="images/devs/5.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Alvin Belejerdo</h5>
+                                        <p class="card-text">Developer</p>
                                     </div>
                                 </div>
                             </div>
