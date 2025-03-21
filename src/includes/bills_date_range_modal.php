@@ -1,6 +1,6 @@
 
 <!-- Custom Bill Filter Modal -->
-<div class="modal fade" id="dateRangeModal" data-bs-backdrop="static">
+<div class="modal fade" id="dateRangeModal" data-bs-backdrop="true" data-bs-keyboard="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -37,8 +37,8 @@
             </div>
             <div class="modal-footer justify-content-end">
                 <button type="button" class="btn btn-light close-modal" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-success excel-btn" style="display: none;" onclick="submitDateRange('excel')"><i class="mdi mdi-file-excel me-1"></i>Download</button>
-                <button type="button" class="btn btn-info print-btn" style="display: none;" onclick="submitDateRange('pdf')"><i class="mdi mdi-printer me-1"></i>Print</button>
+                <button type="button" class="btn btn-primary excel-btn" style="display: none;" onclick="submitDateRange('excel')"><i class="mdi mdi-file-excel me-1"></i>Export</button>
+                <button type="button" class="btn btn-primary print-btn" style="display: none;" onclick="submitDateRange('pdf')"><i class="mdi mdi-printer me-1"></i>Print</button>
             </div>
         </div>
     </div>
@@ -66,64 +66,6 @@ function validateDateRange() {
     return true;
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const printBtn = document.querySelector('.print-btn');
-    const excelBtn = document.querySelector('.excel-btn');
-    const modalElement = document.getElementById('dateRangeModal');
-    
-    // Initialize the modal
-    const dateRangeModal = new bootstrap.Modal(modalElement, {
-        backdrop: 'static',
-        keyboard: false
-    });
-    
-    // Handle modal show event
-    modalElement.addEventListener('show.bs.modal', function() {
-        document.body.classList.add('modal-open');
-    });
-
-    // Handle modal hide event
-    modalElement.addEventListener('hide.bs.modal', function() {
-        document.body.classList.remove('modal-open');
-        // Remove any lingering backdrops
-        const backdrops = document.getElementsByClassName('modal-backdrop');
-        while(backdrops.length > 0) {
-            backdrops[0].remove();
-        }
-    });
-    
-    // Handle clicks on date range menu items
-    document.querySelectorAll('[data-bs-target="#dateRangeModal"]').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            
-            // Determine which button was clicked (Excel or Print)
-            const parentDropdown = this.closest('.dropdown-menu');
-            const dropdownToggle = parentDropdown ? parentDropdown.previousElementSibling : null;
-            
-            if (dropdownToggle) {
-                const isExcel = dropdownToggle.innerHTML.includes('Excel');
-                const isPrint = dropdownToggle.innerHTML.includes('Print');
-                
-                // Show/hide appropriate buttons
-                printBtn.style.display = isPrint ? 'inline-block' : 'none';
-                excelBtn.style.display = isExcel ? 'inline-block' : 'none';
-            }
-            
-            // Show the modal
-            dateRangeModal.show();
-        });
-    });
-    
-    // Handle modal close
-    document.querySelectorAll('.close-modal').forEach(button => {
-        button.addEventListener('click', function() {
-            dateRangeModal.hide();
-        });
-    });
-});
-
 function submitDateRange(type) {
     if (!validateDateRange()) return;
 
@@ -135,9 +77,36 @@ function submitDateRange(type) {
     url += `?bill_type=${billType}&date_from=${startDate}&date_to=${endDate}`;
     
     window.open(url, '_blank');
-    const dateRangeModal = bootstrap.Modal.getInstance(document.getElementById('dateRangeModal'));
-    if (dateRangeModal) {
-        dateRangeModal.hide();
-    }
+    $('#dateRangeModal').modal('hide');
 }
+
+$(document).ready(function() {
+    const printBtn = $('.print-btn');
+    const excelBtn = $('.excel-btn');
+    
+    // Initialize the modal using jQuery
+    $('#dateRangeModal').on('show.bs.modal', function(e) {
+        // Get the button that triggered the modal
+        const triggerBtn = $(e.relatedTarget);
+        
+        // Get the modal type from data attribute
+        const modalType = triggerBtn.data('modal-type');
+        
+        // Hide both buttons first
+        printBtn.hide();
+        excelBtn.hide();
+        
+        // Show the appropriate button based on modal type
+        if (modalType === 'print') {
+            printBtn.show();
+        } else if (modalType === 'excel') {
+            excelBtn.show();
+        }
+    });
+
+    // Handle modal close
+    $('.close-modal, [data-bs-dismiss="modal"]').on('click', function() {
+        $('#dateRangeModal').modal('hide');
+    });
+});
 </script>

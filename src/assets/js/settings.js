@@ -107,3 +107,28 @@
     });
   });
 })(jQuery);
+
+window.addEventListener('scroll', function() {
+  const navbar = document.querySelector('.navbar');
+  const sidebar = document.querySelector('.sidebar');
+  const sidebarLinks = document.querySelectorAll('.sidebar .nav-link');
+  const navbarLinksContainer = document.getElementById('navbar-sidebar-links');
+  
+  if (window.scrollY > 100) {
+      navbar.classList.add('scrolled');
+      sidebar.classList.add('scrolled');
+      
+      // Copy sidebar links to navbar
+      if (navbarLinksContainer.innerHTML === '') {
+          sidebarLinks.forEach(link => {
+              const clonedLink = link.cloneNode(true);
+              clonedLink.classList.add('nav-item');
+              navbarLinksContainer.appendChild(clonedLink);
+          });
+      }
+  } else {
+      navbar.classList.remove('scrolled');
+      sidebar.classList.remove('scrolled');
+      navbarLinksContainer.innerHTML = '';
+  }
+});
