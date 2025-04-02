@@ -68,7 +68,7 @@
       <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
-    <?php include 'includes/ilcdb_modal.php';?>
+    <!-- <?php include 'includes/ilcdb_modal.php';?> -->
     <?php include 'includes/scripts.php';?>
 
     <!-- DataTables CSS and JS -->
