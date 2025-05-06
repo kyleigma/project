@@ -2,12 +2,11 @@
 require('assets/vendors/fpdf186/fpdf.php'); 
 include ('includes/conn.php');
 
-// Get filter parameters
+// Get filter parameters from URL
 $selectedProject = isset($_GET['project']) ? $_GET['project'] : '';
 $selectedMunicipality = isset($_GET['municipality']) ? $_GET['municipality'] : '';
 
 class PDF extends FPDF {
-    // Page header
     function Header() {
         // Logo
         $this->Image('assets/images/dictlogo.png', 95, 8, 18, 18);
@@ -47,10 +46,33 @@ $lineBreak = 1;
 // Set font
 $pdf->SetFont('Arial', '', $rowFont);
 
-$pdf->Cell(40, 5, 'Project :', 0, 0);
-$pdf->Cell(40, 5, 'Free WiFi For All', 0, 1);
+// Get project name for display
+$projectName = 'Free WiFi For All';
+if (!empty($selectedProject)) {
+    $projectQuery = "SELECT name FROM free_wifi_projects WHERE id = " . (int)$selectedProject;
+    $projectResult = $conn->query($projectQuery);
+    if ($projectResult && $projectResult->num_rows > 0) {
+        $projectRow = $projectResult->fetch_assoc();
+        $projectName = $projectRow['name'];
+    }
+}
 
-// Query to get data
+$pdf->Cell(40, 5, 'Project :', 0, 0);
+$pdf->Cell(40, 5, $projectName, 0, 1);
+
+// Get municipality name if selected
+$municipalityInfo = '';
+if (!empty($selectedMunicipality)) {
+    $muniQuery = "SELECT name FROM municipalities WHERE id = " . (int)$selectedMunicipality;
+    $muniResult = $conn->query($muniQuery);
+    if ($muniResult && $muniResult->num_rows > 0) {
+        $muniRow = $muniResult->fetch_assoc();
+        $pdf->Cell(40, 5, 'Municipality :', 0, 0);
+        $pdf->Cell(40, 5, $muniRow['name'], 0, 1);
+    }
+}
+
+// Query to get filtered data
 $sql = "SELECT 
         fw.id, fw.address, fw.access_point, 
         fp.name AS project_name, fw.status, m.name AS municipality_name
@@ -60,10 +82,10 @@ $sql = "SELECT
         WHERE 1=1";
 
 if (!empty($selectedProject)) {
-    $sql .= " AND fp.id = '" . $conn->real_escape_string($selectedProject) . "'";
+    $sql .= " AND fw.project_id = " . (int)$selectedProject;
 }
 if (!empty($selectedMunicipality)) {
-    $sql .= " AND m.id = '" . $conn->real_escape_string($selectedMunicipality) . "'";
+    $sql .= " AND fw.municipality_id = " . (int)$selectedMunicipality;
 }
 
 $sql .= " ORDER BY fw.address ASC";

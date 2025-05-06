@@ -1,6 +1,7 @@
 <!-- Bootstrap 5 Bundle (Includes Popper.js) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+
 <!-- Core Plugins -->
 <script src="assets/vendors/js/vendor.bundle.base.js"></script>
 <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>

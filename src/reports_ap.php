@@ -41,9 +41,11 @@
                     </select>
                 </form>
                 <div class="d-flex flex-column flex-sm-row gap-2 flex-shrink-0">
-                    <a href="reports_ap_excel.php" class="btn btn-md btn-primary btn-flat"><i class="mdi mdi-file-excel"></i> Export</a>
-                    <a href="tech4ed_print.php" target="_blank" class="btn btn-md btn-primary btn-flat">
-                        <i class="mdi mdi-printer-outline"></i> Print
+                    <a href="reports_ap_excel.php?project=<?php echo isset($_GET['project']) ? $_GET['project'] : ''; ?>&municipality=<?php echo isset($_GET['municipality']) ? $_GET['municipality'] : ''; ?>" class="btn btn-md btn-primary btn-flat">
+                        <i class="mdi mdi-file-excel"></i> Export
+                    </a>
+                    <a href="reports_ap_print.php?project=<?php echo isset($_GET['project']) ? $_GET['project'] : ''; ?>&municipality=<?php echo isset($_GET['municipality']) ? $_GET['municipality'] : ''; ?>" class="btn btn-primary" target="_blank">
+                        <i class="mdi mdi-printer"></i> Print
                     </a>
                 </div>
             </div>

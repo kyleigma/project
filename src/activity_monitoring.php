@@ -11,10 +11,10 @@
         <?php include 'includes/sidebar.php'; ?>
         <!-- Main Content -->
         <div class="main-panel">
-          <div class="content-wrapper">
+          <div class="content-wrapper" style="padding: 0; margin: 0; height: calc(100vh - 60px);">
             <iframe 
               src="https://project-monitoring-five.vercel.app/" 
-              style="width: 100%; height: 100vh; border: none;">
+              style="width: 100%; height: 100%; border: none;">
             </iframe>
           </div>
           <!-- Content Wrapper Ends -->

@@ -16,6 +16,28 @@
                         <div class="col-sm-12">
                             <!-- Home Tab -->
                             <div class="home-tab">
+                            <?php
+                if (isset($_SESSION['error'])) {
+                    echo "
+                        <div class='alert alert-danger alert-dismissible fade show d-flex align-items-center' role='alert'>
+                            <i class='mdi mdi-alert-circle mdi-24px me-2'></i> 
+                            <span>".$_SESSION['error']."</span>
+                            <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    ";
+                    unset($_SESSION['error']);
+                }
+                if (isset($_SESSION['success'])) {
+                    echo "
+                        <div class='alert alert-success alert-dismissible fade show d-flex align-items-center' role='alert'>
+                            <i class='mdi mdi-check-circle mdi-24px me-2'></i> 
+                            <span>".$_SESSION['success']."</span>
+                            <button type='button' class='btn-close ms-auto' data-bs-dismiss='alert' aria-label='Close'></button>
+                        </div>
+                    ";
+                    unset($_SESSION['success']);
+                }
+            ?>
                                 <h2 class="mb-4">Dashboard</h2>
                                 
                                 <!-- Tab Navigation -->

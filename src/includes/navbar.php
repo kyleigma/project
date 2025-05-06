@@ -1,6 +1,5 @@
 <?php include 'includes/header.php';?>
 <?php include 'includes/scripts.php';?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
@@ -11,10 +10,10 @@
           </div>
           <div>
             <a class="navbar-brand brand-logo" href="home.php">
-              <img src="assets/images/logo.svg" alt="logo" />
+              <img src="assets/images/dictlogo-full.png" alt="logo" style="transform: scale(1.5); margin-left: 1rem;"/>
             </a>
             <a class="navbar-brand brand-logo-mini" href="home.php">
-              <img src="assets/images/logo-mini.svg" alt="logo" />
+              <img src="assets/images/dictlogo-mini.png" alt="logo" />
             </a>
           </div>
         </div>
@@ -35,7 +34,7 @@
                         <i class="fa fa-circle text-success me-1"></i> Online
                     </small>
                 </div>
-                <a href="#" class="dropdown-item d-flex align-items-center py-2">
+                <a href="#profile" class="dropdown-item d-flex align-items-center py-2" data-bs-toggle="modal" data-bs-target="#profile">
                     <i class="mdi mdi-account-outline text-primary me-2"></i> 
                     <span>Edit Profile</span>
                 </a>
@@ -51,4 +50,59 @@
         </div>
       </nav>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <?php include 'includes/profile_update_modal.php';?>
+
+<script>
+// Complete modal backdrop management
+document.addEventListener('DOMContentLoaded', function() {
+    let singleBackdrop = null;
+    let modalStack = [];
+
+    // Intercept all modal show events
+    document.addEventListener('show.bs.modal', function(event) {
+        // Add modal to stack
+        modalStack.push(event.target);
+        
+        // Remove any existing backdrops
+        document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+        
+        // Create new backdrop if it doesn't exist
+        if (!singleBackdrop) {
+            singleBackdrop = document.createElement('div');
+            singleBackdrop.classList.add('modal-backdrop', 'fade', 'show');
+            document.body.appendChild(singleBackdrop);
+        }
+        
+        // Ensure proper z-index stacking
+        const modal = event.target;
+        modal.style.zIndex = 1060 + modalStack.length * 10;
+        if (singleBackdrop) {
+            singleBackdrop.style.zIndex = 1050 + modalStack.length * 10;
+        }
+    });
+
+    // Intercept all modal hide events
+    document.addEventListener('hidden.bs.modal', function(event) {
+        // Remove modal from stack
+        modalStack = modalStack.filter(modal => modal !== event.target);
+        
+        // Remove backdrop if no more modals are open
+        if (modalStack.length === 0 && singleBackdrop) {
+            singleBackdrop.remove();
+            singleBackdrop = null;
+        }
+    });
+
+    // Prevent Bootstrap from creating backdrops
+    const originalModal = bootstrap.Modal;
+    bootstrap.Modal = function(element, options) {
+        options = options || {};
+        options.backdrop = false; // Disable Bootstrap's backdrop creation
+        return new originalModal(element, options);
+    };
+    bootstrap.Modal.prototype = originalModal.prototype;
+
+    // Clean up any existing backdrops
+    document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+});
+</script>

@@ -227,77 +227,115 @@
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 
-    <script>// Image modal functionality
-    const modalContainer = document.getElementById('modal-container');
-    const modalContent = document.getElementById('modal-content');
-    const closeBtn = document.querySelector('#modal-container .close');
-    const galleryImgs = document.querySelectorAll('.bill-images');
-
-    galleryImgs.forEach(function(img) {
-        img.addEventListener('click', function() {
-            modalContent.src = this.src;
-            modalContainer.classList.add('active');
-            document.body.classList.add('modal-open');
+    <script>
+    $(document).ready(function() {
+        // Image modal functionality remains unchanged
+        const modalContainer = document.getElementById('modal-container');
+        const modalContent = document.getElementById('modal-content');
+        const closeBtn = document.querySelector('#modal-container .close');
+        const galleryImgs = document.querySelectorAll('.bill-images');
+    
+        galleryImgs.forEach(function(img) {
+            img.addEventListener('click', function() {
+                modalContent.src = this.src;
+                modalContainer.classList.add('active');
+                document.body.classList.add('modal-open');
+            });
         });
-    });
-
-    closeBtn.addEventListener('click', function() {
-        modalContainer.classList.remove('active');
-        document.body.classList.remove('modal-open');
-    });
-
-    window.addEventListener('click', function(e) {
-        if (e.target === modalContainer) {
+    
+        closeBtn.addEventListener('click', function() {
             modalContainer.classList.remove('active');
             document.body.classList.remove('modal-open');
+        });
+    
+        window.addEventListener('click', function(e) {
+            if (e.target === modalContainer) {
+                modalContainer.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        });
+    
+        // Fix for date range modal
+        // First, destroy any existing modal instances to prevent conflicts
+        const dateRangeModalEl = document.getElementById('dateRangeModal');
+        if (dateRangeModalEl) {
+            const existingModal = bootstrap.Modal.getInstance(dateRangeModalEl);
+            if (existingModal) {
+                existingModal.dispose();
+            }
+            
+            // Create a new modal instance with proper configuration
+            const dateRangeModal = new bootstrap.Modal(dateRangeModalEl, {
+                backdrop: true,  // Enable backdrop but allow clicking outside to close
+                keyboard: true
+            });
+            
+            // Handle dropdown triggers with direct event binding
+            $('[data-bs-target="#dateRangeModal"]').off('click').on('click', function(e) {
+                e.preventDefault();
+                const isPrint = $(this).data('modal-type') === 'print';
+                $('.print-btn').toggle(isPrint);
+                $('.excel-btn').toggle(!isPrint);
+                dateRangeModal.show();
+            });
+            
+            // Ensure proper cleanup when modal is hidden
+            $(dateRangeModalEl).off('hidden.bs.modal').on('hidden.bs.modal', function() {
+                // Remove any lingering backdrops
+                $('.modal-backdrop').remove();
+                $('body').removeClass('modal-open');
+                $('body').css('padding-right', '');
+            });
         }
     });
+    </script>
 
+    <script>
     $(document).ready(function() {
-            // Initialize print modal
-            const printModal = new bootstrap.Modal(document.getElementById('printRangeModal'));
+        // Initialize print modal
+        const printModal = new bootstrap.Modal(document.getElementById('printRangeModal'));
     
-            // Initialize excel modal
-            const excelModal = new bootstrap.Modal(document.getElementById('excelRangeModal'));
+        // Initialize excel modal
+        const excelModal = new bootstrap.Modal(document.getElementById('excelRangeModal'));
     
-            // Handle print form submission
-            $('#printRangeForm').on('submit', function(e) {
-                e.preventDefault();
-                const form = $(this);
-                window.open('bills_print.php?' + form.serialize(), '_blank');
-                printModal.hide();
-                return false;
-            });
-    
-            // Handle excel form submission
-            $('#excelRangeForm').on('submit', function(e) {
-                e.preventDefault();
-                const form = $(this);
-                window.open('bills_excel.php?' + form.serialize(), '_blank');
-                excelModal.hide();
-                return false;
-            });
-    
-            // Handle modal triggers
-            $('[data-bs-target="#printRangeModal"]').on('click', function() {
-                printModal.show();
-            });
-    
-            $('[data-bs-target="#excelRangeModal"]').on('click', function() {
-                excelModal.show();
-            });
-    
-            // Handle modal close buttons
-            $('.close-modal, [data-bs-dismiss="modal"]').on('click', function() {
-                const modalElement = $(this).closest('.modal');
-                if (modalElement.length) {
-                    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-                    if (modalInstance) {
-                        modalInstance.hide();
-                    }
-                }
-            });
+        // Handle print form submission
+        $('#printRangeForm').on('submit', function(e) {
+            e.preventDefault();
+            const form = $(this);
+            window.open('bills_print.php?' + form.serialize(), '_blank');
+            printModal.hide();
+            return false;
         });
+    
+        // Handle excel form submission
+        $('#excelRangeForm').on('submit', function(e) {
+            e.preventDefault();
+            const form = $(this);
+            window.open('bills_excel.php?' + form.serialize(), '_blank');
+            excelModal.hide();
+            return false;
+        });
+    
+        // Handle modal triggers
+        $('[data-bs-target="#printRangeModal"]').on('click', function() {
+            printModal.show();
+        });
+    
+        $('[data-bs-target="#excelRangeModal"]').on('click', function() {
+            excelModal.show();
+        });
+    
+        // Handle modal close buttons
+        $('.close-modal, [data-bs-dismiss="modal"]').on('click', function() {
+            const modalElement = $(this).closest('.modal');
+            if (modalElement.length) {
+                const modalInstance = bootstrap.Modal.getInstance(modalElement);
+                if (modalInstance) {
+                    modalInstance.hide();
+                }
+            }
+        });
+    });
     </script>
     
 </body>

@@ -48,9 +48,14 @@
             ?>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
-                <a href="iptb_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
-                    <i class="mdi mdi-printer-outline"></i> Print
-                </a>
+                <div class="ml-auto">
+                    <a href="iptb_print.php" target="_blank" class="btn btn-md btn-primary btn-flat">
+                        <i class="mdi mdi-printer-outline"></i> Print
+                    </a>
+                    <a href="iptb_excel.php" class="btn btn-md btn-primary btn-flat">
+                        <i class="mdi mdi-file-excel"></i> Export
+                    </a>
+                </div>
             </div>
             <table class="table responsive table-striped datatable">
                 <thead>

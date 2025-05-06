@@ -74,9 +74,14 @@
                         <button type="button" class="btn btn-primary addnew" data-toggle="modal" data-target="#addnew" data-municipality="<?= $municipality_id; ?>">
                             <i class="mdi mdi-plus"></i> New
                         </button>
-                        <a href="free_wifi_municipalities_print.php?id=<?= $municipality_id ?>" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
-                            <i class="mdi mdi-printer-outline"></i> Print
-                        </a>
+                        <div class="ml-auto">
+                            <a href="free_wifi_municipalities_print.php?id=<?= $municipality_id ?>" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
+                                <i class="mdi mdi-printer-outline"></i> Print
+                            </a>
+                            <a href="free_wifi_municipalities_excel.php?id=<?= $municipality_id ?>" class="btn btn-md btn-primary btn-flat">
+                                <i class="mdi mdi-file-excel"></i> Export
+                            </a>
+                        </div>
                     </div>
 
 

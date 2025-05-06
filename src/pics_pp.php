@@ -13,7 +13,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites &nbsp;&nbsp;|&nbsp;&nbsp;<b>Region Initiated</b></h1>
+              <h1 class="h3 mb-0 text-gray-800 mb-3">Implemented Aklan Free WiFi Sites &nbsp;&nbsp;|&nbsp;&nbsp;<b>PICS-PP</b></h1>
                 <nav style="font-size:85%;" aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0">
                         <li class=""><a href="home.php">Dashboard</a></li>&nbsp;&nbsp;&nbsp;
@@ -48,9 +48,14 @@
             ?>
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
                 <button class="btn btn-primary addnew"><i class="mdi mdi-plus"></i> New</button>
-                <a href="pics_pp_print.php" target="_blank" class="btn btn-md btn-primary btn-flat mr-2">
-                    <i class="mdi mdi-printer-outline"></i> Print
-                </a>
+                <div class="ml-auto">
+                    <a href="pics_pp_print.php" target="_blank" class="btn btn-md btn-primary btn-flat" style="margin-left: 2rem;">
+                        <i class="mdi mdi-printer-outline"></i> Print
+                    </a>
+                    <a href="pics_pp_excel.php" class="btn btn-md btn-primary btn-flat">
+                        <i class="mdi mdi-file-excel"></i> Export
+                    </a>
+                </div>
             </div>
             <table class="table responsive table-striped datatable">
                 <thead>
