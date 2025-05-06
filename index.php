@@ -63,9 +63,7 @@ https://templatemo.com/tm-575-leadership-event
                             <a class="nav-link click-scroll" href="#section_3">Projects</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link click-scroll" href="#section_4">Programs</a>
-                        </li>
+                  
 
                         <li class="nav-item">
                             <a class="nav-link click-scroll" href="#section_5">Location</a>
@@ -1137,7 +1135,7 @@ https://templatemo.com/tm-575-leadership-event
             <div class="col-lg-5 col-12 mb-4 mb-lg-0">
                 <div class="speakers-text-info">
                     <h2 class="mb-4">DICT <u class="text-info">Officers</u></h2>
-                    <p>We are passionate developers committed to building innovative, efficient, and seamless digital experiences through clean code and creative problem-solving.</p>
+                    <p>The Department of Information and Communications Technology (DICT) shall be the primary policy, planning, coordinating, implementing, and administrative entity of the Executive Branch of the government that will plan, develop, and promote the national ICT development agenda. (RA 10844)</p>
                 </div>
             </div>
 
@@ -1148,7 +1146,7 @@ https://templatemo.com/tm-575-leadership-event
                         <h5 class="speakers-title mb-0">Mr. Marvin L. Manuel</h5>
                         <p class="speakers-text mb-0">Provincial Officer</p>
                         <ul class="social-icon">
-                            <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                            <li><a href="https://www.facebook.com/MarvinLM05" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
                             <li><a href="#" class="social-icon-link bi-google"></a></li>
                         </ul>
@@ -1166,9 +1164,9 @@ https://templatemo.com/tm-575-leadership-event
                     <img src="images/DICTofficers/hadasa.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Hadasa A. Manalili</h5>
-                        <p class="speakers-text mb-0">Project Development Officer</p>
+                        <p class="speakers-text mb-0">Project Development Officer I</p>
                         <ul class="social-icon">
-                            <li><a href="#" class="social-icon-link bi-facebook"></a></li>
+                            <li><a href="https://www.facebook.com/hadasaapolinariomanalili" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
                         </ul>
                     </div>
@@ -1181,9 +1179,9 @@ https://templatemo.com/tm-575-leadership-event
                     <img src="images/DICTofficers/earl.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Mr. Earl Jame Rentillo</h5>
-                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <p class="speakers-text mb-0">Cyber Security</p>
                         <ul class="social-icon">
-                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="https://www.facebook.com/earl.rentillo" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
                         </ul>
                     </div>
@@ -1195,7 +1193,7 @@ https://templatemo.com/tm-575-leadership-event
                     <img src="images/DICTofficers/engr.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
                         <h5 class="speakers-title mb-0">Mr. Randy</h5>
-                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <p class="speakers-text mb-0">Engr.</p>
                         <ul class="social-icon">
                             <li><a href="#" class="social-icon-link bi-instagram"></a></li>
                             <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
@@ -1208,10 +1206,10 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/carol.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Mrs. Carol</h5>
-                        <p class="speakers-text mb-0">BackEnd Developer</p>
+                        <h5 class="speakers-title mb-0">Mrs. Carol Israel</h5>
+                        <p class="speakers-text mb-0">office</p>
                         <ul class="social-icon">
-                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="https://www.facebook.com/carol.israel.16" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
                         </ul>
                     </div>
@@ -1222,10 +1220,10 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/nelia.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Mrs. Nelia</h5>
-                        <p class="speakers-text mb-0">Full Stack Developer</p>
+                        <h5 class="speakers-title mb-0">Mrs. Nelia Pereira</h5>
+                        <p class="speakers-text mb-0">office</p>
                         <ul class="social-icon">
-                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="https://www.facebook.com/neliapereira1101" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
                         </ul>
                     </div>
@@ -1235,10 +1233,10 @@ https://templatemo.com/tm-575-leadership-event
                 <div class="speakers-thumb speakers-thumb-small card-hover">
                     <img src="images/DICTofficers/juliet.png" class="img-fluid speakers-image" alt="">
                     <div class="speakers-info">
-                        <h5 class="speakers-title mb-0">Mrs. Juliet</h5>
-                        <p class="speakers-text mb-0">Full Stack Developer</p>
+                        <h5 class="speakers-title mb-0">Mrs. Juliet Magdael</h5>
+                        <p class="speakers-text mb-0">office</p>
                         <ul class="social-icon">
-                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+                            <li><a href="https://www.facebook.com/juliet.magdael.1" class="social-icon-link bi-facebook"></a></li>
                             <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
                         </ul>
                     </div>
@@ -1268,7 +1266,7 @@ https://templatemo.com/tm-575-leadership-event
         scroll-behavior: smooth;
         -webkit-overflow-scrolling: touch;
         gap: 20px;
-        padding: 10px;
+        padding: 60px;
     }
     .speakers-scroll::-webkit-scrollbar {
         height: 8px;
