@@ -1385,17 +1385,7 @@ https://templatemo.com/tm-575-leadership-event
                                     </div>
                                 </div>
                             </div>
-                            <div class="carousel-item">
-                                <div class="text-center">
-                                    <div class="rounded-circle overflow-hidden mx-auto mb-4" style="width: 200px; height: 200px;">
-                                        <img src="images/devs/6.png" class="w-100 h-100" alt="Project Planning" style="object-fit: cover;">
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Randy Begaso</h5>
-                                        <p class="card-text">Developer</p>
-                                    </div>
-                                </div>
-                            </div>
+                          
                             
                         </div>
                         <button class="carousel-control-prev" type="button" data-bs-target="#developersCarousel" data-bs-slide="prev">
