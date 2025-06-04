@@ -4,7 +4,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Add Electric Bill</b></h4>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <!-- Update all close buttons to use data-bs-dismiss instead of data-dismiss -->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="electric_bill_add.php" enctype="multipart/form-data">
@@ -82,7 +83,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal"> Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="mdi mdi-content-save"></i> Save</button>
               </form>
             </div>
@@ -96,7 +97,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Update Electric Bill</b></h4>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="electric_bill_edit.php">
@@ -167,7 +168,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="mdi mdi-content-save-edit"></i> Update</button>
               </form>
             </div>
@@ -181,7 +182,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b><span class="fullname"></span></h4>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="electric_bill_photo.php" enctype="multipart/form-data">
@@ -192,7 +193,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="mdi mdi-content-save-edit"></i> Update</button>
               </form>
             </div>
@@ -207,7 +208,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title"><b>Delete Electric Bill</b></h4>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <!-- And for footer close buttons -->
+                <button type="button" class="btn btn-light btn-flat pull-left" data-bs-dismiss="modal">Close</button>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="pics_pp_delete.php">
@@ -218,7 +220,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-light btn-flat pull-left" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-light btn-flat pull-left" data-bs-dismiss="modal">Close</button>
               <button type="submit" class="btn btn-danger btn-flat" name="delete"><i class="mdi mdi-trash-can"></i> Delete</button>
               </form>
             </div>

@@ -90,7 +90,7 @@
     }
 
     /* Disable scrolling when modal is open */
-    body.modal-open {
+    .body.modal-open {
         overflow: hidden;
 
     }
@@ -424,6 +424,20 @@
         }
     });
 });
+    </script>
+<script> // Fix for duplicate modal backdrops
+    $(document).on('show.bs.modal', '.modal', function () {
+        // Remove any existing duplicate backdrops
+        $('.modal-backdrop:gt(0)').remove();
+    });
+    
+    // Handle both Bootstrap 4 and 5 modal close buttons
+    $(document).on('click', '[data-dismiss="modal"], [data-bs-dismiss="modal"]', function() {
+        var modal = $(this).closest('.modal');
+        if (modal.length) {
+            modal.modal('hide');
+        }
+    });
     </script>
   </body>
 </html>
